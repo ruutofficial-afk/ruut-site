@@ -1,0 +1,805 @@
+/* 1. Global Checkout Backgrounds & Padding Removal */
+html {
+    overflow-y: scroll !important; /* Locks scrollbar to prevent rightward layout shift */
+    /* Removed overflow-x: hidden to allow position: sticky to work properly */
+}
+
+html, body.woocommerce-checkout, 
+body.woocommerce-checkout #main, 
+body.woocommerce-checkout #page, 
+body.woocommerce-checkout #content, 
+body.woocommerce-checkout .site-content,Q
+body.woocommerce-checkout .woocommerce {
+    background-color: #E6DED1 !important;
+    padding-top: 0 !important; 
+    margin-top: 0 !important;
+    overflow: visible !important; /* CRITICAL FOR STICKY: Unlocks parent cropping */
+}
+
+/* Force clears any Page Builder transforms that destroy position: sticky */
+body.woocommerce-checkout #page, 
+body.woocommerce-checkout #content, 
+body.woocommerce-checkout .site-content,
+body.woocommerce-checkout .elementor-section {
+    transform: none !important;
+    perspective: none !important;
+    will-change: auto !important;
+}
+
+/* 2. BEAUTIFUL TWO-TIER LUXURY HEADER (Compacted) */
+.ruut-header-wrapper {
+    text-align: center !important;
+    margin: 30px auto 40px auto !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+.ruut-brand-logo {
+    font-family: 'Times New Roman', Times, serif !important; 
+    color: #5c4338 !important;
+    font-size: 38px !important;
+    font-weight: 400 !important;
+    letter-spacing: 12px !important;
+    text-transform: uppercase !important;
+    margin-right: -12px !important; 
+    line-height: 1 !important;
+}
+.ruut-page-title {
+    font-family: sans-serif !important;
+    color: #888 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 6px !important;
+    text-transform: uppercase !important;
+    margin-right: -6px !important;
+}
+
+form.woocommerce-checkout {
+    margin-top: 0 !important; 
+    padding-bottom: 120px !important; /* Added for beautiful breathing space at the bottom of the page */
+    position: relative;
+    z-index: 10;
+    overflow: visible !important; /* CRITICAL FOR STICKY */
+}
+
+/* Hide default junk, Native Coupon Banner, and hidden themes */
+/* REMOVED error wrappers from this list so we can actually see checkout errors! */
+.woocommerce-billing-fields > h3:first-of-type, 
+#ship-to-different-address,
+.woocommerce-shipping-fields,
+#billing_country_field,
+.woocommerce-privacy-policy-text,
+.woocommerce-form-coupon-toggle,
+form.checkout_coupon,
+body.woocommerce-checkout header, 
+body.woocommerce-checkout .site-header, 
+body.woocommerce-checkout .main-header,
+body.woocommerce-checkout .elementor-location-header,
+body.woocommerce-checkout footer,
+body.woocommerce-checkout .site-footer { display: none !important; }
+
+
+/* --- LUXURY WOOCOMMERCE ERROR NOTICES (REDESIGNED) --- */
+.woocommerce-checkout .woocommerce-notices-wrapper {
+    display: none !important;
+}
+.woocommerce-checkout .woocommerce-NoticeGroup-checkout,
+.woocommerce-checkout ul.woocommerce-error {
+    display: block !important;
+    background-color: #F8F4EF !important; /* soft warm light cream */
+    border: 1px solid rgba(217, 83, 79, 0.25) !important;
+    border-left: 4px solid #d9534f !important; /* solid red left highlight */
+    border-radius: 2px !important;
+    padding: 16px 20px !important;
+    margin: 0 0 30px 0 !important;
+    list-style: none !important;
+    font-family: sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #5c4338 !important; /* elegant coffee brown text */
+    line-height: 1.5 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 12px rgba(92, 67, 56, 0.05) !important;
+}
+.woocommerce-checkout ul.woocommerce-error li {
+    margin: 6px 0 !important;
+    padding: 0 0 0 12px !important;
+    list-style: none !important;
+    position: relative !important;
+}
+.woocommerce-checkout ul.woocommerce-error li::before {
+    content: "•";
+    color: #d9534f !important;
+    font-weight: bold !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+}
+.woocommerce-checkout ul.woocommerce-error li strong {
+    color: #d9534f !important; /* highlight invalid fields in red */
+    font-weight: 700 !important;
+}
+/* -------------------------------------------------------- */
+
+
+/* 3. BULLETPROOF HIDING FOR GUEST USERS */
+body:not(.logged-in) .woocommerce-billing-fields__field-wrapper > * { display: none !important; }
+body:not(.logged-in) .woocommerce-billing-fields__field-wrapper > #custom_contacts_wrapper,
+body:not(.logged-in) .woocommerce-billing-fields__field-wrapper > #billing_email_field,
+body:not(.logged-in) .woocommerce-billing-fields__field-wrapper > #custom_button_wrapper { display: block !important; }
+body:not(.logged-in) .woocommerce-billing-fields__field-wrapper.ruut-fields-revealed > * { display: block !important; }
+
+/* 4. FIXED OTP DISPLAY & STYLING */
+body:not(.logged-in) .woocommerce-billing-fields__field-wrapper > #ruut_otp_wrapper.show-ruut-otp { display: block !important; animation: ruutFadeIn 0.4s ease; }
+@keyframes ruutFadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+.ruut-otp-boxes-container {
+    position: relative; display: flex; gap: 8px; width: 100%; max-width: 220px; height: 35px; 
+}
+.ruut-otp-box {
+    flex: 1; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 600;
+    color: #5c4338 !important; border-bottom: 2px solid #a89f91; background: transparent;
+}
+#ruut_otp_input {
+    position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
+    opacity: 0 !important; z-index: 10 !important; cursor: text !important; background: transparent !important; border: none !important; box-shadow: none !important;
+    color: transparent !important; caret-color: transparent !important; font-size: 16px !important; 
+}
+
+/* Cursor Animation for active OTP Box */
+.ruut-cursor {
+    display: inline-block;
+    animation: ruutBlink 1s step-end infinite;
+    font-weight: 300;
+    color: #5c4338;
+}
+@keyframes ruutBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* 5. 60-40 Grid Layout & STICKY SIDEBAR */
+@media (min-width: 992px) {
+    form.woocommerce-checkout { display: flex !important; flex-wrap: nowrap !important; justify-content: space-between !important; align-items: flex-start !important; gap: 8%; overflow: visible !important; }
+    #customer_details { width: 55% !important; flex-shrink: 0; margin: 0 !important; float: none !important; }
+    #order_review { width: 37% !important; flex-shrink: 0; float: none !important; margin: 0 !important; position: -webkit-sticky !important; position: sticky !important; top: 40px !important; align-self: flex-start !important; }
+    form.woocommerce-checkout::before, form.woocommerce-checkout::after { display: none !important; }
+}
+
+#order_review_heading { display: none !important; }
+
+/* 6. AGGRESSIVE Dropdown Colors & Hover Fix */
+.woocommerce-checkout select, .woocommerce-checkout .select2-selection, .woocommerce-checkout .select2-selection--single, .select2-dropdown, .select2-results__options, .select2-results__option, .select2-search, .select2-search__field { background-color: #F1ECE6 !important; color: #5c4338 !important; border: none !important; }
+.select2-container--default .select2-results__option--highlighted[aria-selected], 
+.select2-container--default .select2-results__option[aria-selected="true"], 
+.select2-container--default .select2-results__option:hover { 
+    background-color: #5c4338 !important; 
+    color: #F1ECE6 !important; 
+}
+
+/* 7. PERFECT COLOR UNIFICATION */
+.woocommerce-checkout label, .woocommerce-checkout input[type="text"], .woocommerce-checkout input[type="tel"], .woocommerce-checkout input[type="email"], .select2-container .select2-selection--single .select2-selection__rendered, #custom_contacts_wrapper h3, #custom_shipping_wrapper h3, .ruut-item-name, .ruut-item-meta, .ruut-item-qty, .woocommerce-checkout-review-order-table th, .woocommerce-checkout-review-order-table td, .woocommerce-checkout-review-order-table .amount, .woocommerce-checkout-review-order-table .product-name, .woocommerce-checkout-review-order-table span, .ruut-coupon-toggle, .ruut-coupon-toggle span, .woocommerce-terms-and-conditions-wrapper label, .woocommerce-terms-and-conditions-wrapper a, #ruut_guest_welcome, #ruut_status_message { color: #5c4338 !important; }
+.woocommerce-checkout input::placeholder { color: #5c4338 !important; opacity: 0.6 !important; }
+
+.woocommerce-checkout label { font-family: sans-serif; font-size: 11px !important; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700 !important; margin-bottom: 4px !important; display: block; }
+.woocommerce-checkout label .optional { display: none !important; } /* Removes WooCommerce native optional text */
+
+.woocommerce-checkout input[type="text"], .woocommerce-checkout input[type="tel"], .woocommerce-checkout input[type="email"], .woocommerce-checkout select, .select2-container .select2-selection--single { background: transparent !important; border: none !important; border-bottom: 1px solid #a89f91 !important; border-radius: 0 !important; padding: 8px 0 !important; box-shadow: none !important; font-size: 15px !important; width: 100% !important; font-weight: 500 !important; transition: border-color 0.3s ease; }
+.woocommerce-checkout input:hover, .woocommerce-checkout select:hover { border-bottom: 1px solid #5c4338 !important; }
+.woocommerce-checkout input:focus, .woocommerce-checkout select:focus { border-bottom: 2px solid #5c4338 !important; outline: none !important; }
+.select2-container .select2-selection--single .select2-selection__rendered { padding-left: 0 !important; background-color: transparent !important; font-weight: 500 !important; }
+.select2-container--default .select2-selection--single .select2-selection__arrow { top: 8px !important; }
+
+/* Fix for Autofill Background Color */
+.woocommerce-checkout input:-webkit-autofill,
+.woocommerce-checkout input:-webkit-autofill:hover, 
+.woocommerce-checkout input:-webkit-autofill:focus, 
+.woocommerce-checkout input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #E6DED1 inset !important;
+    -webkit-text-fill-color: #5c4338 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ERROR HIGHLIGHTING (Red Borders Only, No Text) */
+.woocommerce-invalid input, .woocommerce-invalid select, .woocommerce-invalid .select2-selection { border-bottom: 2px solid #d9534f !important; }
+.woocommerce-invalid label { color: #d9534f !important; }
+
+.woocommerce-invalid-required-field::after,
+.woocommerce-checkout-review-order .woocommerce-error {
+    display: none !important;
+}
+
+.woocommerce-invalid span.error,
+.woocommerce-invalid label.error {
+    display: block !important;
+    font-family: sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    margin-top: 6px !important;
+    line-height: 1.3 !important;
+    color: #d9534f !important;
+    text-transform: none !important;
+}
+
+#custom_contacts_wrapper h3, #custom_shipping_wrapper h3 { font-family: 'Times New Roman', serif; font-size: 26px !important; font-weight: 400 !important; margin-bottom: 15px !important; border: none !important; }
+
+/* 8. Layout inner fields (Compacted & Ordered) */
+.woocommerce-billing-fields__field-wrapper { display: flex !important; flex-wrap: wrap !important; gap: 20px 4%; }
+.woocommerce-billing-fields__field-wrapper > p, .woocommerce-billing-fields__field-wrapper > div { margin: 0 !important; }
+#custom_contacts_wrapper { order: 1; width: 100%; }
+#billing_email_field { order: 2; width: 100%; }
+#billing_phone_field { order: 5; width: 100%; }
+#billing_first_name_field { order: 6; width: 48%; }
+#billing_last_name_field { order: 7; width: 48%; }
+#custom_shipping_wrapper { order: 8; width: 100%; margin-top: 30px !important; } 
+
+/* ADDRESS BUTTONS UI & VAULT CARDS FIX */
+.ruut-saved-addresses-container { order: 8; width: 100%; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+
+.ruut-address-card {
+    background-color: transparent !important;
+    border: 1px solid rgba(92, 67, 56, 0.3) !important;
+    border-radius: 4px !important;
+    padding: 15px !important;
+    width: calc(50% - 7.5px) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+.ruut-address-card:hover {
+    border-color: #5c4338 !important;
+    background-color: rgba(92, 67, 56, 0.03) !important;
+}
+.ruut-address-card.active {
+    border-color: #5c4338 !important;
+    background-color: #5c4338 !important; /* CRITICAL FIX: Forces the brown background */
+    color: #E6DED1 !important;
+}
+.ruut-address-card strong {
+    font-family: sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    margin-bottom: 6px !important;
+    color: inherit !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+.ruut-address-card span {
+    font-family: sans-serif !important;
+    font-size: 11px !important;
+    opacity: 0.8 !important;
+    line-height: 1.4 !important;
+    color: inherit !important;
+}
+.ruut-address-card.active strong, 
+.ruut-address-card.active span {
+    color: #E6DED1 !important; /* Ensures text is visible against the brown background */
+}
+
+.ruut-address-btn {
+    background-color: transparent !important;
+    color: #5c4338 !important;
+    border: 1px solid #5c4338 !important;
+    padding: 8px 16px !important;
+    font-family: sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    border-radius: 30px !important; /* Circular edges applied */
+}
+.ruut-address-btn:hover { background-color: rgba(92, 67, 56, 0.05) !important; }
+.ruut-address-btn.active { background-color: #5c4338 !important; color: #E6DED1 !important; }
+
+/* Reordered fields properly */
+#billing_save_as_field { order: 9; width: 100%; margin-bottom: 20px !important; } /* Reordered right above PIN code */
+#billing_postcode_field { order: 10; width: 48%; }
+#billing_city_field { order: 11; width: 48%; }
+#billing_state_field { order: 12; width: 100%; }
+#billing_address_1_field { order: 13; width: 100%; }
+#billing_address_2_field { order: 14; width: 100%; }
+#billing_landmark_field { order: 15; width: 100%; margin-bottom: 40px !important; } /* Reordered down */
+
+#ruut_action_btn { background-color: transparent; color: #5c4338; padding: 14px; border: 1px solid #5c4338; border-radius: 0; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin-top: 10px; transition: all 0.3s ease; }
+#ruut_action_btn:hover { background-color: #5c4338 !important; color: #fff !important; }
+
+/* -----------------------------------------------------
+   9. PRODUCTS & INNER COMPONENTS
+   ----------------------------------------------------- */
+.ruut-item-wrapper { display: flex !important; flex-wrap: nowrap !important; align-items: flex-start !important; gap: 15px !important; width: 100% !important; text-align: left !important; }
+.ruut-item-img { flex-shrink: 0 !important; }
+.ruut-item-img img { border-radius: 4px !important; width: 64px !important; height: auto !important; object-fit: cover !important; }
+.ruut-item-details { display: flex !important; flex-direction: column !important; gap: 4px !important; width: 100% !important; min-width: 150px !important; text-align: left !important; }
+
+/* BOLD Product Name */
+.ruut-item-name { font-family: sans-serif !important; font-size: 13px !important; font-weight: 700 !important; color: #5c4338 !important; margin-bottom: 0 !important; line-height: 1.3 !important;}
+.ruut-item-meta { font-family: sans-serif !important; font-size: 11px !important; color: #5c4338 !important; opacity: 0.8 !important;}
+.ruut-item-qty { font-family: sans-serif !important; font-size: 11px !important; color: #5c4338 !important; margin-top: 4px !important; }
+
+/* BOLD Your Order */
+.ruut-order-heading-text { font-family: sans-serif !important; font-size: 14px !important; font-weight: 700 !important; color: #5c4338 !important; }
+
+/* ITALIC Edit Cart */
+.ruut-inline-edit-cart { font-family: 'Times New Roman', serif !important; font-size: 13px !important; text-decoration: underline !important; color: #5c4338 !important; opacity: 0.8 !important; font-weight: 400 !important; font-style: italic !important; text-transform: none !important; letter-spacing: 0 !important;}
+.ruut-inline-edit-cart:hover { opacity: 1 !important; }
+
+.ruut-custom-coupon-wrapper { width: 100% !important; display: block !important; }
+.ruut-coupon-toggle { cursor: pointer; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 10px 0 !important; font-size: 13px !important; font-weight: 500 !important; font-family: sans-serif !important; } 
+
+/* HIDDEN Coupon Content Layout Fixes (Smooth animation fix - NO !important on padding-bottom) */
+.ruut-coupon-form-content { display: none; padding-bottom: 12px; width: 100% !important; font-size: 0 !important; overflow: hidden; }
+#ruut_custom_coupon_input { border: 1px solid rgba(92, 67, 56, 0.3) !important; background: transparent !important; padding: 0 15px !important; height: 46px !important; width: calc(100% - 110px) !important; display: inline-block !important; vertical-align: middle !important; box-sizing: border-box !important; font-size: 13px !important; color: #5c4338 !important; }
+#ruut_custom_coupon_btn { background-color: #5c4338 !important; color: #fff !important; border: none !important; padding: 0 !important; height: 46px !important; line-height: 46px !important; font-weight: 600 !important; cursor: pointer !important; text-transform: uppercase !important; font-size: 12px !important; letter-spacing: 1px !important; width: 100px !important; display: inline-block !important; vertical-align: middle !important; margin-left: 10px !important; box-sizing: border-box !important; text-align: center !important; }
+
+/* CUSTOM COUPON MODAL - LUXURY UPGRADE */
+.ruut-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(92, 67, 56, 0.35); backdrop-filter: blur(5px); z-index: 999999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.ruut-modal-overlay.active { opacity: 1; visibility: visible; }
+.ruut-modal-box { background: #F1ECE6; padding: 45px 35px 35px 35px; border: 1px solid rgba(92, 67, 56, 0.15); border-radius: 2px; max-width: 440px; width: 90%; text-align: center; position: relative; box-shadow: 0 20px 40px rgba(92, 67, 56, 0.12); transform: translateY(-20px) scale(0.98); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.ruut-modal-overlay.active .ruut-modal-box { transform: translateY(0) scale(1); }
+.ruut-modal-close { position: absolute; top: 12px; right: 18px; font-size: 30px; cursor: pointer; color: #5c4338; line-height: 1; font-weight: 300; opacity: 0.6; transition: 0.3s ease; }
+.ruut-modal-close:hover { opacity: 1; }
+#ruut_coupon_modal_text { color: #5c4338; font-family: 'Times New Roman', Times, serif; font-size: 18px; margin: 0 0 30px 0; line-height: 1.5; font-weight: 400; font-style: italic; letter-spacing: 0.5px; }
+.ruut-modal-btn { background-color: #5c4338 !important; color: #fff !important; padding: 15px 35px !important; text-decoration: none !important; display: inline-block !important; font-family: sans-serif !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 2px !important; text-transform: uppercase !important; border-radius: 0px !important; transition: all 0.3s ease; border: 1px solid #5c4338; }
+.ruut-modal-btn:hover { background-color: transparent !important; color: #5c4338 !important; }
+
+
+/* -----------------------------------------------------
+   10. ORDER SUMMARY TABLE (GOD-TIER SPECIFICITY)
+   ----------------------------------------------------- */
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table thead,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tbody,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot {
+    display: block !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 8px 0 !important; 
+    border: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr.cart_item {
+    align-items: flex-start !important;
+    border-bottom: 1px solid rgba(92, 67, 56, 0.15) !important;
+    padding: 10px 0 !important; 
+}
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table thead tr {
+    border-bottom: 1px solid rgba(92, 67, 56, 0.15) !important;
+    padding-bottom: 8px !important; 
+}
+
+/* COUPON ROW: Only the TR gets the border, killing the double-line bug */
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr.ruut-coupon-row {
+    display: block !important;
+    border-bottom: 1px solid rgba(92, 67, 56, 0.15) !important;
+    padding: 0 !important;
+}
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr.ruut-coupon-row td { 
+    width: 100% !important; 
+    border-bottom: none !important; 
+}
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr.order-total {
+    border-top: 1px solid rgba(92, 67, 56, 0.15) !important;
+    padding-top: 10px !important; 
+    margin-top: 0 !important; 
+}
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table th,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table td {
+    display: block !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table th.product-name { width: 100% !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table th.product-total { display: none !important; }
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr.cart_item td.product-name { width: 75% !important; text-align: left !important; }
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr.cart_item td.product-total { width: 25% !important; text-align: right !important; font-family: sans-serif !important; font-size: 13px !important; font-weight: 500 !important; color: #5c4338 !important; }
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr:not(.cart_item):not(.ruut-coupon-row):not(.order-total) th { width: 50% !important; text-align: left !important; font-family: sans-serif !important; font-size: 13px !important; font-weight: 400 !important; color: #5c4338 !important; text-transform: none !important; opacity: 0.9 !important; }
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr:not(.cart_item):not(.ruut-coupon-row):not(.order-total) td { width: 50% !important; text-align: right !important; font-family: sans-serif !important; font-size: 13px !important; font-weight: 400 !important; color: #5c4338 !important; }
+
+/* UNBOLD Shipping texts */
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.shipping th,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.shipping td,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.shipping span,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.shipping b,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.shipping strong,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.shipping label { font-weight: 400 !important; }
+
+/* BOLD Total Row texts */
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.order-total.order-total th, 
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.order-total.order-total td,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.order-total.order-total span,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tfoot tr.order-total.order-total strong { font-size: 14px !important; font-weight: 700 !important; opacity: 1 !important; color: #5c4338 !important; }
+
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr::before,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table tr::after,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table td::before,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table td::after,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table th::before,
+body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table th::after { display: none !important; content: none !important; }
+
+
+/* -----------------------------------------------------
+   11. LUXURY SKELETON LOADING ANIMATION
+   ----------------------------------------------------- */
+.woocommerce-checkout .blockUI.blockOverlay { background: transparent !important; }
+.woocommerce-checkout .blockUI.blockOverlay::before { display: none !important; content: none !important; animation: none !important; }
+
+@keyframes ruutSkeletonPulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+form.checkout.processing .woocommerce-checkout-review-order-table th,
+form.checkout.processing .woocommerce-checkout-review-order-table td,
+form.checkout.processing .ruut-item-img img {
+    color: transparent !important;
+    background: linear-gradient(90deg, #D5CCBE 25%, #F1EADF 50%, #D5CCBE 75%) !important;
+    background-size: 200% 100% !important;
+    animation: ruutSkeletonPulse 1.5s infinite linear !important;
+    border-color: transparent !important;
+    border-radius: 4px;
+}
+form.checkout.processing .woocommerce-checkout-review-order-table * { color: transparent !important; }
+
+/* 12. Payment Gateway & Place Order Button (Compacted) */
+.phonepe-payment-solutions { display: none !important; }
+#payment ul.payment_methods { list-style: none !important; padding: 0 !important; margin: 0 0 15px 0 !important; border-bottom: 1px solid rgba(92, 67, 56, 0.15) !important; padding-bottom: 15px !important; }
+#payment ul.payment_methods li { font-family: sans-serif !important; font-size: 13px !important; color: #5c4338 !important; margin-bottom: 10px !important; font-weight: 600 !important; display: flex; align-items: center; }
+#payment ul.payment_methods input[type="radio"] { margin-right: 10px !important; width: 14px !important; height: 14px !important; accent-color: #5c4338 !important; }
+#payment .payment_box { font-family: sans-serif !important; font-size: 11px !important; color: #5c4338 !important; opacity: 0.8 !important; margin: 5px 0 15px 24px !important; line-height: 1.4 !important; }
+#payment { background: transparent !important; border-radius: 0 !important; }
+
+#payment .place-order { padding: 0 !important; background: transparent !important; border: none !important; margin-top: 20px !important; } 
+#payment #place_order { background-color: #5c4338 !important; color: #ffffff !important; padding: 18px 20px !important; width: 100% !important; font-family: sans-serif; font-size: 14px !important; font-weight: 600 !important; letter-spacing: 1.5px !important; text-transform: uppercase !important; border: none !important; border-radius: 2px !important; transition: 0.3s ease-in-out; }
+#payment #place_order:hover { background-color: #4a352c !important; }
+
+#payment .form-row.place-order { display: block !important; }
+p.form-row:has(input[type="checkbox"]:not([name="terms"], [id="terms"])):not(.place-order), .place-order label:has(input[type="checkbox"]:not([name="terms"], [id="terms"])) { display: none !important; }
+
+/* 13. BEAUTIFUL CUSTOM TERMS & CONDITIONS (Compacted) */
+.woocommerce-terms-and-conditions-wrapper { margin: 15px 0 !important; padding: 0 !important; } 
+.woocommerce-terms-and-conditions-wrapper label { display: flex !important; align-items: center !important; font-size: 12px !important; text-transform: none !important; letter-spacing: 0.5px !important; cursor: pointer; font-weight: 600 !important; }
+.woocommerce-terms-and-conditions-wrapper input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 16px !important; height: 16px !important; border: 1px solid #5c4338 !important; border-radius: 2px !important; margin-right: 12px !important; position: relative; cursor: pointer; display: inline-block !important; background: transparent !important; padding: 0 !important; box-shadow: none !important; flex-shrink: 0; }
+.woocommerce-terms-and-conditions-wrapper input[type="checkbox"]:checked { background-color: #5c4338 !important; }
+.woocommerce-terms-and-conditions-wrapper input[type="checkbox"]:checked::after { content: '✓'; color: white !important; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); line-height: 1; }
+.woocommerce-terms-and-conditions-wrapper a { text-decoration: underline !important; margin-left: 4px; font-weight: 700; }
+.woocommerce-terms-and-conditions-wrapper .required { display: none !important; }
+
+/* -----------------------------------------------------
+   14. PERFECTED MOBILE ADJUSTMENTS (Screens under 992px)
+   ----------------------------------------------------- */
+@media (max-width: 991px) {
+    body.woocommerce-checkout .woocommerce,
+    body.woocommerce-order-received .woocommerce { padding-top: 20px !important; }
+    
+    .ruut-brand-logo { font-size: 32px !important; margin-right: -8px !important; letter-spacing: 8px !important; }
+    .ruut-header-wrapper { margin: 15px auto 20px auto !important; }
+
+    form.woocommerce-checkout { padding: 0 5vw 40px !important; box-sizing: border-box !important; overflow-x: hidden !important; margin-top: 0 !important; }
+    .woocommerce-billing-fields__field-wrapper { gap: 30px 0 !important; }
+    
+    #billing_save_as_field { margin-bottom: 10px !important; }
+    #billing_landmark_field { margin-bottom: 10px !important; }
+    
+    #order_review, .woocommerce-checkout-review-order { margin-top: 15px !important; padding-top: 15px !important; border-top: 1px solid rgba(92, 67, 56, 0.15) !important; display: block !important; }
+    
+    body.woocommerce-checkout form.woocommerce-checkout #order_review table.woocommerce-checkout-review-order-table { width: 100% !important; }
+    
+    #billing_first_name_field, #billing_last_name_field, #billing_postcode_field, #billing_city_field { width: 100% !important; }
+    #custom_contacts_wrapper h3, #custom_shipping_wrapper h3 { font-size: 24px !important; margin-bottom: 15px !important; font-weight: 500 !important; }
+    #payment #place_order { margin-top: 25px !important; padding: 22px 20px !important; }
+    
+    .ruut-otp-boxes-container { gap: 8px; height: 35px; max-width: 100% !important; }
+    .ruut-otp-box { font-size: 14px; border-bottom: 1px solid #a89f91; }
+}
+
+
+/* ==========================================================
+   15. THANK YOU PAGE (ORDER RECEIVED) LUXURY STYLES
+   ========================================================== */
+
+/* Ensure body background continues seamlessly */
+body.woocommerce-order-received {
+    background-color: #E6DED1 !important;
+}
+
+/* Add breathing room so it doesn't touch the screen edges */
+body.woocommerce-order-received .woocommerce {
+    padding: 30px 5vw 80px !important;
+    box-sizing: border-box !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+}
+
+/* Top Order Overview Bar */
+.woocommerce-order ul.order_details {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important; /* Fix alignment on the row */
+    background: transparent !important;
+    border: 1px solid rgba(92, 67, 56, 0.2) !important;
+    border-radius: 4px !important;
+    padding: 25px 30px !important;
+    margin-bottom: 40px !important;
+}
+.woocommerce-order ul.order_details li {
+    flex: 1 1 0px !important; /* Force items to take perfectly equal widths */
+    display: block !important; /* Force block to center all text inside perfectly */
+    border-right: none !important;
+    font-family: sans-serif !important;
+    font-size: 11px !important;
+    color: #5c4338 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 0 !important;
+    text-align: center !important; 
+}
+.woocommerce-order ul.order_details li strong {
+    display: block !important;
+    font-size: 14px !important;
+    margin-top: 8px !important;
+    color: #5c4338 !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    text-align: center !important;
+}
+
+/* Force Strip Native White Backgrounds generated by Themes */
+.woocommerce-order-received .woocommerce-order-details, 
+.woocommerce-order-received .woocommerce-customer-details,
+.woocommerce-order-received section.woocommerce-customer-details {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ---------------------------------------------------
+   TWO-COLUMN LAYOUT (Desktop)
+   --------------------------------------------------- */
+@media (min-width: 992px) {
+    .woocommerce-order-received .woocommerce-order {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+    }
+    .woocommerce-order-received .woocommerce-order > .ruut-thankyou-header,
+    .woocommerce-order-received .woocommerce-order > ul.order_details,
+    .woocommerce-order-received .woocommerce-order > p.woocommerce-notice {
+        width: 100% !important; 
+        flex: 0 0 100% !important;
+    }
+    .woocommerce-order-received .woocommerce-order > section.woocommerce-order-details {
+        width: 60% !important;
+        flex: 0 0 60% !important;
+        margin-bottom: 0 !important;
+    }
+    .woocommerce-order-received .woocommerce-order > section.woocommerce-customer-details {
+        width: 35% !important;
+        flex: 0 0 35% !important;
+        margin-top: 0 !important;
+    }
+}
+
+/* Typography for Section Titles */
+.woocommerce-order-received h2.woocommerce-order-details__title,
+.woocommerce-order-received h2.woocommerce-column__title {
+    font-family: 'Times New Roman', serif !important;
+    font-size: 26px !important;
+    font-weight: 400 !important;
+    color: #5c4338 !important;
+    margin-bottom: 20px !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+/* Hide redundant Customer Details title if present */
+.woocommerce-order-received section.woocommerce-customer-details > h2 {
+    display: none !important; 
+}
+/* Bring back the nested Shipping Address title */
+.woocommerce-order-received section.woocommerce-customer-details h2.woocommerce-column__title {
+    display: block !important;
+}
+
+/* ---------------------------------------------------
+   ORDER DETAILS TABLE AESTHETICS - FRESH START
+   --------------------------------------------------- */
+/* Master reset on the table and every single element inside it to nuke theme styles completely */
+body.woocommerce-order-received table.shop_table.order_details,
+body.woocommerce-order-received table.shop_table.order_details * {
+    background: transparent !important;
+    border: 0 !important;
+    border-color: transparent !important;
+    border-style: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details *::before,
+body.woocommerce-order-received table.shop_table.order_details *::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    display: block !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details thead {
+    display: none !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details tbody,
+body.woocommerce-order-received table.shop_table.order_details tfoot {
+    display: block !important;
+    width: 100% !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details tr {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 0 !important;
+}
+
+/* Create ONLY the specific borders we want */
+body.woocommerce-order-received table.shop_table.order_details tbody {
+    border-bottom: 1px solid rgba(92, 67, 56, 0.15) !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details tfoot tr:last-child {
+    border-top: 1px solid rgba(92, 67, 56, 0.15) !important;
+    margin-top: 5px !important;
+    padding-top: 15px !important;
+}
+
+body.woocommerce-order-received table.shop_table.order_details th, 
+body.woocommerce-order-received table.shop_table.order_details td {
+    padding: 0 !important;
+    color: #5c4338 !important;
+    font-family: sans-serif !important;
+    font-size: 13px !important;
+    display: block !important;
+}
+
+/* Product Row Formatting */
+body.woocommerce-order-received table.shop_table.order_details td.product-name {
+    width: 75% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+body.woocommerce-order-received table.shop_table.order_details td.product-total {
+    width: 25% !important;
+    text-align: right !important;
+    font-weight: 600 !important;
+}
+
+/* Force Wrapper to only take up necessary space so Quantity hugs the text */
+body.woocommerce-order-received .ruut-item-wrapper,
+body.woocommerce-order-received .ruut-item-details {
+    width: auto !important;
+    margin-left: 0 !important; 
+}
+
+body.woocommerce-order-received .shop_table.order_details .product-quantity {
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: #5c4338 !important;
+    margin-left: 15px !important;
+    margin-right: 0 !important; /* Overrides the old 'auto' */
+    white-space: nowrap !important;
+    position: static !important;
+    float: none !important;
+}
+
+/* Footer Rows Formatting */
+body.woocommerce-order-received table.shop_table.order_details tfoot th {
+    width: 50% !important;
+    font-weight: 400 !important;
+    text-align: left !important; 
+}
+body.woocommerce-order-received table.shop_table.order_details tfoot td {
+    width: 50% !important;
+    text-align: right !important;
+    font-weight: 500 !important;
+}
+body.woocommerce-order-received table.shop_table.order_details tfoot tr:last-child th,
+body.woocommerce-order-received table.shop_table.order_details tfoot tr:last-child td {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+/* ---------------------------------------------------
+   SHIPPING ADDRESS BOX
+   --------------------------------------------------- */
+.woocommerce-order-received .woocommerce-customer-details .col2-set {
+    display: block !important;
+}
+.woocommerce-order-received .woocommerce-customer-details .col-1,
+.woocommerce-order-received .woocommerce-customer-details .woocommerce-column--billing-address {
+    display: none !important;
+}
+.woocommerce-order-received .woocommerce-customer-details .col-2,
+.woocommerce-order-received .woocommerce-customer-details .woocommerce-column--shipping-address {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    padding: 30px !important;
+    border: 1px solid rgba(92, 67, 56, 0.2) !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+}
+.woocommerce-order-received .woocommerce-customer-details address {
+    border: none !important;
+    padding: 0 !important;
+    color: #5c4338 !important;
+    font-family: sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+    font-style: normal !important;
+}
+
+/* Mobile Responsiveness for Thank You Page */
+@media (max-width: 991px) {
+    .woocommerce-order-received .woocommerce-order > section.woocommerce-order-details,
+    .woocommerce-order-received .woocommerce-order > section.woocommerce-customer-details {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+    .woocommerce-order-received .woocommerce-order > section.woocommerce-customer-details {
+        margin-top: 30px !important;
+    }
+    .woocommerce-order ul.order_details {
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding: 25px 20px !important;
+    }
+    .woocommerce-order ul.order_details li,
+    .woocommerce-order ul.order_details li strong {
+        text-align: left !important;
+        width: 100% !important;
+        word-break: break-word !important; /* Prevents long emails from overlapping edges */
+    }
+    body.woocommerce-order-received table.shop_table.order_details td.product-name {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    body.woocommerce-order-received .shop_table.order_details .product-quantity {
+        margin-left: 0 !important;
+        margin-top: 10px !important;
+        align-self: flex-start !important;
+    }
+}
