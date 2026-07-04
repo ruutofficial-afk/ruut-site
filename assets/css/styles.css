@@ -2377,19 +2377,33 @@ footer {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   background-color: var(--ruut-white);
   border: 3px solid var(--ruut-border);
   border-radius: 50%;
   transition: left 0.4s ease, border-color 0.3s ease, background-color 0.3s ease;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 .cart-progress-dot.ruut-dot-reached {
   border-color: var(--ruut-accent) !important;
   background-color: var(--ruut-accent) !important;
   box-shadow: 0 0 6px rgba(137, 81, 88, 0.6);
+}
+
+.cart-progress-dot .dot-label {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ruut-text);
+  white-space: nowrap;
+  line-height: 1;
+  pointer-events: none;
 }
 
 /* Cart Scrollable Area */
