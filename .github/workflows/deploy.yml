@@ -13,6 +13,7 @@ jobs:
   deploy-frontend:
     name: Deploy Frontend Files via FTP
     runs-on: ubuntu-latest
+    environment: FTP_HOST
 
     steps:
       - name: Checkout code
@@ -51,6 +52,7 @@ jobs:
   deploy-backend-plugin:
     name: Deploy Backend Plugin via FTP
     runs-on: ubuntu-latest
+    environment: FTP_HOST
 
     # Only run when commit message contains [deploy-backend] or manual trigger
     if: >-
