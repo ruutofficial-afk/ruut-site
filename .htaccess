@@ -1,5 +1,34 @@
-# Prioritize the custom HTML landing page over the WordPress PHP index
-DirectoryIndex index.html index.php
+# Prioritize the coming-soon launch landing page over other files
+DirectoryIndex coming-soon.html index.html index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Redirect external requests for coming-soon.html to root /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/coming-soon\.html(?:[?#]|\s) [NC]
+RewriteRule ^coming-soon\.html$ / [R=301,L]
+
+# Redirect external requests for other .html files to their extensionless URL
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/+(.+?)\.html(?:[?#]|\s) [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Serve .html files without the .html extension in the URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^([^\.]+)/?$ $1.html [L]
+
+# Rewrite deep shop product URLs to product.html
+RewriteCond %{QUERY_STRING} (?:^|&)(?:product|id)=([^&]+) [NC]
+RewriteRule ^shop/.*$ /product.html [QSA,L]
+
+# Force WooCommerce AJAX requests to be handled by index.php instead of index.html
+RewriteCond %{QUERY_STRING} wc-ajax= [NC]
+RewriteRule ^$ /index.php [L]
+
+# Redirect WordPress cart/account pages to static frontend
+RewriteRule ^cart/?$ /cart.html [R=302,L,NC]
+RewriteRule ^my-account/?$ /about-us.html [R=302,L,NC]
+</IfModule>
 
 # BEGIN WordPress
 # The directives (lines) between "BEGIN WordPress" and "END WordPress" are

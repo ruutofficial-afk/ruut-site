@@ -4,14 +4,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>yourruut.com | Indoor Environment Air Mists</title>
+  <title>RUUT | Premium Natural Indoor Environment Air Mists</title>
   <meta name="description"
-    content="Discover The Atlas Collection by RUUT. Premium indoor environment air mists that capture the scent of unique places around the world.">
-  <link rel="icon" href="assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
-  <link rel="apple-touch-icon" href="assets/images/favicon-192x192.png">
-  <link rel="stylesheet" href="assets/css/fonts.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
+    content="Discover The Atlas Collection by RUUT. Premium water-based room fresheners and natural air mists crafted from essential oils. Clean, vegan, and sustainable.">
+  <meta name="keywords"
+    content="room fresheners, room spray, air mist, natural air mist, essential oil spray, indoor environment spray, RUUT room spray, water-based room freshener, home fragrances">
+  <link rel="canonical" href="https://yourruut.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourruut.com/">
+  <meta property="og:title" content="RUUT | Premium Natural Indoor Environment Air Mists">
+  <meta property="og:description"
+    content="Discover The Atlas Collection by RUUT. Premium water-based room fresheners and natural air mists crafted from essential oils. Clean, vegan, and sustainable.">
+  <meta property="og:image" content="https://yourruut.com/assets/images/about_story.webp">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://yourruut.com/">
+  <meta property="twitter:title" content="RUUT | Premium Natural Indoor Environment Air Mists">
+  <meta property="twitter:description"
+    content="Discover The Atlas Collection by RUUT. Premium water-based room fresheners and natural air mists crafted from essential oils. Clean, vegan, and sustainable.">
+  <meta property="twitter:image" content="https://yourruut.com/assets/images/about_story.webp">
+
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon-192x192.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/hero_desktop.webp">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=16.0">
+
+  <!-- Structured JSON-LD Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "RUUT",
+      "url": "https://yourruut.com",
+      "logo": "https://yourruut.com/assets/images/ruut-logo-CF6400.png",
+      "sameAs": [
+        "https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-98985-71044",
+        "contactType": "customer service"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://yourruut.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://yourruut.com/shop/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
+  <script>
+    // Redirect logged-in users to shop
+    if (document.cookie.split(';').some(item => item.trim().startsWith('wordpress_logged_in_'))) {
+      window.location.replace('shop');
+    }
+  </script>
+  <script src="/assets/js/app.js?v=110.0" defer></script>
 </head>
 
 <body>
@@ -37,9 +99,9 @@
     <button class="close-btn" id="closeDrawer" aria-label="Close menu">&times;</button>
     <ul class="mobile-nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="the-atlas-collection.html">The Atlas Collection</a></li>
+      <li><a href="/collection.html">Collection</a></li>
       <li><a href="#bestsellers">Bestsellers</a></li>
-      <li><a href="about-us.html">About Us</a></li>
+      <li><a href="/about-us">About Us</a></li>
       <li><a href="#gifts">Gifts</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -51,8 +113,7 @@
       <!-- Left Navigation (Desktop) -->
       <ul class="nav-links left">
         <li><a href="#home">Home</a></li>
-        <li><a href="the-atlas-collection.html">The Atlas Collection</a></li>
-        <li><a href="#haha">haha</a></li>
+        <li><a href="/collection.html">Collection</a></li>
       </ul>
 
       <!-- Hamburger Menu (Mobile) -->
@@ -66,14 +127,14 @@
 
       <!-- Center Logo -->
       <a href="#home" class="logo-container" aria-label="RUUT Home">
-        <img class="logo-img" src="assets/images/ruut-logo-D6BD9F.png" alt="yourruut.com logo">
+        <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-CF6400.png" alt="yourruut.com logo">
       </a>
 
       <!-- Right Navigation (Desktop) + Actions -->
       <div class="header-actions">
         <ul class="nav-links right">
           <li><a href="#gifts">Gifts</a></li>
-          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="/about-us">About Us</a></li>
           <li><a href="/my-account/">My Account</a></li>
         </ul>
 
@@ -90,10 +151,54 @@
 
   <!-- HERO SECTION -->
   <section class="hero" id="home">
-    <div class="hero-cta">
-      <a href="#bestsellers" class="btn-outline">Get Yours!</a>
+    <div class="hero-slides" id="heroSlides">
+      <!-- Slide 1 (Collection) -->
+      <a href="/the-atlas-collection" class="hero-slide active"
+        style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/assets/images/hero_desktop.webp');">
+        <div class="hero-slide-content">
+          <span class="hero-subtitle">The Collection</span>
+          <h2 class="hero-title">The Atlas Collection</h2>
+        </div>
+      </a>
+      <!-- Slide 2 (Product 1) -->
+      <a href="/product" class="hero-slide" id="heroProductSlide1"
+        style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/assets/images/landing_hero.webp');">
+        <div class="hero-slide-content">
+          <span class="hero-subtitle">Best Seller</span>
+          <h2 class="hero-title">Diffusior</h2>
+        </div>
+      </a>
+      <!-- Slide 3 (Product 2) -->
+      <a href="/product" class="hero-slide" id="heroProductSlide2"
+        style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/assets/images/hero_landing_desktop_slide3_1.webp');">
+        <div class="hero-slide-content">
+          <span class="hero-subtitle">Premium Mist</span>
+          <h2 class="hero-title">The Landour Morning</h2>
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide navigation arrows -->
+    <button class="hero-nav-btn prev-btn" id="heroPrevBtn" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      </svg>
+    </button>
+    <button class="hero-nav-btn next-btn" id="heroNextBtn" aria-label="Next slide">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+      </svg>
+    </button>
+
+    <!-- Slide indicator dots -->
+    <div class="hero-dots" id="heroDots">
+      <span class="hero-dot active" data-index="0"></span>
+      <span class="hero-dot" data-index="1"></span>
+      <span class="hero-dot" data-index="2"></span>
     </div>
   </section>
+
+
 
   <!-- INGREDIENTS BANNER -->
   <section class="ingredients-banner" id="collection">
@@ -105,27 +210,220 @@
         </div>
         <div class="badge-grid">
           <div class="badge-item">
-            <img class="badge-icon-img" src="https://yourruut.com/wp-content/uploads/2021/04/icon-01-free-img.png"
-              alt="Natural Ingredients">
-            <span class="badge-label">Natural Ingredients</span>
+            <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/b9a1f3e4-64a2-4d93-95f1-79e6f9ad171d.webp"
+              alt="100% Clean Formulas">
+            <span class="badge-label">100% Clean Formulas</span>
           </div>
           <div class="badge-item">
-            <img class="badge-icon-img" src="https://yourruut.com/wp-content/uploads/2021/04/icon-02-free-img.png"
-              alt="Cruelty Free">
+            <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/8a17ff43-eeed-4020-9f57-4e83d6153674.webp" alt="Cruelty Free">
             <span class="badge-label">Cruelty Free</span>
           </div>
           <div class="badge-item">
-            <img class="badge-icon-img" src="https://yourruut.com/wp-content/uploads/2021/04/icon-03-free-img.png"
-              alt="Carbon Natural">
-            <span class="badge-label">Carbon Natural</span>
-          </div>
-          <div class="badge-item">
-            <img class="badge-icon-img" src="https://yourruut.com/wp-content/uploads/2021/04/icon-04-free-img.png"
-              alt="Recyclable Packaging">
-            <span class="badge-label">Recyclable Packaging</span>
+            <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/f91de18e-8ae4-468a-a1ff-a6dd3943c0bb.webp"
+              alt="Sustainable Vessels">
+            <span class="badge-label">Sustainable Vessels</span>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT REELS SECTION -->
+  <!-- PRODUCT REELS SECTION -->
+  <section class="reels-section" id="reelsSection" style="display: none;">
+    <style>
+      /* Play overlay on track hover */
+      .reel-play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 2;
+      }
+      .reel-card:hover .reel-play-overlay {
+        opacity: 1;
+      }
+      .reel-play-btn-circle {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        color: #cf6400; /* fallback ruut-accent */
+        transform: scale(0.9);
+        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .reel-card:hover .reel-play-btn-circle {
+        transform: scale(1);
+      }
+      .reel-play-btn-circle svg {
+        margin-left: 4px;
+      }
+
+      /* Reels Gallery Modal */
+      .reels-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 8, 7, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 99999;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        align-items: center;
+        justify-content: center;
+      }
+      .reels-modal.open {
+        display: flex;
+        opacity: 1;
+      }
+      .reels-modal-close {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 3rem;
+        cursor: pointer;
+        z-index: 100001;
+        line-height: 1;
+        transition: transform 0.25s ease, color 0.25s ease;
+      }
+      .reels-modal-close:hover {
+        transform: rotate(90deg);
+        color: #cf6400;
+      }
+      .reels-modal-slider-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        height: 550px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .reels-modal-track {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1000px;
+      }
+      .reels-modal-card {
+        position: absolute;
+        width: 270px;
+        height: 480px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #2A1D12;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, z-index 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+        cursor: pointer;
+        border: 2px solid rgba(255,255,255,0.08);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+      }
+      .reels-modal-card.active {
+        border: 3px solid #cf6400;
+        box-shadow: 0 0 35px rgba(207, 100, 0, 0.35);
+      }
+      .modal-reel-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        flex: 1;
+        display: block;
+      }
+      .reels-modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #fff;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #333;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        z-index: 100000;
+        transition: background-color 0.25s, transform 0.25s, color 0.25s;
+      }
+      .reels-modal-nav-btn:hover {
+        background: #cf6400;
+        color: #fff;
+        transform: translateY(-50%) scale(1.1);
+      }
+      .reels-modal-nav-btn.prev-btn {
+        left: 40px;
+      }
+      .reels-modal-nav-btn.next-btn {
+        right: 40px;
+      }
+
+      /* Adjust layout on small screens */
+      @media (max-width: 768px) {
+        .reels-modal-slider-wrapper {
+          height: 450px;
+        }
+        .reels-modal-card {
+          width: 200px;
+          height: 355px;
+        }
+        .reels-modal-nav-btn.prev-btn {
+          left: 15px;
+        }
+        .reels-modal-nav-btn.next-btn {
+          right: 15px;
+        }
+        .reels-modal-nav-btn {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    </style>
+
+    <div class="reels-carousel-wrapper">
+      <div class="reels-track" id="reelsTrack">
+        <!-- Dynamic reels loaded via JS -->
+      </div>
+    </div>
+
+    <!-- Reels 3D Cover Flow Gallery Modal -->
+    <div class="reels-modal" id="reelsModal">
+      <button class="reels-modal-close" id="reelsModalClose">&times;</button>
+      <button class="reels-modal-nav-btn prev-btn" id="reelsModalPrev" aria-label="Previous Reel">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <div class="reels-modal-slider-wrapper">
+        <div class="reels-track reels-modal-track" id="reelsModalTrack">
+          <!-- Dynamic gallery reels loaded via JS -->
+        </div>
+      </div>
+      <button class="reels-modal-nav-btn next-btn" id="reelsModalNext" aria-label="Next Reel">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
     </div>
   </section>
 
@@ -134,78 +432,12 @@
     <div class="container">
       <h2 class="section-title">Bestsellers</h2>
       <div class="bestsellers-grid-three" id="bestsellersGrid">
-        <!-- Item 1 -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="assets/images/pangong_tso_paradise.webp" alt="Pangong Tso Paradise Air Mist">
-            <div class="add-to-cart-overlay">
-              <button class="btn-add-cart" onclick="addToCart('Pangong Tso Paradise', 650.00)">Add To Cart</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">Pangong Tso Paradise</h3>
-            <span class="product-price">₹ 650.00</span>
-          </div>
-        </div>
-        <!-- Item 2 -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="assets/images/the_landour_mornig.webp" alt="The Landour Morning Air Mist">
-            <div class="add-to-cart-overlay">
-              <button class="btn-add-cart" onclick="addToCart('The Landour Morning', 550.00)">Add To Cart</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">The Landour Morning</h3>
-            <span class="product-price">₹ 550.00</span>
-          </div>
-        </div>
-        <!-- Item 3 -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="assets/images/the_street_of kannuj.webp" alt="The Street of Kannauj Air Mist">
-            <div class="add-to-cart-overlay">
-              <button class="btn-add-cart" onclick="addToCart('The Street of Kannauj', 650.00)">Add To Cart</button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">The Street of Kannauj</h3>
-            <span class="product-price">₹ 650.00</span>
-          </div>
-        </div>
+        <!-- Dynamically rendered by app.js?v=7.4 -->
       </div>
     </div>
   </section>
 
-  <!-- CATEGORIES -->
-  <section class="categories">
-    <div class="category-card">
-      <img src="assets/images/pangong_tso_paradise.webp" alt="Mountain Mists">
-      <div class="category-content">
-        <span class="category-subtitle">Air Mist Products</span>
-        <h3 class="category-title">Mountain Mists</h3>
-        <a href="#bestsellers" class="category-btn">Shop Now</a>
-      </div>
-    </div>
-    <div class="category-card">
-      <img src="assets/images/the_landour_mornig.webp" alt="Forest Mists">
-      <div class="category-content">
-        <span class="category-subtitle">Air Mist Products</span>
-        <h3 class="category-title">Forest Mists</h3>
-        <a href="#bestsellers" class="category-btn">Shop Now</a>
-      </div>
-    </div>
-    <div class="category-card">
-      <img src="assets/images/the_street_of kannuj.webp" alt="Floral Mists">
-      <div class="category-content">
-        <span class="category-subtitle">Air Mist Products</span>
-        <h3 class="category-title">Floral Mists</h3>
-        <a href="#bestsellers" class="category-btn">Shop Now</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUOTE CALLOUT SECTION -->
+  <!-- DIFFUSER SECTION -->
   <section class="quote-callout">
     <div class="container">
       <div class="quote-container">
@@ -218,122 +450,64 @@
         </div>
         <div class="quote-img-side">
           <div class="quote-img-wrap">
-            <img src="assets/images/the_landour_mornig.webp" alt="Air Mist environment arrangement">
+            <img loading="lazy" decoding="async" src="/assets/images/diffuser_image.webp" alt="RUUT Premium Diffuser arrangement">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MEET THE FOUNDER -->
-  <section class="meet-founder" id="about">
-    <div class="founder-bio">
-      <span class="founder-bio-subtitle">Meet the founder</span>
-      <h2>Jennifer Oliver</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur.</p>
-
-      <div class="signature-container">
-        <img class="signature-img" src="https://yourruut.com/wp-content/uploads/2021/04/signature-free-img.png"
-          alt="Jennifer Oliver signature">
-      </div>
-
-      <a href="#about-more" class="founder-link">Read More</a>
-    </div>
-    <div class="founder-img-wrap">
-      <img src="https://yourruut.com/wp-content/uploads/2021/04/about-01-free-img.jpg"
-        alt="Jennifer Oliver, founder of RUUT">
-    </div>
-  </section>
-
-  <!-- FOUNDERS FAVORITES -->
-  <section class="top-favorites">
+  <!-- THE RUUT STORY SECTION -->
+  <section class="ruut-story-section" id="ruutStorySection" style="display: none;">
     <div class="container">
-      <h2 class="favorites-title">Founders Favorites</h2>
-      <div class="favorites-row-three">
-        <!-- Fav 1 -->
-        <div class="favorite-item">
-          <div class="fav-circle">
-            <img src="assets/images/pangong_tso_paradise.webp" alt="Pangong Tso Paradise">
+      <div class="ruut-story-container">
+        <div class="ruut-story-img-side">
+          <div class="ruut-story-img-wrap">
+            <img loading="lazy" decoding="async" id="ruutStoryImage" src="" alt="The Ruut Story">
           </div>
-          <h3 class="fav-title">Pangong Tso Paradise Air Mist</h3>
-          <span class="fav-price">₹ 650.00</span>
         </div>
-        <!-- Fav 2 -->
-        <div class="favorite-item">
-          <div class="fav-circle">
-            <img src="assets/images/the_landour_mornig.webp" alt="The Landour Morning">
-          </div>
-          <h3 class="fav-title">The Landour Morning Air Mist</h3>
-          <span class="fav-price">₹ 550.00</span>
-        </div>
-        <!-- Fav 3 -->
-        <div class="favorite-item">
-          <div class="fav-circle">
-            <img src="assets/images/the_street_of kannuj.webp" alt="The Street of Kannauj">
-          </div>
-          <h3 class="fav-title">The Street of Kannauj Air Mist</h3>
-          <span class="fav-price">₹ 650.00</span>
+        <div class="ruut-story-text-side">
+          <h2 class="ruut-story-headline" id="ruutStoryTitle">The Ruut Story</h2>
+          <div class="ruut-story-description" id="ruutStoryContent"></div>
+          <a href="/about-us.html" class="btn-solid">read our story</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories-section">
+    <div class="categories-carousel-wrapper">
+      <div class="categories-slider-container">
+        <div class="categories-slider-track" id="collectionsGrid">
+          <div class="ruut-loading-skeleton" style="text-align:center; padding:40px; color:#4A3324; width:100%;">
+            Loading collections...
+          </div>
+        </div>
+      </div>
+      <!-- Previous and Next buttons -->
+      <button class="carousel-nav-btn prev-btn" id="categoryPrevBtn" aria-label="Previous category">
+        <svg viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
+      </button>
+      <button class="carousel-nav-btn next-btn" id="categoryNextBtn" aria-label="Next category">
+        <svg viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </button>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials">
     <div class="container testimonials-container">
-      <h2 class="section-title">Testimonials</h2>
+      <h2 class="section-title">Customer Reviews</h2>
       <div class="testimonials-grid">
         <div class="testimonials-track" id="testimonialsTrack">
-          <!-- Testimonial 1 -->
-          <div class="testimonial-card">
-            <p class="testimonial-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://yourruut.com/wp-content/uploads/2021/04/testimonial-01-free-img.jpg"
-                  alt="Natalie Attired">
-              </div>
-              <span class="author-name">Natalie Attired</span>
-            </div>
-          </div>
-          <!-- Testimonial 2 -->
-          <div class="testimonial-card">
-            <p class="testimonial-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://yourruut.com/wp-content/uploads/2021/04/testimonial-07-free-img.jpg"
-                  alt="Lucinda Tung">
-              </div>
-              <span class="author-name">Lucinda Tung</span>
-            </div>
-          </div>
-          <!-- Testimonial 3 -->
-          <div class="testimonial-card">
-            <p class="testimonial-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://yourruut.com/wp-content/uploads/2021/04/testimonial-08-free-img.jpg"
-                  alt="Annie Von Holm">
-              </div>
-              <span class="author-name">Annie Von Holm</span>
-            </div>
-          </div>
-          <!-- Testimonial 4 -->
-          <div class="testimonial-card">
-            <p class="testimonial-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <img src="https://yourruut.com/wp-content/uploads/2021/04/testimonial-09-free-img.jpg"
-                  alt="Nicole Anne Dime">
-              </div>
-              <span class="author-name">Nicole Anne Dime</span>
-            </div>
+          <!-- Dynamic customer reviews will be loaded here -->
+          <div style="text-align:center; padding:40px; color:var(--ruut-text); width:100%;">
+            Loading reviews...
           </div>
         </div>
       </div>
@@ -342,29 +516,55 @@
   </section>
 
   <!-- FEATURED ON -->
-  <section class="featured-on">
+  <section class="featured-on" style="display: none;">
     <div class="container">
       <h2 class="featured-title">Featured On</h2>
       <div class="logos-marquee">
         <div class="logos-track">
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png" alt="Featured Partner 1"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png" alt="Featured Partner 2"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png" alt="Featured Partner 3"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png" alt="Featured Partner 4"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png" alt="Featured Partner 5"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png" alt="Featured Partner 6"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png" alt="Featured Partner 7"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png" alt="Featured Partner 8"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png"
+              alt="Featured Partner 1"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png"
+              alt="Featured Partner 2"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png"
+              alt="Featured Partner 3"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png"
+              alt="Featured Partner 4"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png"
+              alt="Featured Partner 5"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png"
+              alt="Featured Partner 6"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png"
+              alt="Featured Partner 7"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png"
+              alt="Featured Partner 8"></div>
           <!-- Duplicated for seamless loop -->
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png" alt="Featured Partner 1"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png" alt="Featured Partner 2"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png" alt="Featured Partner 3"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png" alt="Featured Partner 4"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png" alt="Featured Partner 5"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png" alt="Featured Partner 6"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png" alt="Featured Partner 7"></div>
-          <div class="logo-item"><img src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png" alt="Featured Partner 8"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png"
+              alt="Featured Partner 1"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png"
+              alt="Featured Partner 2"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png"
+              alt="Featured Partner 3"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png"
+              alt="Featured Partner 4"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png"
+              alt="Featured Partner 5"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png"
+              alt="Featured Partner 6"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png"
+              alt="Featured Partner 7"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png"
+              alt="Featured Partner 8"></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section" id="faqSection" style="display: none;">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion" id="faqAccordion">
+        <!-- Dynamic FAQs loaded via JS -->
       </div>
     </div>
   </section>
@@ -379,13 +579,7 @@
         </div>
         <div class="q-column">
           <h2 class="q-title" style="font-size: 1.4rem;">Track Your Order</h2>
-          <p class="q-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.</p>
           <a href="#" class="q-link">Track your Order</a>
-        </div>
-        <div class="q-column">
-          <h2 class="q-title" style="font-size: 1.4rem;">Return & Refund</h2>
-          <p class="q-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.</p>
-          <a href="#" class="q-link">Read More</a>
         </div>
       </div>
     </div>
@@ -399,38 +593,38 @@
         <div class="footer-col">
           <h3>Useful Links</h3>
           <ul class="footer-links">
-            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="/about-us">About Us</a></li>
             <li><a href="#contact">Contact Us</a></li>
             <li><a href="/my-account/">My account</a></li>
-            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#faqSection">FAQs</a></li>
           </ul>
         </div>
         <!-- Col 2 -->
         <div class="footer-col">
           <h3>Categories</h3>
           <ul class="footer-links">
-            <li><a href="the-atlas-collection.html">The Atlas Collection</a></li>
+            <li><a href="/collection.html">Collection</a></li>
             <li><a href="#gifts">Gifts</a></li>
           </ul>
         </div>
         <!-- Col 3 -->
         <div class="footer-col">
           <h3>Contact Us</h3>
-          <p>+91 8866 995 428</p>
+          <p>+91 98985 71044</p>
           <p><a href="mailto:connect@yourruut.com">connect@yourruut.com</a></p>
           <div class="footer-socials">
             <!-- Instagram -->
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
               <svg class="social-icon" viewBox="0 0 24 24">
                 <path
                   d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
               </svg>
             </a>
             <!-- WhatsApp -->
-            <a href="https://whatsapp.com" target="_blank" aria-label="WhatsApp">
-              <svg class="social-icon" viewBox="0 0 24 24">
-                <path
-                  d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.452 4.825 1.453 5.46.002 9.902-4.387 9.905-9.761.002-2.602-1.009-5.05-2.846-6.89C16.69 2.116 14.241.972 11.64.972c-5.467 0-9.911 4.391-9.913 9.768-.001 1.765.485 3.488 1.408 4.966L2.148 21.6l6.096-1.597-.1 0.05z" />
+            <a href="https://wa.me/919898571044" target="_blank" aria-label="WhatsApp">
+              <svg class="social-icon" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
               </svg>
             </a>
           </div>
@@ -450,69 +644,72 @@
   <div id="astra-mobile-cart-drawer" class="cart-drawer">
     <div class="cart-drawer-header">
       <div class="cart-drawer-title">Shopping Cart</div>
-      <button type="button" class="cart-drawer-close" id="closeCartDrawer" aria-label="Close Cart Drawer">&times;</button>
+      <button type="button" class="cart-drawer-close" id="closeCartDrawer"
+        aria-label="Close Cart Drawer">&times;</button>
     </div>
-    
+
     <div class="cart-drawer-content">
-      <!-- Mini Cart Progress Bar -->
-      <div class="cart-promo-banner" id="ruut-minicart-progress">
-        <div class="cart-promo-text" id="ruutMinicartText">
-          Add <span class="bold">1</span> more to unlock <span class="bold">₹250</span> off.
-        </div>
-        <div class="cart-progress-bar-wrap">
-          <div class="cart-progress-bar" id="ruutMinicartFill" style="width: 66.67%;"></div>
-          <div class="cart-progress-dot" id="ruutDot1" style="left: 66.67%;"></div>
-          <div class="cart-progress-dot" id="ruutDot2" style="left: 100%;"></div>
-        </div>
-      </div>
-      
-      <!-- Cart Items List -->
-      <div class="cart-items-list" id="cartItemsList">
-        <!-- Dynamically rendered by app.js -->
-      </div>
-
-      <!-- Complete the Ritual (Upsell) -->
-      <div class="cart-upsell-section" id="cartUpsellSection">
-        <div class="cart-upsell-title">Complete The Ritual</div>
-        <div class="cart-upsell-card">
-          <div class="cart-upsell-img-wrap">
-            <img src="assets/images/the_street_of kannuj.webp" alt="The Street of Kannauj">
+      <div class="cart-scrollable-area">
+        <!-- Mini Cart Progress Bar -->
+        <div class="cart-promo-banner" id="ruut-minicart-progress">
+          <div class="cart-promo-text" id="ruutMinicartText">
+            Add <span class="bold">1</span> more to unlock <span class="bold">₹250</span> off.
           </div>
-          <div class="cart-upsell-info">
-            <h4 class="cart-upsell-name">The Street of Kannauj</h4>
-            <span class="cart-upsell-price">₹650.00</span>
+          <div class="cart-progress-bar-wrap">
+            <div class="cart-progress-bar" id="ruutMinicartFill" style="width: 66.67%;"></div>
+            <div class="cart-progress-dot" id="ruutDot1" style="left: 66.67%;"></div>
+            <div class="cart-progress-dot" id="ruutDot2" style="left: 100%;"></div>
           </div>
-          <button type="button" class="btn-upsell-add" onclick="addUpsellToCart()">ADD +</button>
         </div>
-      </div>
 
-      <!-- Promo Code Section -->
-      <div class="cart-promo-code-section">
-        <div class="cart-promo-input-wrap">
-          <input type="text" class="cart-promo-input" id="ruut_coupon_code" placeholder="Gift or Promo Code">
-          <button type="button" class="btn-promo-apply" onclick="applyCouponCode()">APPLY</button>
+        <!-- Cart Items List -->
+        <div class="cart-items-list" id="cartItemsList">
+          <!-- Dynamically rendered by app.js?v=7.4 -->
         </div>
-        <a href="#" class="cart-coupons-link" id="exploreCouponsBtn">EXPLORE ALL ACTIVE COUPONS</a>
-        <div class="ruut-coupon-messages" id="couponMessages"></div>
+
+        <!-- Complete the Ritual (Upsell) -->
+        <div class="cart-upsell-section" id="cartUpsellSection" style="display: none;">
+          <div class="cart-upsell-title">Complete The Ritual</div>
+          <div class="cart-upsell-card">
+            <div class="cart-upsell-img-wrap">
+              <img loading="lazy" decoding="async" src="" alt="" id="cartUpsellImg">
+            </div>
+            <div class="cart-upsell-info">
+              <h4 class="cart-upsell-name" id="cartUpsellName">Loading...</h4>
+              <span class="cart-upsell-price" id="cartUpsellPrice"></span>
+            </div>
+            <button type="button" class="btn-upsell-add" id="cartUpsellBtn">ADD +</button>
+          </div>
+        </div>
+
+        <!-- Promo Code Section -->
+        <div class="cart-promo-code-section">
+          <div class="cart-promo-input-wrap">
+            <input type="text" class="cart-promo-input" id="ruut_coupon_code" placeholder="Gift or Promo Code">
+            <button type="button" class="btn-promo-apply" onclick="applyCouponCode()">APPLY</button>
+          </div>
+          <a href="#" class="cart-coupons-link" id="exploreCouponsBtn">EXPLORE ALL ACTIVE COUPONS</a>
+          <div class="ruut-coupon-messages" id="couponMessages"></div>
+        </div>
+
       </div>
-      
       <!-- Pricing Summary -->
       <div class="cart-summary-section">
         <div class="cart-summary-row">
-          <span class="cart-summary-label">Subtotal</span>
+          <span class="cart-summary-label">Total</span>
           <div class="cart-summary-value-wrap">
-            <span class="cart-summary-original-price" id="cartSubtotalOriginal">₹1,170.00</span>
-            <span class="cart-summary-price" id="cartSubtotal">₹1,070.00</span>
+            <span class="cart-summary-original-price" id="cartSubtotalOriginal"></span>
+            <span class="cart-summary-price" id="cartSubtotal"></span>
           </div>
         </div>
       </div>
-      
+
       <!-- Actions -->
       <div class="cart-drawer-actions">
-        <a href="#" class="btn-cart-drawer view-cart-btn">View Cart</a>
+        <a href="/cart.html" class="btn-cart-drawer view-cart-btn">View Cart</a>
         <a href="#" class="btn-cart-drawer checkout-btn">Checkout</a>
       </div>
-      
+
     </div>
   </div>
 
@@ -522,8 +719,8 @@
       <button type="button" class="ruut-modal-close" id="closeCouponsModal">&times;</button>
       <div class="ruut-modal-header">Privileges</div>
       <div class="ruut-modal-subheader">SELECT A REWARD TO ENHANCE YOUR RITUAL</div>
-      
-      <div class="ruut-modal-body">
+
+      <div class="ruut-modal-body" id="ruutCouponsList">
         <div class="ruut-modal-coupon-item" data-coupon-code="TEST-34">
           <div class="ruut-modal-coupon-main">
             <div class="ruut-modal-coupon-info">
@@ -534,7 +731,7 @@
           </div>
           <div class="ruut-modal-coupon-messages" id="coupon-msg-TEST-34" style="display: none;"></div>
         </div>
-        
+
         <div class="ruut-modal-coupon-item" data-coupon-code="TEST-12">
           <div class="ruut-modal-coupon-main">
             <div class="ruut-modal-coupon-info">
@@ -553,7 +750,8 @@
   <div id="ruut-confirm-overlay" class="ruut-confirm-overlay" style="display: none;">
     <div class="ruut-confirm-modal">
       <div class="ruut-confirm-title">Confirm Change</div>
-      <div class="ruut-confirm-desc">Applying this privilege will replace your current active privilege, resulting in a lower total benefit. Are you sure you wish to proceed?</div>
+      <div class="ruut-confirm-desc">Applying this privilege will replace your current active privilege, resulting in a
+        lower total benefit. Are you sure you wish to proceed?</div>
       <div class="ruut-confirm-actions">
         <button type="button" class="ruut-confirm-cancel" id="confirmCancelBtn">CANCEL</button>
         <button type="button" class="ruut-confirm-anyway" id="confirmAnywayBtn">APPLY ANYWAY</button>
@@ -561,7 +759,410 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <!-- REVIEW SUBMISSION MODAL -->
+  <div class="review-modal-overlay" id="reviewModalOverlay">
+    <div class="review-modal">
+      <button class="review-modal-close" id="closeReviewModalBtn" aria-label="Close modal">&times;</button>
+      <h2 class="review-modal-title">Write a Review</h2>
+      <p class="review-modal-subtitle">Share your experience with RUUT air mists. Your feedback helps us grow.</p>
+      <form id="reviewSubmitForm">
+        <div class="review-form-group">
+          <label class="review-form-label" for="reviewName">Your Name *</label>
+          <input type="text" id="reviewName" class="review-form-input" required placeholder="e.g. Aishwarya Sharma">
+        </div>
+        <div class="review-form-group">
+          <label class="review-form-label" for="reviewEmail">Your Email *</label>
+          <input type="email" id="reviewEmail" class="review-form-input" required
+            placeholder="e.g. aishwarya@domain.com">
+        </div>
+        <div class="review-form-group">
+          <label class="review-form-label">Rating *</label>
+          <div class="star-rating-select" id="starRatingSelect">
+            <span data-val="1">★</span>
+            <span data-val="2">★</span>
+            <span data-val="3">★</span>
+            <span data-val="4">★</span>
+            <span data-val="5" class="active">★</span>
+          </div>
+          <input type="hidden" id="reviewRatingVal" value="5">
+        </div>
+        <div class="review-form-group">
+          <label class="review-form-label" for="reviewContent">Review content *</label>
+          <textarea id="reviewContent" class="review-form-input review-form-textarea" required
+            placeholder="Tell us what you liked about your mist..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit-review">Submit Review</button>
+      </form>
+    </div>
+  </div>
+
+  
+  <script>
+    // FAQ Loader for homepage
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqSection = document.getElementById('faqSection');
+      const faqAccordion = document.getElementById('faqAccordion');
+      if (!faqSection || !faqAccordion) return;
+
+      const renderFaqs = (faqs) => {
+        faqSection.style.display = 'block';
+        faqAccordion.innerHTML = faqs.map(f => `
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>${f.question}</span>
+              <span class="faq-toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+              <p class="faq-answer-text">${f.answer}</p>
+            </div>
+          </div>
+        `).join('');
+
+        faqAccordion.querySelectorAll('.faq-question').forEach(q => {
+          q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const isOpen = item.classList.contains('open');
+            faqAccordion.querySelectorAll('.faq-item').forEach(el => {
+              el.classList.remove('open');
+              el.querySelector('.faq-answer').style.maxHeight = '0';
+            });
+            if (!isOpen) {
+              item.classList.add('open');
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+          });
+        });
+      };
+
+      ruutFetch('/wp-json/ruut/v1/faqs')
+        .then(res => {
+          if (!res.ok) throw new Error('API down');
+          return res.json();
+        })
+        .then(data => {
+          const faqs = window.ensureArray(data);
+          if (!faqs || faqs.length === 0) throw new Error('Empty FAQs');
+          renderFaqs(faqs);
+        })
+        .catch(err => {
+          console.error('Failed to load FAQs from WordPress:', err);
+          renderFaqs([]);
+        });
+    });
+  </script>
+
+  <!-- The Ruut Story Loader -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderStory = (story) => {
+        const section = document.getElementById('ruutStorySection');
+        const titleEl = document.getElementById('ruutStoryTitle');
+        const contentEl = document.getElementById('ruutStoryContent');
+        const imageEl = document.getElementById('ruutStoryImage');
+        if (section && titleEl && contentEl && imageEl) {
+          titleEl.textContent = story.title;
+          contentEl.innerHTML = story.content;
+          imageEl.src = story.image;
+          imageEl.alt = story.title;
+          section.style.display = 'block';
+        }
+      };
+
+      ruutFetch('/wp-json/ruut/v1/story')
+        .then(res => {
+          if (!res.ok) throw new Error('API down');
+          return res.json();
+        })
+        .then(story => {
+          if (!story || !story.title) throw new Error('Empty story');
+          renderStory(story);
+        })
+        .catch(err => {
+          console.error('Failed to load Story from WordPress:', err);
+        });
+    });
+  </script>
+
+  <!-- Product Reels Loader -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const reelsSection = document.getElementById('reelsSection');
+      const reelsTrack = document.getElementById('reelsTrack');
+      const reelsModal = document.getElementById('reelsModal');
+      const reelsModalClose = document.getElementById('reelsModalClose');
+      const reelsModalTrack = document.getElementById('reelsModalTrack');
+      const reelsModalPrev = document.getElementById('reelsModalPrev');
+      const reelsModalNext = document.getElementById('reelsModalNext');
+
+      if (!reelsSection || !reelsTrack || !reelsModal || !reelsModalClose || !reelsModalTrack) return;
+
+      let animationId;
+      let activeIndex = 0;
+      let globalReels = [];
+      let isPaused = false;
+
+      const renderReels = (reels) => {
+        globalReels = reels;
+        reelsSection.style.display = 'block';
+
+        // Duplicate reels multiple times to guarantee an endless infinite loop on desktop
+        const allReels = [...reels, ...reels, ...reels, ...reels];
+
+        reelsTrack.innerHTML = allReels.map((reel, idx) => {
+          let productHtml = '';
+          if (reel.product) {
+            const productUrl = window.getProductUrl ? window.getProductUrl(reel.product) : `/shop/?product=${reel.product.id}`;
+            const formattedPrice = reel.product.formatted_price || `₹ ${parseFloat(reel.product.price).toLocaleString('en-IN')}`;
+            const hasDiscount = reel.product.discount_percentage > 0;
+            const formattedRegPrice = hasDiscount ? `₹ ${parseFloat(reel.product.regular_price).toLocaleString('en-IN')}` : '';
+
+            productHtml = `
+              <a href="${productUrl}" class="reel-product-card">
+                <div class="reel-product-img-wrap">
+                  <img loading="lazy" decoding="async" class="reel-product-img" src="${reel.product.image}" alt="${reel.product.title}" />
+                </div>
+                <div class="reel-product-info">
+                  <h4 class="reel-product-title">${reel.product.title}</h4>
+                  <div class="reel-product-price-row">
+                    <span class="reel-product-price">${formattedPrice}</span>
+                    ${hasDiscount ? `<span class="reel-product-old-price">${formattedRegPrice}</span>` : ''}
+                  </div>
+                  ${hasDiscount ? `<div class="reel-product-discount-badge">${reel.product.discount_percentage}% off</div>` : ''}
+                </div>
+              </a>
+            `;
+          } else {
+            productHtml = `<p class="reel-title">${reel.title}</p>`;
+          }
+
+          // Use index mapping to trace back to original array index
+          const originalIndex = idx % reels.length;
+
+          return `
+            <div class="reel-card" data-original-index="${originalIndex}">
+              <div class="reel-media">
+                ${reel.video_url
+                  ? `<video class="reel-video" src="${reel.video_url}" autoplay muted loop playsinline preload="metadata" poster="${reel.thumbnail || ''}"></video>`
+                  : `<img loading="lazy" decoding="async" class="reel-thumbnail" src="${reel.thumbnail || ''}" alt="${reel.title}" />`
+                }
+                <div class="reel-play-overlay">
+                  <div class="reel-play-btn-circle">
+                    <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                </div>
+              </div>
+              ${productHtml}
+            </div>
+          `;
+        }).join('');
+
+        // Bind clicks on reels to open the 3D gallery modal
+        reelsTrack.querySelectorAll('.reel-card').forEach(card => {
+          card.addEventListener('click', (e) => {
+            // If they clicked the product link card, let the link navigate
+            if (e.target.closest('.reel-product-card')) return;
+            
+            const origIndex = parseInt(card.getAttribute('data-original-index'));
+            openModalAt(origIndex);
+          });
+        });
+
+        // Endless infinite scroll
+        let scrollSpeed = 0.4;
+        let scrollAccumulator = 0;
+
+        function autoScroll() {
+          if (!isPaused) {
+            scrollAccumulator += scrollSpeed;
+            if (scrollAccumulator >= 1) {
+              reelsTrack.scrollLeft += Math.floor(scrollAccumulator);
+              scrollAccumulator -= Math.floor(scrollAccumulator);
+            }
+            // Jump back to middle silently for infinite loop
+            if (reelsTrack.scrollLeft >= reelsTrack.scrollWidth / 2) {
+              reelsTrack.scrollLeft -= reelsTrack.scrollWidth / 2;
+            } else if (reelsTrack.scrollLeft <= 0) {
+              reelsTrack.scrollLeft += reelsTrack.scrollWidth / 2;
+            }
+          }
+          animationId = requestAnimationFrame(autoScroll);
+        }
+
+        // Cancel previous loop if running
+        if (animationId) cancelAnimationFrame(animationId);
+        // Start scroll loop
+        animationId = requestAnimationFrame(autoScroll);
+
+        // Pause interactions to allow manual scrolling
+        reelsTrack.addEventListener('mouseenter', () => isPaused = true);
+        reelsTrack.addEventListener('mouseleave', () => {
+          if (!reelsModal.classList.contains('open')) {
+            isPaused = false;
+          }
+        });
+        reelsTrack.addEventListener('touchstart', () => isPaused = true, { passive: true });
+        reelsTrack.addEventListener('touchend', () => {
+          setTimeout(() => {
+            if (!reelsModal.classList.contains('open')) {
+              isPaused = false;
+            }
+          }, 1500);
+        }, { passive: true });
+      };
+
+      // 3D Cover Flow Modal Slider logic
+      const updateGallery = () => {
+        const cards = reelsModalTrack.querySelectorAll('.reels-modal-card');
+        cards.forEach((card, i) => {
+          const video = card.querySelector('.modal-reel-video');
+          const offset = i - activeIndex;
+
+          if (offset === 0) {
+            // CENTER REEL (active, unmuted, playing)
+            card.className = 'reels-modal-card active';
+            card.style.transform = 'translateX(0) scale(1.1)';
+            card.style.opacity = '1';
+            card.style.zIndex = '10';
+            card.style.pointerEvents = 'auto';
+
+            if (video) {
+              video.muted = false;
+              video.currentTime = 0;
+              video.play().catch(() => {});
+            }
+          } else {
+            // SIDE REELS (scaled down, dim, muted)
+            card.className = 'reels-modal-card';
+            const translateX = offset * 260; // Spread spacing
+            card.style.transform = `translateX(${translateX}px) scale(0.7)`;
+            card.style.opacity = Math.abs(offset) === 1 ? '0.35' : '0'; // Only show adjacent side cards
+            card.style.zIndex = 10 - Math.abs(offset);
+            card.style.pointerEvents = Math.abs(offset) === 1 ? 'auto' : 'none';
+
+            if (video) {
+              video.muted = true;
+              video.pause();
+            }
+          }
+        });
+      };
+
+      const openModalAt = (index) => {
+        isPaused = true; // Pause background track scrolling
+        activeIndex = index;
+
+        // Render modal slides
+        reelsModalTrack.innerHTML = globalReels.map((reel, idx) => {
+          let buyOverlayHtml = '';
+          if (reel.product) {
+            const productUrl = window.getProductUrl ? window.getProductUrl(reel.product) : `/shop/?product=${reel.product.id}`;
+            const formattedPrice = reel.product.formatted_price || `₹ ${parseFloat(reel.product.price).toLocaleString('en-IN')}`;
+            buyOverlayHtml = `
+              <a href="${productUrl}" class="reels-modal-product-link" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.1); position: absolute; bottom: 0; left: 0; right: 0; text-decoration: none; color: #fff; z-index: 12; transition: background-color 0.25s;">
+                <img src="${reel.product.image}" style="width: 42px; height: 42px; border-radius: 8px; object-fit: cover;" />
+                <div style="flex: 1; min-width: 0; text-align: left;">
+                  <p style="margin: 0; font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff;">${reel.product.title}</p>
+                  <p style="margin: 0; font-size: 0.75rem; color: var(--ruut-accent, #cf6400); font-weight: 600; margin-top: 2px;">${formattedPrice}</p>
+                </div>
+                <div style="padding: 6px 12px; border-radius: 20px; background: var(--ruut-accent, #cf6400); font-size: 0.75rem; font-weight: 700; color: #fff;">SHOP NOW</div>
+              </a>
+            `;
+          }
+
+          return `
+            <div class="reels-modal-card" data-idx="${idx}">
+              ${reel.video_url
+                ? `<video class="modal-reel-video" src="${reel.video_url}" loop playsinline preload="auto" poster="${reel.thumbnail || ''}"></video>`
+                : `<img class="modal-reel-video" src="${reel.thumbnail || ''}" alt="${reel.title}" />`
+              }
+              ${buyOverlayHtml}
+            </div>
+          `;
+        }).join('');
+
+        // Bind clicks on modal cards to shift focus
+        reelsModalTrack.querySelectorAll('.reels-modal-card').forEach((card, idx) => {
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.reels-modal-product-link')) return;
+            if (idx !== activeIndex) {
+              activeIndex = idx;
+              updateGallery();
+            }
+          });
+        });
+
+        reelsModal.classList.add('open');
+        updateGallery();
+      };
+
+      const closeModal = () => {
+        reelsModal.classList.remove('open');
+        isPaused = false; // Resume background track scrolling
+
+        // Pause and reset all videos inside the modal
+        reelsModalTrack.querySelectorAll('.modal-reel-video').forEach(video => {
+          if (video && typeof video.pause === 'function') {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+        reelsModalTrack.innerHTML = '';
+      };
+
+      reelsModalClose.addEventListener('click', closeModal);
+
+      // Dismiss modal by clicking background overlay
+      reelsModal.addEventListener('click', (e) => {
+        if (e.target === reelsModal) {
+          closeModal();
+        }
+      });
+
+      // Navigation arrows in modal
+      reelsModalPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        activeIndex = (activeIndex - 1 + globalReels.length) % globalReels.length;
+        updateGallery();
+      });
+
+      reelsModalNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        activeIndex = (activeIndex + 1) % globalReels.length;
+        updateGallery();
+      });
+
+      // Keyboard bindings for modal navigation
+      document.addEventListener('keydown', (e) => {
+        if (!reelsModal.classList.contains('open')) return;
+        if (e.key === 'ArrowLeft') {
+          activeIndex = (activeIndex - 1 + globalReels.length) % globalReels.length;
+          updateGallery();
+        } else if (e.key === 'ArrowRight') {
+          activeIndex = (activeIndex + 1) % globalReels.length;
+          updateGallery();
+        } else if (e.key === 'Escape') {
+          closeModal();
+        }
+      });
+
+      // Fetch reels using ruutFetch
+      ruutFetch('/wp-json/ruut/v1/reels')
+        .then(res => {
+          if (!res.ok) throw new Error('API down');
+          return res.json();
+        })
+        .then(data => {
+          const reels = window.ensureArray(data);
+          if (!reels || reels.length === 0) throw new Error('Empty reels');
+          renderReels(reels);
+        })
+        .catch(err => {
+          console.error('Failed to load Reels from WordPress:', err);
+          renderReels([]);
+        });
+    });
+  </script>
 </body>
 
 </html>

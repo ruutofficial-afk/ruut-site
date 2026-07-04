@@ -7,11 +7,15 @@
   <title>Our Story – yourruut.com</title>
   <meta name="description"
     content="Composing quiet stories for rooms. Discover the story and philosophy behind RUUT, creating a scented dialogue between space and soul.">
-  <link rel="icon" href="assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
-  <link rel="apple-touch-icon" href="assets/images/favicon-192x192.png">
-  <link rel="stylesheet" href="assets/css/fonts.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon-192x192.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/hero_desktop.webp">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=20.0">
+  <script src="/assets/js/app.js?v=110.0" defer></script>
 </head>
 
 <body>
@@ -36,12 +40,12 @@
   <div class="mobile-nav-drawer" id="mobileDrawer">
     <button class="close-btn" id="closeDrawer" aria-label="Close menu">&times;</button>
     <ul class="mobile-nav-links">
-      <li><a href="index.html#home">Home</a></li>
-      <li><a href="the-atlas-collection.html">The Atlas Collection</a></li>
-      <li><a href="index.html#bestsellers">Bestsellers</a></li>
-      <li><a href="about-us.html">About Us</a></li>
-      <li><a href="index.html#gifts">Gifts</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="/index.html#home">Home</a></li>
+      <li><a href="/collection.html">Collection</a></li>
+      <li><a href="/index.html#bestsellers">Bestsellers</a></li>
+      <li><a href="/about-us.html">About Us</a></li>
+      <li><a href="/index.html#gifts">Gifts</a></li>
+      <li><a href="/index.html#contact">Contact</a></li>
     </ul>
   </div>
 
@@ -50,8 +54,8 @@
     <div class="nav-container">
       <!-- Left Navigation (Desktop) -->
       <ul class="nav-links left">
-        <li><a href="index.html#home">Home</a></li>
-        <li><a href="the-atlas-collection.html">The Atlas Collection</a></li>
+        <li><a href="/index.html#home">Home</a></li>
+        <li><a href="/collection.html">Collection</a></li>
       </ul>
 
       <!-- Hamburger Menu (Mobile) -->
@@ -64,15 +68,15 @@
       </button>
 
       <!-- Center Logo -->
-      <a href="index.html#home" class="logo-container" aria-label="RUUT Home">
-        <img class="logo-img" src="assets/images/ruut-logo-D6BD9F.png" alt="yourruut.com logo">
+      <a href="/index.html#home" class="logo-container" aria-label="RUUT Home">
+        <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-D6BD9F.png" alt="yourruut.com logo">
       </a>
 
       <!-- Right Navigation (Desktop) + Actions -->
       <div class="header-actions">
         <ul class="nav-links right">
-          <li><a href="index.html#gifts">Gifts</a></li>
-          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="/index.html#gifts">Gifts</a></li>
+          <li><a href="/about-us.html">About Us</a></li>
           <li><a href="/my-account/">My Account</a></li>
         </ul>
 
@@ -88,7 +92,7 @@
   </header>
 
   <!-- HERO BANNER -->
-  <section class="collection-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('about_story.png'); background-position: center 45%;">
+  <section class="collection-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('/assets/images/about_story.webp'); background-position: center 45%;">
   </section>
 
   <!-- ABOUT SECTION -->
@@ -97,7 +101,7 @@
       
       <!-- BREADCRUMBS -->
       <nav class="breadcrumbs-showcase">
-        <a href="index.html">Home</a><span>/</span>About Us
+        <a href="/index.html">Home</a><span>/</span>About Us
       </nav>
 
       <div class="about-grid" style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; margin-top: 2rem;">
@@ -116,7 +120,7 @@
         </div>
         <div class="about-image-block">
           <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); background-color: var(--ruut-white);">
-            <img src="about_story.png" alt="ṚUUT Botanical Mist Concept" style="width: 100%; display: block; height: auto;">
+            <img loading="lazy" decoding="async" src="/assets/images/about_story.webp" alt="ṚUUT Botanical Mist Concept" style="width: 100%; display: block; height: auto;">
           </div>
         </div>
       </div>
@@ -131,7 +135,7 @@
         
         <div class="pillar-card" style="text-align: center; padding: 1rem;">
           <div style="width: 60px; height: 60px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
-            <img src="https://yourruut.com/wp-content/uploads/2021/04/icon-01-free-img.png" alt="Natural" style="width: 48px; height: auto;">
+            <img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/icon-01-free-img.png" alt="Natural" style="width: 48px; height: auto;">
           </div>
           <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; color: var(--ruut-text); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">100% Clean Formulas</h3>
           <p style="font-size: 0.85rem; line-height: 1.7; color: var(--ruut-text); opacity: 0.85;">
@@ -141,7 +145,7 @@
 
         <div class="pillar-card" style="text-align: center; padding: 1rem;">
           <div style="width: 60px; height: 60px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
-            <img src="https://yourruut.com/wp-content/uploads/2021/04/icon-02-free-img.png" alt="Cruelty Free" style="width: 48px; height: auto;">
+            <img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/icon-02-free-img.png" alt="Cruelty Free" style="width: 48px; height: auto;">
           </div>
           <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; color: var(--ruut-text); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Cruelty-Free & Vegan</h3>
           <p style="font-size: 0.85rem; line-height: 1.7; color: var(--ruut-text); opacity: 0.85;">
@@ -151,7 +155,7 @@
 
         <div class="pillar-card" style="text-align: center; padding: 1rem;">
           <div style="width: 60px; height: 60px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
-            <img src="https://yourruut.com/wp-content/uploads/2021/04/icon-04-free-img.png" alt="Recyclable" style="width: 48px; height: auto;">
+            <img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/icon-04-free-img.png" alt="Recyclable" style="width: 48px; height: auto;">
           </div>
           <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; color: var(--ruut-text); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Sustainable Vessels</h3>
           <p style="font-size: 0.85rem; line-height: 1.7; color: var(--ruut-text); opacity: 0.85;">
@@ -169,7 +173,7 @@
       <div class="meet-founder-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
         <div class="founder-img-col">
           <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
-            <img src="about_founder.png" alt="Jennifer Oliver, founder of RUUT" style="width: 100%; display: block; height: auto;">
+            <img loading="lazy" decoding="async" src="/assets/images/about_founder.webp" alt="Jennifer Oliver, founder of RUUT" style="width: 100%; display: block; height: auto;">
           </div>
         </div>
         <div class="founder-content-col">
@@ -182,7 +186,7 @@
             "Our blends are inspired by my travels—the dew-soaked mornings in the pine woods of Landour, the historic rose distilleries on the narrow lanes of Kannauj, and the sacred serenity of Pangong Tso. By keeping our ingredients completely natural and chemical-free, we make sure that your space remains as pure and honest as nature intended."
           </p>
           <div class="signature-wrap" style="max-width: 160px; margin-top: 1rem;">
-            <img src="https://yourruut.com/wp-content/uploads/2021/04/signature-free-img.png" alt="Jennifer Oliver signature" style="width: 100%; display: block; height: auto; opacity: 0.85;">
+            <img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/signature-free-img.png" alt="Jennifer Oliver signature" style="width: 100%; display: block; height: auto; opacity: 0.85;">
           </div>
         </div>
       </div>
@@ -219,34 +223,34 @@
         <div class="footer-col">
           <h3>Useful Links</h3>
           <ul class="footer-links">
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="index.html#contact">Contact Us</a></li>
+            <li><a href="/about-us.html">About Us</a></li>
+            <li><a href="/index.html#contact">Contact Us</a></li>
             <li><a href="/my-account/">My account</a></li>
-            <li><a href="the-atlas-collection.html">FAQs</a></li>
+            <li><a href="/collection.html">Collection</a></li>
           </ul>
         </div>
         <!-- Col 2 -->
         <div class="footer-col">
           <h3>Categories</h3>
           <ul class="footer-links">
-            <li><a href="the-atlas-collection.html">The Atlas Collection</a></li>
-            <li><a href="index.html#gifts">Gifts</a></li>
+            <li><a href="/collection.html">Collection</a></li>
+            <li><a href="/index.html#gifts">Gifts</a></li>
           </ul>
         </div>
         <!-- Col 3 -->
         <div class="footer-col">
           <h3>Contact Us</h3>
-          <p>+91 8866 995 428</p>
+          <p>+91 98985 71044</p>
           <p><a href="mailto:connect@yourruut.com">connect@yourruut.com</a></p>
           <div class="footer-socials">
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
               <svg class="social-icon" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
               </svg>
             </a>
-            <a href="https://whatsapp.com" target="_blank" aria-label="WhatsApp">
+            <a href="https://wa.me/919898571044" target="_blank" aria-label="WhatsApp">
               <svg class="social-icon" viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.452 4.825 1.453 5.46.002 9.902-4.387 9.905-9.761.002-2.602-1.009-5.05-2.846-6.89C16.69 2.116 14.241.972 11.64.972c-5.467 0-9.911 4.391-9.913 9.768-.001 1.765.485 3.488 1.408 4.966L2.148 21.6l6.096-1.597-.1 0.05z" />
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.953-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.452 4.825 1.453 5.46.002 9.902-4.387 9.905-9.761.002-2.602-1.009-5.05-2.846-6.89C16.69 2.116 14.241.972 11.64.972c-5.467 0-9.911 4.391-9.913 9.768-.001 1.765.485 3.488 1.408 4.966L2.148 21.6l6.096-1.597-.1 0.05z" />
               </svg>
             </a>
           </div>
@@ -266,69 +270,72 @@
   <div id="astra-mobile-cart-drawer" class="cart-drawer">
     <div class="cart-drawer-header">
       <div class="cart-drawer-title">Shopping Cart</div>
-      <button type="button" class="cart-drawer-close" id="closeCartDrawer" aria-label="Close Cart Drawer">&times;</button>
+      <button type="button" class="cart-drawer-close" id="closeCartDrawer"
+        aria-label="Close Cart Drawer">&times;</button>
     </div>
-    
+
     <div class="cart-drawer-content">
-      <!-- Mini Cart Progress Bar -->
-      <div class="cart-promo-banner" id="ruut-minicart-progress">
-        <div class="cart-promo-text" id="ruutMinicartText">
-          Add <span class="bold">1</span> more to unlock <span class="bold">₹250</span> off.
-        </div>
-        <div class="cart-progress-bar-wrap">
-          <div class="cart-progress-bar" id="ruutMinicartFill" style="width: 66.67%;"></div>
-          <div class="cart-progress-dot" id="ruutDot1" style="left: 66.67%;"></div>
-          <div class="cart-progress-dot" id="ruutDot2" style="left: 100%;"></div>
-        </div>
-      </div>
-      
-      <!-- Cart Items List -->
-      <div class="cart-items-list" id="cartItemsList">
-        <!-- Dynamically rendered by app.js -->
-      </div>
-
-      <!-- Complete the Ritual (Upsell) -->
-      <div class="cart-upsell-section" id="cartUpsellSection">
-        <div class="cart-upsell-title">Complete The Ritual</div>
-        <div class="cart-upsell-card">
-          <div class="cart-upsell-img-wrap">
-            <img src="assets/images/the_street_of kannuj.webp" alt="The Street of Kannauj">
+      <div class="cart-scrollable-area">
+        <!-- Mini Cart Progress Bar -->
+        <div class="cart-promo-banner" id="ruut-minicart-progress">
+          <div class="cart-promo-text" id="ruutMinicartText">
+            Add <span class="bold">1</span> more to unlock <span class="bold">₹250</span> off.
           </div>
-          <div class="cart-upsell-info">
-            <h4 class="cart-upsell-name">The Street of Kannauj</h4>
-            <span class="cart-upsell-price">₹650.00</span>
+          <div class="cart-progress-bar-wrap">
+            <div class="cart-progress-bar" id="ruutMinicartFill" style="width: 66.67%;"></div>
+            <div class="cart-progress-dot" id="ruutDot1" style="left: 66.67%;"></div>
+            <div class="cart-progress-dot" id="ruutDot2" style="left: 100%;"></div>
           </div>
-          <button type="button" class="btn-upsell-add" onclick="addUpsellToCart()">ADD +</button>
         </div>
-      </div>
 
-      <!-- Promo Code Section -->
-      <div class="cart-promo-code-section">
-        <div class="cart-promo-input-wrap">
-          <input type="text" class="cart-promo-input" id="ruut_coupon_code" placeholder="Gift or Promo Code">
-          <button type="button" class="btn-promo-apply" onclick="applyCouponCode()">APPLY</button>
+        <!-- Cart Items List -->
+        <div class="cart-items-list" id="cartItemsList">
+          <!-- Dynamically rendered by app.js?v=7.4 -->
         </div>
-        <a href="#" class="cart-coupons-link" id="exploreCouponsBtn">EXPLORE ALL ACTIVE COUPONS</a>
-        <div class="ruut-coupon-messages" id="couponMessages"></div>
+
+        <!-- Complete the Ritual (Upsell) -->
+        <div class="cart-upsell-section" id="cartUpsellSection" style="display: none;">
+          <div class="cart-upsell-title">Complete The Ritual</div>
+          <div class="cart-upsell-card">
+            <div class="cart-upsell-img-wrap">
+              <img loading="lazy" decoding="async" src="" alt="" id="cartUpsellImg">
+            </div>
+            <div class="cart-upsell-info">
+              <h4 class="cart-upsell-name" id="cartUpsellName">Loading...</h4>
+              <span class="cart-upsell-price" id="cartUpsellPrice"></span>
+            </div>
+            <button type="button" class="btn-upsell-add" id="cartUpsellBtn">ADD +</button>
+          </div>
+        </div>
+
+        <!-- Promo Code Section -->
+        <div class="cart-promo-code-section">
+          <div class="cart-promo-input-wrap">
+            <input type="text" class="cart-promo-input" id="ruut_coupon_code" placeholder="Gift or Promo Code">
+            <button type="button" class="btn-promo-apply" onclick="applyCouponCode()">APPLY</button>
+          </div>
+          <a href="#" class="cart-coupons-link" id="exploreCouponsBtn">EXPLORE ALL ACTIVE COUPONS</a>
+          <div class="ruut-coupon-messages" id="couponMessages"></div>
+        </div>
+
       </div>
-      
       <!-- Pricing Summary -->
       <div class="cart-summary-section">
         <div class="cart-summary-row">
-          <span class="cart-summary-label">Subtotal</span>
+          <span class="cart-summary-label">Total</span>
           <div class="cart-summary-value-wrap">
-            <span class="cart-summary-original-price" id="cartSubtotalOriginal">₹1,170.00</span>
-            <span class="cart-summary-price" id="cartSubtotal">₹1,070.00</span>
+            <span class="cart-summary-original-price" id="cartSubtotalOriginal"></span>
+            <span class="cart-summary-price" id="cartSubtotal"></span>
           </div>
         </div>
       </div>
-      
+
       <!-- Actions -->
       <div class="cart-drawer-actions">
-        <a href="#" class="btn-cart-drawer view-cart-btn">View Cart</a>
+        <a href="/cart.html" class="btn-cart-drawer view-cart-btn">View Cart</a>
         <a href="#" class="btn-cart-drawer checkout-btn">Checkout</a>
       </div>
-      
+
     </div>
   </div>
 
@@ -338,8 +345,8 @@
       <button type="button" class="ruut-modal-close" id="closeCouponsModal">&times;</button>
       <div class="ruut-modal-header">Privileges</div>
       <div class="ruut-modal-subheader">SELECT A REWARD TO ENHANCE YOUR RITUAL</div>
-      
-      <div class="ruut-modal-body">
+
+      <div class="ruut-modal-body" id="ruutCouponsList">
         <div class="ruut-modal-coupon-item" data-coupon-code="TEST-34">
           <div class="ruut-modal-coupon-main">
             <div class="ruut-modal-coupon-info">
@@ -350,7 +357,7 @@
           </div>
           <div class="ruut-modal-coupon-messages" id="coupon-msg-TEST-34" style="display: none;"></div>
         </div>
-        
+
         <div class="ruut-modal-coupon-item" data-coupon-code="TEST-12">
           <div class="ruut-modal-coupon-main">
             <div class="ruut-modal-coupon-info">
@@ -369,7 +376,8 @@
   <div id="ruut-confirm-overlay" class="ruut-confirm-overlay" style="display: none;">
     <div class="ruut-confirm-modal">
       <div class="ruut-confirm-title">Confirm Change</div>
-      <div class="ruut-confirm-desc">Applying this privilege will replace your current active privilege, resulting in a lower total benefit. Are you sure you wish to proceed?</div>
+      <div class="ruut-confirm-desc">Applying this privilege will replace your current active privilege, resulting in a
+        lower total benefit. Are you sure you wish to proceed?</div>
       <div class="ruut-confirm-actions">
         <button type="button" class="ruut-confirm-cancel" id="confirmCancelBtn">CANCEL</button>
         <button type="button" class="ruut-confirm-anyway" id="confirmAnywayBtn">APPLY ANYWAY</button>
@@ -377,7 +385,7 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  
 </body>
 
 </html>

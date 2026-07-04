@@ -1,0 +1,85 @@
+name: Deploy Frontend to Hostinger
+
+# Trigger: runs on every push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+    paths:
+      # Only trigger when frontend files change
+      - '*.html'
+      - 'assets/**'
+      - '.htaccess'
+      - 'index.php'
+
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy-frontend:
+    name: Deploy Frontend Files via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Deploy ONLY frontend files to Hostinger via FTP
+      # This NEVER touches wp-admin, wp-includes, wp-content, wp-config.php
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
+
+          # CRITICAL: Exclude WordPress backend and dev files from deployment
+          # This ensures WordPress installation is NEVER overwritten
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/project-brain/**
+            **/scratch/**
+            **/wp-content/**
+            **/reconstructed_ruut_core.*
+            **/*.py
+            **/*.mp4
+            **/design.md
+            **/architecture.md
+            **/DEVELOPER_HANDOFF.md
+            **/landing page image .txt
+            **/.github/**
+
+          # Only upload changed files (incremental deploy)
+          # This makes deploys fast and safe
+          dangerous-clean-slate: false
+
+  deploy-backend-plugin:
+    name: Deploy Backend Plugin via FTP
+    runs-on: ubuntu-latest
+
+    # Only run when backend plugin files change
+    if: >-
+      contains(github.event.head_commit.message, '[deploy-backend]') ||
+      github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Deploy ONLY the ruut-core plugin directory
+      - name: FTP Deploy Plugin
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+
+          # Upload plugin files to the correct WP plugin directory
+          local-dir: ./wp-content/plugins/ruut-core/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}wp-content/plugins/ruut-core/
+
+          dangerous-clean-slate: false
