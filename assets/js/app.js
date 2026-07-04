@@ -3,7 +3,7 @@
 
 // Global fetch wrapper with automatic remote host fallback for local static testing & timeout control
 window.ruutFetch = (url, options = {}) => {
-  const timeout = 10000; // 10 seconds timeout for slow WordPress servers
+  const timeout = 30000; // 30 seconds timeout for slow WordPress servers
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
 
@@ -15,31 +15,30 @@ window.ruutFetch = (url, options = {}) => {
                       window.location.hostname === '127.0.0.1' ||
                       window.location.hostname === '';
 
-  const wpBaseUrl = window.RUUT_WP_URL || 'https://yourruut.com';
+  const liveOrigin = (window.location.origin && window.location.origin !== 'null') ? window.location.origin : 'https://yourruut.com';
+  const wpBaseUrl = window.RUUT_WP_URL || liveOrigin;
 
   if (isRelative && isLocalHost) {
     targetUrl = wpBaseUrl + url;
   }
 
-  const doFetch = (fetchUrl) => {
-    return fetch(fetchUrl, { ...options, signal: controller.signal })
-      .then(res => {
-        clearTimeout(id);
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res;
-      });
-  };
-
-  return doFetch(targetUrl).catch(err => {
-    clearTimeout(id);
-    // If relative request failed on local setup, attempt fallback to live WordPress host
-    if (isRelative && targetUrl !== wpBaseUrl + url) {
-      return fetch(wpBaseUrl + url, { ...options });
-    }
-    throw err;
-  });
+  return fetch(targetUrl, { ...options, signal: controller.signal })
+    .then(res => {
+      clearTimeout(id);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res;
+    })
+    .catch(err => {
+      clearTimeout(id);
+      console.warn(`ruutFetch failed for ${targetUrl}:`, err);
+      // Fall back if relative request failed
+      if (isRelative && targetUrl !== wpBaseUrl + url) {
+        return fetch(wpBaseUrl + url, { ...options });
+      }
+      throw err;
+    });
 };
 
 // Global helper to safely normalize API outputs ({ value: [...] } or { data: [...] } or [...]) to a clean JavaScript Array
@@ -92,14 +91,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // Expose URL Helper globally
   window.getProductUrl = getProductUrl;
 
-  // Pre-fetch helper to cache catalog
+  // Pre-fetch helper to cache catalog with instant LocalStorage fallback
   window.ensureProductsFetched = () => {
     if (window.allProducts && window.allProducts.length > 0) {
       return Promise.resolve(window.allProducts);
     }
+
+    // Check LocalStorage cache first for instant load
+    try {
+      const cached = localStorage.getItem('ruut_cached_products');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          window.allProducts = parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage read error:', e);
+    }
+
     if (window.activeProductsFetch) {
+      if (window.allProducts && window.allProducts.length > 0) {
+        return Promise.resolve(window.allProducts);
+      }
       return window.activeProductsFetch;
     }
+
     window.activeProductsFetch = window.ruutFetch('/wp-json/ruut/v1/products?limit=100')
       .then(res => {
         if (!res.ok) throw new Error('API down');
@@ -107,15 +124,24 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(data => {
         const products = window.ensureArray(data);
-        window.allProducts = products;
+        if (products.length > 0) {
+          window.allProducts = products;
+          try {
+            localStorage.setItem('ruut_cached_products', JSON.stringify(products));
+          } catch (e) {}
+        }
         window.activeProductsFetch = null;
-        return products;
+        return window.allProducts || products;
       })
       .catch(err => {
-        console.error('Failed to pre-fetch products:', err);
+        console.error('Failed to pre-fetch products from WordPress API:', err);
         window.activeProductsFetch = null;
-        return [];
+        return window.allProducts || [];
       });
+
+    if (window.allProducts && window.allProducts.length > 0) {
+      return Promise.resolve(window.allProducts);
+    }
     return window.activeProductsFetch;
   };
 
