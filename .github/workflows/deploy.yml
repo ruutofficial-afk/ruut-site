@@ -1,4 +1,4 @@
-name: Deploy Frontend to Hostinger
+name: Deploy to Hostinger
 
 # Trigger: runs on every push to the 'main' branch
 on:
@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-frontend:
-    name: Deploy Frontend Files via FTP
+  deploy-site:
+    name: Deploy Frontend & Ruut Plugin via FTP
     runs-on: ubuntu-latest
     environment: FTP_HOST
 
@@ -24,8 +24,8 @@ jobs:
         run: |
           rm -rf .git .github project-brain scratch *.py reconstructed_ruut_core* *.md
 
-      # Deploy ONLY frontend files to Hostinger via FTP using lftp
-      # This NEVER touches wp-admin, wp-includes, wp-content, wp-config.php
+      # Deploy frontend files + ruut-core plugin to Hostinger via FTP using lftp
+      # This NEVER touches wp-admin, wp-includes, wp-config.php, or uploads
       - name: Deploy via FTP
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
@@ -36,6 +36,7 @@ jobs:
             set net:timeout 15;
             open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
             
+            # 1. Upload frontend files
             mirror --reverse --only-newer --verbose \
               --exclude-glob 'wp-admin/*' \
               --exclude-glob 'wp-includes/*' \
@@ -43,36 +44,11 @@ jobs:
               --exclude-glob 'wp-config.php' \
               --exclude-glob '*.mp4' \
               ./ '${{ secrets.FTP_SERVER_DIR }}';
-            quit;
-          "
-          echo "Frontend deploy complete!"
 
-  deploy-backend-plugin:
-    name: Deploy Backend Plugin via FTP
-    runs-on: ubuntu-latest
-    environment: FTP_HOST
-
-    # Only run when commit message contains [deploy-backend] or manual trigger
-    if: >-
-      contains(github.event.head_commit.message, '[deploy-backend]') ||
-      github.event_name == 'workflow_dispatch'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy Plugin via FTP
-        run: |
-          sudo apt-get update && sudo apt-get install -y lftp
-
-          lftp -c "
-            set ftp:ssl-allow no;
-            set net:max-retries 3;
-            set net:timeout 15;
-            open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
-            
+            # 2. Upload ruut-core plugin (inc/ruut-cart-api.php, ruut-core.php, assets)
             mirror --reverse --only-newer --verbose \
               ./wp-content/plugins/ruut-core/ '${{ secrets.FTP_SERVER_DIR }}wp-content/plugins/ruut-core/';
+
             quit;
           "
-          echo "Backend plugin deploy complete!"
+          echo "Frontend & Ruut Plugin deployment complete!"
