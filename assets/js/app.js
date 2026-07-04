@@ -3456,7 +3456,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
-  }
 
 });
 
