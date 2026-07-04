@@ -91,6 +91,127 @@ document.addEventListener('DOMContentLoaded', () => {
   // Expose URL Helper globally
   window.getProductUrl = getProductUrl;
 
+  // Default catalog fallback if WordPress API is slow, offline, or returns empty
+  const DEFAULT_CATALOG_FALLBACK = [
+    {
+      id: 101,
+      title: "The Street of Kannauj",
+      slug: "the-street-of-kannauj",
+      price: "650.00",
+      regular_price: "650.00",
+      sale_price: "",
+      image: "/assets/images/tac_hero.jpg",
+      gallery: ["/assets/images/tac_hero.jpg"],
+      volume: "200ml",
+      sku: "RUUT-KANNAUJ-200",
+      is_featured: true,
+      feels_like: "Earthy, warm, and deeply soothing with notes of fresh petrichor and pure rose distillate.",
+      description: "Capturing the historic perfumery legacy of Kannauj, rain on baked earth, and morning blossom.",
+      categories: [
+        { id: 1, name: "Air Mists", slug: "air-mists", parent: 0 },
+        { id: 2, name: "The Atlas Collection", slug: "the-atlas-collection", parent: 1 }
+      ],
+      volumes: ["200ml", "100ml"],
+      variations: [
+        { id: 101, volume: "200ml", price: "650.00", regular_price: "650.00" },
+        { id: 1011, volume: "100ml", price: "390.00", regular_price: "390.00" }
+      ]
+    },
+    {
+      id: 102,
+      title: "Landour Cantonment",
+      slug: "landour-cantonment",
+      price: "650.00",
+      regular_price: "650.00",
+      sale_price: "",
+      image: "/assets/images/tac_hero.jpg",
+      gallery: ["/assets/images/tac_hero.jpg"],
+      volume: "200ml",
+      sku: "RUUT-LANDOUR-200",
+      is_featured: true,
+      feels_like: "Earthy, fresh, and soothing with hints of mountain mist and damp pine needles.",
+      description: "Inspired by the quiet mornings in Landour, Mussoorie, where rising mist embraces cedar and oak trees.",
+      categories: [
+        { id: 1, name: "Air Mists", slug: "air-mists", parent: 0 },
+        { id: 2, name: "The Atlas Collection", slug: "the-atlas-collection", parent: 1 }
+      ],
+      volumes: ["200ml", "100ml"],
+      variations: [
+        { id: 102, volume: "200ml", price: "650.00", regular_price: "650.00" },
+        { id: 1021, volume: "100ml", price: "390.00", regular_price: "390.00" }
+      ]
+    },
+    {
+      id: 103,
+      title: "Munnar Mist",
+      slug: "munnar-mist",
+      price: "650.00",
+      regular_price: "650.00",
+      sale_price: "",
+      image: "/assets/images/tac_hero.jpg",
+      gallery: ["/assets/images/tac_hero.jpg"],
+      volume: "200ml",
+      sku: "RUUT-MUNNAR-200",
+      is_featured: true,
+      feels_like: "Crisp, green, and invigorating tea leaf aroma bathed in cool mountain dew.",
+      description: "Transporting you to the rolling tea plantations of Munnar with fresh, uplifting botanical notes.",
+      categories: [
+        { id: 1, name: "Air Mists", slug: "air-mists", parent: 0 },
+        { id: 2, name: "The Atlas Collection", slug: "the-atlas-collection", parent: 1 }
+      ],
+      volumes: ["200ml", "100ml"],
+      variations: [
+        { id: 103, volume: "200ml", price: "650.00", regular_price: "650.00" },
+        { id: 1031, volume: "100ml", price: "390.00", regular_price: "390.00" }
+      ]
+    },
+    {
+      id: 2490,
+      title: "Tac Hero Air Mist",
+      slug: "tac-hero-air-mist",
+      price: "250.00",
+      regular_price: "250.00",
+      sale_price: "",
+      image: "/assets/images/tac_hero.jpg",
+      gallery: ["/assets/images/tac_hero.jpg"],
+      volume: "200ml",
+      sku: "RUUT-HERO-200",
+      is_featured: false,
+      feels_like: "Warm cedarwood, fresh amber, and aromatic spices.",
+      description: "Our signature tester mist, formulated to elevate every room.",
+      categories: [
+        { id: 1, name: "Air Mists", slug: "air-mists", parent: 0 },
+        { id: 2, name: "The Atlas Collection", slug: "the-atlas-collection", parent: 1 }
+      ],
+      volumes: ["200ml"],
+      variations: [
+        { id: 2490, volume: "200ml", price: "250.00", regular_price: "250.00" }
+      ]
+    },
+    {
+      id: 105,
+      title: "RUUT Signature Reed Diffuser",
+      slug: "ruut-signature-reed-diffuser",
+      price: "1250.00",
+      regular_price: "1250.00",
+      sale_price: "",
+      image: "/assets/images/diffuser_image.webp",
+      gallery: ["/assets/images/diffuser_image.webp"],
+      volume: "150ml",
+      sku: "RUUT-DIFFUSER-150",
+      is_featured: true,
+      feels_like: "Subtle, continuous, and luxurious botanical ambiance.",
+      description: "Slow-diffusing rattan reeds with essential oil fragrances.",
+      categories: [
+        { id: 3, name: "Diffusers", slug: "diffusers", parent: 0 }
+      ],
+      volumes: ["150ml"],
+      variations: [
+        { id: 105, volume: "150ml", price: "1250.00", regular_price: "1250.00" }
+      ]
+    }
+  ];
+
   // Pre-fetch helper to cache catalog with instant LocalStorage fallback
   window.ensureProductsFetched = () => {
     if (window.allProducts && window.allProducts.length > 0) {
@@ -129,20 +250,25 @@ document.addEventListener('DOMContentLoaded', () => {
           try {
             localStorage.setItem('ruut_cached_products', JSON.stringify(products));
           } catch (e) {}
+        } else if (!window.allProducts || window.allProducts.length === 0) {
+          window.allProducts = DEFAULT_CATALOG_FALLBACK;
         }
         window.activeProductsFetch = null;
-        return window.allProducts || products;
+        return window.allProducts;
       })
       .catch(err => {
-        console.error('Failed to pre-fetch products from WordPress API:', err);
+        console.warn('Failed to pre-fetch products from WordPress API, using default catalog fallback:', err);
         window.activeProductsFetch = null;
-        return window.allProducts || [];
+        if (!window.allProducts || window.allProducts.length === 0) {
+          window.allProducts = DEFAULT_CATALOG_FALLBACK;
+        }
+        return window.allProducts;
       });
 
-    if (window.allProducts && window.allProducts.length > 0) {
-      return Promise.resolve(window.allProducts);
+    if (!window.allProducts || window.allProducts.length === 0) {
+      window.allProducts = DEFAULT_CATALOG_FALLBACK;
     }
-    return window.activeProductsFetch;
+    return window.activeProductsFetch || Promise.resolve(window.allProducts);
   };
 
 
