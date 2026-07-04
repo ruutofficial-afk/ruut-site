@@ -2339,10 +2339,10 @@ footer {
 .cart-promo-banner {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.45);
-  padding: 1rem 1.5rem 2.2rem 1.5rem;
+  padding: 1rem 1.2rem 2.4rem 1.2rem;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .cart-promo-text {
@@ -2395,15 +2395,19 @@ footer {
 
 .cart-progress-dot .dot-label {
   position: absolute;
-  top: 16px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
   color: var(--ruut-text);
   white-space: nowrap;
   line-height: 1;
   pointer-events: none;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* Cart Scrollable Area */

@@ -982,10 +982,12 @@ document.addEventListener('DOMContentLoaded', () => {
       cartSubtotal.innerHTML = `₹${finalDiscountedTotal.toFixed(2)}`;
     }
 
-    // Dynamically insert/update Privilege Discount breakdown row in minicart drawer summary
+    // Dynamically insert/update Privilege & Volume Discount breakdown rows in minicart drawer summary
     const cartSummarySection = document.querySelector('.cart-summary-section');
     if (cartSummarySection) {
       let discountRow = cartSummarySection.querySelector('.cart-summary-discount-row');
+      let volumeDiscountRow = cartSummarySection.querySelector('.cart-summary-volume-row');
+
       if (activeCoupon && discount > 0) {
         if (!discountRow) {
           discountRow = document.createElement('div');
@@ -1000,6 +1002,23 @@ document.addEventListener('DOMContentLoaded', () => {
         discountRow.style.display = 'flex';
       } else if (discountRow) {
         discountRow.style.display = 'none';
+      }
+
+      if (!activeCoupon && activeDiscount > 0) {
+        if (!volumeDiscountRow) {
+          volumeDiscountRow = document.createElement('div');
+          volumeDiscountRow.className = 'cart-summary-row cart-summary-volume-row';
+          volumeDiscountRow.style.cssText = 'display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--ruut-accent); font-weight: 600; margin-bottom: 8px; align-items: center;';
+          const refNode = discountRow && discountRow.parentNode ? discountRow.nextSibling : cartSummarySection.firstChild;
+          cartSummarySection.insertBefore(volumeDiscountRow, refNode);
+        }
+        volumeDiscountRow.innerHTML = `
+          <span>Tier Discount (${regularItemsQty} Items)</span>
+          <span>-₹${activeDiscount.toFixed(2)}</span>
+        `;
+        volumeDiscountRow.style.display = 'flex';
+      } else if (volumeDiscountRow) {
+        volumeDiscountRow.style.display = 'none';
       }
     }
 
@@ -1040,14 +1059,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper: build unlocked reward description
     const getOfferUnlockText = (t) => {
       const rewards = [];
-      if (t.compulsory_gift_name) {
-        rewards.push(`a free <strong>${t.compulsory_gift_name}</strong>`);
-      }
-      if (t.random_gift_name) {
-        rewards.push(`a free <strong>${t.random_gift_name}</strong>`);
-      }
       if (t.discount > 0) {
         rewards.push(`<strong>₹${t.discount.toFixed(0)} off</strong>`);
+      }
+      const compName = t.compulsory_gift_name || (t.compulsory_gift_id && window.allProducts ? (window.allProducts.find(p => p.id == t.compulsory_gift_id) || {}).title : '') || 'Complimentary Gift';
+      if (compName) {
+        rewards.push(`a free <strong>${compName}</strong>`);
+      }
+      const randName = t.random_gift_name || (t.random_gift_id && window.allProducts ? (window.allProducts.find(p => p.id == t.random_gift_id) || {}).title : '');
+      if (randName) {
+        rewards.push(`a free <strong>${randName}</strong>`);
       }
       
       if (rewards.length === 0) return 'rewards';
@@ -1126,9 +1147,19 @@ document.addEventListener('DOMContentLoaded', () => {
         dots.forEach((dot, idx) => {
           const reachedClass = progressPercent >= dot.percent ? 'ruut-dot-reached' : '';
           const activeColor = progressPercent >= dot.percent ? 'var(--ruut-accent)' : 'var(--ruut-white)';
+
+          let badgeText = `${dot.quantity} Qty`;
+          if (dot.threshold.discount > 0 && dot.quantity >= 3) {
+            badgeText = `${dot.quantity} Qty (₹${dot.threshold.discount.toFixed(0)} OFF + GIFTS)`;
+          } else if (dot.threshold.discount > 0) {
+            badgeText = `${dot.quantity} Qty (₹${dot.threshold.discount.toFixed(0)} OFF)`;
+          } else if (dot.quantity >= 2) {
+            badgeText = `${dot.quantity} Qty (FREE GIFT)`;
+          }
+
           const dotHtml = `
-            <div class="cart-progress-dot ${reachedClass}" style="left: ${dot.percent}%; background-color: ${activeColor};" title="Tier ${idx + 1}: ${dot.quantity} items">
-              <span class="dot-label">${dot.quantity} Qty</span>
+            <div class="cart-progress-dot ${reachedClass}" style="left: ${dot.percent}%; background-color: ${activeColor};" title="Tier ${idx + 1}: ${dot.quantity} items (${badgeText})">
+              <span class="dot-label">${badgeText}</span>
             </div>
           `;
           wrapEl.insertAdjacentHTML('beforeend', dotHtml);
