@@ -1,16 +1,18 @@
 /* Coming Soon Page Scripts — RUUT */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Dynamic Countdown Timer Setup
-  // Set launch date to 15 days in the future from current visit
-  let launchDate = localStorage.getItem('ruut_launch_date');
-  if (!launchDate) {
-    const defaultDate = new Date();
-    defaultDate.setDate(defaultDate.getDate() + 15);
-    launchDate = defaultDate.getTime().toString();
-    localStorage.setItem('ruut_launch_date', launchDate);
-  }
-  
-  const targetTime = parseInt(launchDate, 10);
+  // 1. Fixed Launch Countdown Timer Setup (Target: July 20th)
+  const getLaunchTarget = () => {
+    const now = new Date();
+    let targetYear = now.getFullYear();
+    // July is month 6 (0-indexed)
+    let target = new Date(targetYear, 6, 20, 0, 0, 0);
+    if (now.getTime() > target.getTime()) {
+      target = new Date(targetYear + 1, 6, 20, 0, 0, 0);
+    }
+    return target.getTime();
+  };
+
+  const targetTime = getLaunchTarget();
   
   const daysVal = document.getElementById('days');
   const hoursVal = document.getElementById('hours');
@@ -21,11 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date().getTime();
     const distance = targetTime - now;
     
-    if (distance < 0) {
-      // If timer is expired, reset it to another 15 days for demo purposes
-      const resetDate = new Date();
-      resetDate.setDate(resetDate.getDate() + 15);
-      localStorage.setItem('ruut_launch_date', resetDate.getTime().toString());
+    if (distance <= 0) {
+      if (daysVal) daysVal.textContent = '00';
+      if (hoursVal) hoursVal.textContent = '00';
+      if (minutesVal) minutesVal.textContent = '00';
+      if (secondsVal) secondsVal.textContent = '00';
+      if (typeof timerInterval !== 'undefined') clearInterval(timerInterval);
       return;
     }
     
