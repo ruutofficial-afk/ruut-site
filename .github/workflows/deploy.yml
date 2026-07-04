@@ -36,8 +36,8 @@ jobs:
             set net:timeout 15;
             open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
             
-            # 1. Upload frontend files
-            mirror --reverse --only-newer --verbose \
+            # 1. Upload frontend files (forced sync, ignoring timestamp skew)
+            mirror --reverse --verbose \
               --exclude-glob 'wp-admin/*' \
               --exclude-glob 'wp-includes/*' \
               --exclude-glob 'wp-content/*' \
@@ -46,7 +46,7 @@ jobs:
               ./ '${{ secrets.FTP_SERVER_DIR }}';
 
             # 2. Upload ruut-core plugin (inc/ruut-cart-api.php, ruut-core.php, assets)
-            mirror --reverse --only-newer --verbose \
+            mirror --reverse --verbose \
               ./wp-content/plugins/ruut-core/ '${{ secrets.FTP_SERVER_DIR }}wp-content/plugins/ruut-core/';
 
             quit;
