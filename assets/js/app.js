@@ -725,6 +725,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.allProducts && window.allProducts.length > 0) {
           giftProduct = window.allProducts.find(p => p.id == targetGift.id);
           if (!giftProduct) giftProduct = window.allProducts[0];
+        } else {
+          giftProduct = {
+            title: targetGift.gift_type === 'random' ? "Special Tester Fragrance" : "Complimentary Miniature Fragrance",
+            regular_price: 250,
+            image: "/assets/images/tac_hero.jpg",
+            volume: "200ml",
+            sku: "GIFT-" + (targetGift.id || 101),
+            id: targetGift.id || 101
+          };
         }
         if (giftProduct) {
           cart.push({
@@ -735,8 +744,8 @@ document.addEventListener('DOMContentLoaded', () => {
             image: giftProduct.image || "/assets/images/tac_hero.jpg",
             volume: giftProduct.volume || "200ml",
             sku: giftProduct.sku || ("GIFT-" + giftProduct.id),
-            id: giftProduct.id,
-            key: "gift-" + targetGift.gift_type + "-" + giftProduct.id,
+            id: giftProduct.id || targetGift.id,
+            key: "gift-" + targetGift.gift_type + "-" + (giftProduct.id || targetGift.id),
             is_gift: true,
             gift_type: targetGift.gift_type,
             gift_label: targetGift.gift_label
@@ -1119,7 +1128,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const activeColor = progressPercent >= dot.percent ? 'var(--ruut-accent)' : 'var(--ruut-white)';
           const dotHtml = `
             <div class="cart-progress-dot ${reachedClass}" style="left: ${dot.percent}%; background-color: ${activeColor};" title="Tier ${idx + 1}: ${dot.quantity} items">
-              <span style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 600; color: var(--ruut-text); white-space: nowrap;">${dot.quantity} Qty</span>
+              <span class="dot-label">${dot.quantity} Qty</span>
             </div>
           `;
           wrapEl.insertAdjacentHTML('beforeend', dotHtml);
@@ -1127,25 +1136,29 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       // Render dots for mini-cart
+      const minicartFillEl = document.getElementById('ruutMinicartFill');
       const minicartWrap = document.querySelector('#ruut-minicart-progress .cart-progress-bar-wrap');
       if (minicartWrap) {
-        updateProgressDots(ruutMinicartFill, minicartWrap);
-        minicartWrap.style.marginBottom = '20px';
+        updateProgressDots(minicartFillEl, minicartWrap);
+        minicartWrap.style.marginBottom = '25px';
       }
 
       // Render dots for cart page
+      const cartpageFillEl = document.getElementById('ruutCartpageFill');
       const cartpageWrap = document.querySelector('#ruut-cartpage-progress .cart-progress-bar-wrap');
       if (cartpageWrap) {
-        updateProgressDots(ruutCartpageFill, cartpageWrap);
-        cartpageWrap.style.marginBottom = '20px';
+        updateProgressDots(cartpageFillEl, cartpageWrap);
+        cartpageWrap.style.marginBottom = '25px';
       }
 
       // Update text labels
-      if (ruutMinicartText) {
-        ruutMinicartText.innerHTML = nextOfferText;
+      const minicartTextEl = document.getElementById('ruutMinicartText');
+      if (minicartTextEl) {
+        minicartTextEl.innerHTML = nextOfferText;
       }
-      if (ruutCartpageText) {
-        ruutCartpageText.innerHTML = nextOfferText;
+      const cartpageTextEl = document.getElementById('ruutCartpageText');
+      if (cartpageTextEl) {
+        cartpageTextEl.innerHTML = nextOfferText;
       }
     } else {
       // Hide progress bar if disabled
