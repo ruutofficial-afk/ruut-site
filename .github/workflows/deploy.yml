@@ -30,30 +30,27 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
 
+          TARGET_DIR="${{ secrets.FTP_SERVER_DIR }}"
+          if [ -z "$TARGET_DIR" ]; then
+            TARGET_DIR="public_html/"
+          fi
+
           lftp -c "
             set ftp:ssl-allow no;
             set net:max-retries 3;
             set net:timeout 15;
             open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
             
-            # Determine target base dir
-            TARGET_DIR='${{ secrets.FTP_SERVER_DIR }}'
-            if [ -z \"\$TARGET_DIR\" ]; then
-              TARGET_DIR='public_html/'
-            fi
-
-            # 1. Upload frontend files
             mirror --reverse --verbose \
               --exclude-glob 'wp-admin/*' \
               --exclude-glob 'wp-includes/*' \
               --exclude-glob 'wp-content/*' \
               --exclude-glob 'wp-config.php' \
               --exclude-glob '*.mp4' \
-              ./ \"\$TARGET_DIR\";
+              ./ \"${TARGET_DIR}\";
 
-            # 2. Upload ruut-core plugin (inc/ruut-cart-api.php, ruut-core.php, assets)
             mirror --reverse --verbose \
-              ./wp-content/plugins/ruut-core/ \"\${TARGET_DIR}wp-content/plugins/ruut-core/\";
+              ./wp-content/plugins/ruut-core/ \"${TARGET_DIR}wp-content/plugins/ruut-core/\";
 
             quit;
           "
