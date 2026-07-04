@@ -2288,7 +2288,7 @@ footer {
 }
 
 .cart-drawer.open {
-  right: 0;
+  right: 0 !important;
 }
 
 /* Header */
@@ -2954,6 +2954,9 @@ footer {
   .cart-drawer {
     width: 100%;
     right: -100%;
+  }
+  .cart-drawer.open {
+    right: 0 !important;
   }
 }
 

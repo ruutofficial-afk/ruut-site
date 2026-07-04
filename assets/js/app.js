@@ -703,7 +703,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isCartPage) return;
 
     if (typeof renderCart === 'function') {
-      renderCart();
+      try {
+        renderCart();
+      } catch (err) {
+        console.error('renderCart error:', err);
+      }
     }
 
     const drawer = document.getElementById('astra-mobile-cart-drawer') || 
@@ -717,6 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (drawer) {
       drawer.style.display = 'flex';
       drawer.style.visibility = 'visible';
+      drawer.style.right = '0px';
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
     }
@@ -737,6 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.cart-drawer-overlay');
 
     if (drawer) {
+      drawer.style.right = '';
       drawer.classList.remove('open');
       drawer.setAttribute('aria-hidden', 'true');
     }
