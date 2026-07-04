@@ -661,23 +661,31 @@ document.addEventListener('DOMContentLoaded', () => {
         let randId = parseInt(activeT.random_gift_id || (activeT.random_gift_pool && activeT.random_gift_pool[0]) || 0);
 
         if (window.allProducts && window.allProducts.length > 0) {
-          if (compId > 0) {
-            const foundComp = window.allProducts.find(p => p.id == compId);
-            if (!foundComp) compId = parseInt(window.allProducts[0].id);
-          } else {
+          if (!compId || !window.allProducts.some(p => p.id == compId)) {
             compId = parseInt(window.allProducts[0].id);
           }
-          if (randId > 0) {
-            const foundRand = window.allProducts.find(p => p.id == randId);
-            if (!foundRand) randId = compId;
+
+          if (activeT.quantity >= 3 || randId > 0 || (activeT.random_gift_pool && activeT.random_gift_pool.length > 0)) {
+            let validRand = window.allProducts.find(p => p.id == randId && p.id != compId);
+            if (!validRand && activeT.random_gift_pool && activeT.random_gift_pool.length > 0) {
+              const poolId = activeT.random_gift_pool.find(id => id != compId && window.allProducts.some(p => p.id == id));
+              if (poolId) validRand = window.allProducts.find(p => p.id == poolId);
+            }
+            if (!validRand) {
+              validRand = window.allProducts.find(p => p.id != compId) || window.allProducts[0];
+            }
+            if (validRand) {
+              randId = parseInt(validRand.id);
+            }
           }
         }
 
         if (compId > 0) {
           targetGifts.push({ id: compId, gift_type: 'compulsory', gift_label: 'Complimentary Gift' });
         }
-        if (randId > 0 && randId !== compId) {
-          targetGifts.push({ id: randId, gift_type: 'random', gift_label: 'Special Tester Gift' });
+        if (activeT.quantity >= 3 || (randId > 0 && randId !== compId)) {
+          const finalRandId = (randId > 0 && randId !== compId) ? randId : (window.allProducts && window.allProducts.find(p => p.id != compId) ? window.allProducts.find(p => p.id != compId).id : (compId + 1));
+          targetGifts.push({ id: parseInt(finalRandId), gift_type: 'random', gift_label: 'Special Tester Gift' });
         }
       }
 

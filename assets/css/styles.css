@@ -2338,16 +2338,19 @@ footer {
 /* Promo Banner & Progress Bar */
 .cart-promo-banner {
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.3);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.45);
+  padding: 1rem 1.5rem 2.2rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 0.5rem;
 }
 
 .cart-promo-text {
   font-family: var(--font-sans);
   font-size: 0.85rem;
   color: var(--ruut-text);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
 }
 
 .cart-promo-text .bold {
@@ -2360,6 +2363,7 @@ footer {
   background-color: rgba(102, 68, 54, 0.15);
   border-radius: 3px;
   position: relative;
+  margin-bottom: 0.5rem;
 }
 
 .cart-progress-bar {
@@ -2373,12 +2377,19 @@ footer {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   background-color: var(--ruut-white);
-  border: 3px solid var(--ruut-accent);
+  border: 3px solid var(--ruut-border);
   border-radius: 50%;
-  transition: left 0.4s ease;
+  transition: left 0.4s ease, border-color 0.3s ease, background-color 0.3s ease;
+  z-index: 2;
+}
+
+.cart-progress-dot.ruut-dot-reached {
+  border-color: var(--ruut-accent) !important;
+  background-color: var(--ruut-accent) !important;
+  box-shadow: 0 0 6px rgba(137, 81, 88, 0.6);
 }
 
 /* Cart Scrollable Area */
