@@ -5,12 +5,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      # Only trigger when frontend files change
-      - '*.html'
-      - 'assets/**'
-      - '.htaccess'
-      - 'index.php'
 
   # Allow manual trigger from GitHub Actions tab
   workflow_dispatch:
@@ -24,43 +18,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Deploy ONLY frontend files to Hostinger via FTP
+      # Deploy ONLY frontend files to Hostinger via FTP using lftp
       # This NEVER touches wp-admin, wp-includes, wp-content, wp-config.php
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT || 21 }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
+      - name: Deploy via FTP
+        run: |
+          sudo apt-get install -y lftp
 
-          # CRITICAL: Exclude WordPress backend and dev files from deployment
-          # This ensures WordPress installation is NEVER overwritten
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/project-brain/**
-            **/scratch/**
-            **/wp-content/**
-            **/reconstructed_ruut_core.*
-            **/*.py
-            **/*.mp4
-            **/design.md
-            **/architecture.md
-            **/DEVELOPER_HANDOFF.md
-            **/landing page image .txt
-            **/.github/**
-
-          # Only upload changed files (incremental deploy)
-          # This makes deploys fast and safe
-          dangerous-clean-slate: false
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ${{ secrets.FTP_HOST }} <<EOF
+          set ftp:ssl-allow no
+          set mirror:exclude-regex (\.git|project-brain|scratch|\.github|\.mp4$|\.py$|reconstructed_ruut_core|design\.md|architecture\.md|DEVELOPER_HANDOFF\.md|landing\ page\ image)
+          
+          # Upload HTML files
+          mput -O ${{ secrets.FTP_SERVER_DIR }} *.html
+          mput -O ${{ secrets.FTP_SERVER_DIR }} .htaccess
+          mput -O ${{ secrets.FTP_SERVER_DIR }} index.php
+          
+          # Mirror assets directory (only uploads changed files)
+          mirror --reverse --verbose --only-newer assets ${{ secrets.FTP_SERVER_DIR }}assets
+          
+          bye
+          EOF
+          echo "Frontend deploy complete!"
 
   deploy-backend-plugin:
     name: Deploy Backend Plugin via FTP
     runs-on: ubuntu-latest
 
-    # Only run when backend plugin files change
+    # Only run when commit message contains [deploy-backend] or manual trigger
     if: >-
       contains(github.event.head_commit.message, '[deploy-backend]') ||
       github.event_name == 'workflow_dispatch'
@@ -69,17 +53,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Deploy ONLY the ruut-core plugin directory
-      - name: FTP Deploy Plugin
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT || 21 }}
+      - name: Deploy Plugin via FTP
+        run: |
+          sudo apt-get install -y lftp
 
-          # Upload plugin files to the correct WP plugin directory
-          local-dir: ./wp-content/plugins/ruut-core/
-          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}wp-content/plugins/ruut-core/
-
-          dangerous-clean-slate: false
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ${{ secrets.FTP_HOST }} <<EOF
+          set ftp:ssl-allow no
+          
+          # Mirror only the ruut-core plugin directory
+          mirror --reverse --verbose --only-newer wp-content/plugins/ruut-core ${{ secrets.FTP_SERVER_DIR }}wp-content/plugins/ruut-core
+          
+          bye
+          EOF
+          echo "Backend plugin deploy complete!"
