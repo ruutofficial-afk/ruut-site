@@ -629,9 +629,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Resolve missing or generic names and images from window.allProducts catalog if loaded
     if (window.allProducts && window.allProducts.length > 0) {
       cart.forEach(item => {
-        const prod = window.allProducts.find(p => p.id == item.id);
+        let prod = window.allProducts.find(p => p.id == item.id);
+        if (!prod && item.is_gift) prod = window.allProducts[0];
         if (prod) {
-          if (!item.name || item.name === 'Free Gift') item.name = prod.title;
+          if (!item.name || item.name === 'Free Gift' || item.name.toLowerCase() === 'free gift') item.name = prod.title;
           if (!item.image || item.image.includes('tac_hero.jpg')) item.image = prod.image;
           if (!item.volume) item.volume = prod.volume || '200ml';
           if (item.is_gift) {
@@ -998,17 +999,19 @@ document.addEventListener('DOMContentLoaded', () => {
       let compName = t.compulsory_gift_name;
       let randName = t.random_gift_name;
 
-      if (!compName && window.allProducts && window.allProducts.length > 0) {
-        const foundComp = window.allProducts.find(p => p.id == t.compulsory_gift_id);
-        compName = foundComp ? foundComp.title : window.allProducts[0].title;
-      }
-      if (t.quantity >= 3 && !randName && window.allProducts && window.allProducts.length > 1) {
-        const foundRand = window.allProducts.find(p => p.id == t.random_gift_id && p.title !== compName);
-        randName = foundRand ? foundRand.title : (window.allProducts.find(p => p.title !== compName) || window.allProducts[0]).title;
+      if (window.allProducts && window.allProducts.length > 0) {
+        if (!compName || compName === 'Free Gift') {
+          const foundComp = window.allProducts.find(p => p.id == t.compulsory_gift_id) || window.allProducts[0];
+          compName = foundComp ? foundComp.title : '';
+        }
+        if (t.quantity >= 3 && (!randName || randName === 'Free Gift')) {
+          const foundRand = window.allProducts.find(p => p.id == t.random_gift_id && p.title !== compName) || window.allProducts.find(p => p.title !== compName) || window.allProducts[0];
+          randName = foundRand ? foundRand.title : '';
+        }
       }
 
       if (compName) rewards.push(`a free <strong>${compName}</strong>`);
-      if (randName) rewards.push(`a free <strong>${randName}</strong>`);
+      if (randName && randName !== compName) rewards.push(`a free <strong>${randName}</strong>`);
       if (t.discount > 0) rewards.push(`<strong>₹${t.discount.toFixed(0)} off</strong>`);
 
       if (rewards.length === 0) return 'rewards';
@@ -1019,14 +1022,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (offerEnabled && offerThresholds.length > 0) {
       const N = offerThresholds.length;
+      const maxQty = Math.max(...offerThresholds.map(t => t.quantity), 3);
       const dots = [];
+
       for (let i = 0; i < N; i++) {
         dots.push({
-          percent: ((i + 1) / N) * 100,
+          percent: Math.min(100, (offerThresholds[i].quantity / maxQty) * 100),
           quantity: offerThresholds[i].quantity,
           threshold: offerThresholds[i]
         });
       }
+
+      progressPercent = Math.min(100, (regularItemsQty / maxQty) * 100);
 
       // Find active threshold index
       let activeIndex = -1;
@@ -1037,30 +1044,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (activeIndex === -1) {
-        // Below first threshold
         const nextT = offerThresholds[0];
         needed = nextT.quantity - regularItemsQty;
-        const firstDotPercent = (1 / N) * 100;
-        progressPercent = (regularItemsQty / nextT.quantity) * firstDotPercent;
         nextOfferText = `Add <strong>${needed}</strong> more to unlock ${getOfferUnlockText(nextT)}.`;
       } else {
         if (activeIndex < N - 1) {
-          // Between activeIndex and activeIndex + 1
-          const prevT = offerThresholds[activeIndex];
           const nextT = offerThresholds[activeIndex + 1];
           needed = nextT.quantity - regularItemsQty;
-          
-          const prevDotPercent = ((activeIndex + 1) / N) * 100;
-          const nextDotPercent = ((activeIndex + 2) / N) * 100;
-          
-          const qtyDiff = nextT.quantity - prevT.quantity;
-          const qtyProgress = regularItemsQty - prevT.quantity;
-          
-          progressPercent = prevDotPercent + (qtyProgress / qtyDiff) * (nextDotPercent - prevDotPercent);
           nextOfferText = `Add <strong>${needed}</strong> more to unlock ${getOfferUnlockText(nextT)}.`;
         } else {
-          // Reached/exceeded highest threshold
-          progressPercent = 100;
           needed = 0;
           nextOfferText = `<strong>Congratulations! You have unlocked all benefits: ${getOfferUnlockText(offerThresholds[activeIndex])}.</strong>`;
         }
@@ -1080,11 +1072,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Append new dots
         dots.forEach((dot, idx) => {
-          const reachedClass = progressPercent >= dot.percent ? 'ruut-dot-reached' : '';
-          const activeColor = progressPercent >= dot.percent ? 'var(--ruut-accent)' : 'var(--ruut-white)';
+          const isReached = regularItemsQty >= dot.quantity;
+          const reachedClass = isReached ? 'ruut-dot-reached' : '';
+          const activeColor = isReached ? 'var(--ruut-accent)' : 'var(--ruut-white)';
           const dotHtml = `
             <div class="cart-progress-dot ${reachedClass}" style="left: ${dot.percent}%; background-color: ${activeColor};" title="Tier ${idx + 1}: ${dot.quantity} items">
-              <span style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 600; color: var(--ruut-text); white-space: nowrap;">${dot.quantity} Qty</span>
+              <span style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 600; color: var(--ruut-text); white-space: nowrap;">${dot.quantity} Qty</span>
             </div>
           `;
           wrapEl.insertAdjacentHTML('beforeend', dotHtml);
