@@ -22,22 +22,30 @@ jobs:
       # This NEVER touches wp-admin, wp-includes, wp-content, wp-config.php
       - name: Deploy via FTP
         run: |
-          sudo apt-get install -y lftp
+          sudo apt-get update && sudo apt-get install -y lftp
 
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ${{ secrets.FTP_HOST }} <<EOF
-          set ftp:ssl-allow no
-          set mirror:exclude-regex (\.git|project-brain|scratch|\.github|\.mp4$|\.py$|reconstructed_ruut_core|design\.md|architecture\.md|DEVELOPER_HANDOFF\.md|landing\ page\ image)
-          
-          # Upload HTML files
-          mput -O ${{ secrets.FTP_SERVER_DIR }} *.html
-          mput -O ${{ secrets.FTP_SERVER_DIR }} .htaccess
-          mput -O ${{ secrets.FTP_SERVER_DIR }} index.php
-          
-          # Mirror assets directory (only uploads changed files)
-          mirror --reverse --verbose --only-newer assets ${{ secrets.FTP_SERVER_DIR }}assets
-          
-          bye
-          EOF
+          lftp -c "
+            set ftp:ssl-allow no;
+            set net:max-retries 3;
+            set net:timeout 15;
+            open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
+            
+            mirror --reverse --only-newer --verbose \
+              --exclude-glob '.git*' \
+              --exclude-glob 'project-brain/*' \
+              --exclude-glob 'scratch/*' \
+              --exclude-glob '.github/*' \
+              --exclude-glob 'wp-admin/*' \
+              --exclude-glob 'wp-includes/*' \
+              --exclude-glob 'wp-content/*' \
+              --exclude-glob 'wp-config.php' \
+              --exclude-glob '*.mp4' \
+              --exclude-glob '*.py' \
+              --exclude-glob 'reconstructed_ruut_core*' \
+              --exclude-glob '*.md' \
+              ./ '${{ secrets.FTP_SERVER_DIR }}';
+            quit;
+          "
           echo "Frontend deploy complete!"
 
   deploy-backend-plugin:
@@ -55,14 +63,16 @@ jobs:
 
       - name: Deploy Plugin via FTP
         run: |
-          sudo apt-get install -y lftp
+          sudo apt-get update && sudo apt-get install -y lftp
 
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ${{ secrets.FTP_HOST }} <<EOF
-          set ftp:ssl-allow no
-          
-          # Mirror only the ruut-core plugin directory
-          mirror --reverse --verbose --only-newer wp-content/plugins/ruut-core ${{ secrets.FTP_SERVER_DIR }}wp-content/plugins/ruut-core
-          
-          bye
-          EOF
+          lftp -c "
+            set ftp:ssl-allow no;
+            set net:max-retries 3;
+            set net:timeout 15;
+            open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
+            
+            mirror --reverse --only-newer --verbose \
+              ./wp-content/plugins/ruut-core/ '${{ secrets.FTP_SERVER_DIR }}wp-content/plugins/ruut-core/';
+            quit;
+          "
           echo "Backend plugin deploy complete!"
