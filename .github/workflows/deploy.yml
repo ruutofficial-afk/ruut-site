@@ -19,6 +19,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Clean non-deployable metadata to make FTP transfer fast
+      - name: Clean build workspace
+        run: |
+          rm -rf .git .github project-brain scratch *.py reconstructed_ruut_core* *.md
+
       # Deploy ONLY frontend files to Hostinger via FTP using lftp
       # This NEVER touches wp-admin, wp-includes, wp-content, wp-config.php
       - name: Deploy via FTP
@@ -32,18 +37,11 @@ jobs:
             open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
             
             mirror --reverse --only-newer --verbose \
-              --exclude-glob '.git*' \
-              --exclude-glob 'project-brain/*' \
-              --exclude-glob 'scratch/*' \
-              --exclude-glob '.github/*' \
               --exclude-glob 'wp-admin/*' \
               --exclude-glob 'wp-includes/*' \
               --exclude-glob 'wp-content/*' \
               --exclude-glob 'wp-config.php' \
               --exclude-glob '*.mp4' \
-              --exclude-glob '*.py' \
-              --exclude-glob 'reconstructed_ruut_core*' \
-              --exclude-glob '*.md' \
               ./ '${{ secrets.FTP_SERVER_DIR }}';
             quit;
           "
