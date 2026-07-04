@@ -1,0 +1,74 @@
+{
+  "edges": [
+    { "from": "fn_addToCart", "to": "fn_renderCart", "type": "calls", "label": "After adding item to local cart array" },
+    { "from": "fn_addToCart", "to": "fn_openCart", "type": "calls", "label": "Opens mini-cart drawer" },
+    { "from": "fn_addToCart", "to": "fn_showToast", "type": "calls", "label": "Shows 'Added X to cart' toast" },
+    { "from": "fn_addToCart", "to": "fn_syncCartWithServer", "type": "calls", "label": "Fire-and-forget server sync" },
+    { "from": "fn_addToCart", "to": "fn_ensureProductsFetched", "type": "depends_on", "label": "Uses window.allProducts for lookup" },
+
+    { "from": "fn_buyNow", "to": "fn_addToCart", "type": "calls", "label": "Adds item then redirects" },
+
+    { "from": "fn_updateQty", "to": "fn_renderCart", "type": "calls", "label": "Re-renders after qty change" },
+    { "from": "fn_updateQty", "to": "fn_syncCartWithServer", "type": "calls", "label": "Syncs new qty or removal" },
+
+    { "from": "fn_removeCartItem", "to": "fn_renderCart", "type": "calls", "label": "Re-renders after removal" },
+    { "from": "fn_removeCartItem", "to": "fn_syncCartWithServer", "type": "calls", "label": "Syncs item removal" },
+
+    { "from": "fn_renderCart", "to": "fn_saveCartToStorage", "type": "calls", "label": "Persists to localStorage" },
+    { "from": "fn_renderCart", "to": "fn_loadCartPageSuggestions", "type": "triggers", "label": "Updates cart page suggestions" },
+    { "from": "fn_renderCart", "to": "fn_renderCartPage", "type": "triggers", "label": "Updates standalone cart page" },
+    { "from": "fn_renderCart", "to": "dom_cartCount", "type": "renders", "label": "Updates badge count" },
+    { "from": "fn_renderCart", "to": "dom_cartItemsList", "type": "renders", "label": "Renders item list HTML" },
+    { "from": "fn_renderCart", "to": "dom_ruutMinicartFill", "type": "renders", "label": "Updates progress bar width" },
+    { "from": "fn_renderCart", "to": "dom_ruutMinicartText", "type": "renders", "label": "Updates progress text" },
+    { "from": "fn_renderCart", "to": "dom_cartSubtotal", "type": "renders", "label": "Updates subtotal display" },
+    { "from": "fn_renderCart", "to": "dom_cartUpsellSection", "type": "renders", "label": "Renders upsell products" },
+
+    { "from": "fn_renderCartPage", "to": "dom_cartPageItemsList", "type": "renders", "label": "Renders full cart items" },
+    { "from": "fn_renderCartPage", "to": "dom_billingSubtotal", "type": "renders", "label": "Updates subtotal" },
+    { "from": "fn_renderCartPage", "to": "dom_billingTotal", "type": "renders", "label": "Updates total" },
+
+    { "from": "fn_loadCartPageSuggestions", "to": "fn_ensureProductsFetched", "type": "calls", "label": "Fetches product catalog" },
+    { "from": "fn_loadCartPageSuggestions", "to": "fn_createProductCard", "type": "calls", "label": "Creates suggestion cards" },
+    { "from": "fn_loadCartPageSuggestions", "to": "dom_cartPageSuggestionsGrid", "type": "renders", "label": "Fills suggestions grid" },
+
+    { "from": "fn_saveCartToStorage", "to": "storage_ruut_cart", "type": "writes_to", "label": "JSON.stringify(cart)" },
+    { "from": "fn_saveCartToStorage", "to": "storage_ruut_coupon", "type": "writes_to", "label": "Saves active coupon code" },
+
+    { "from": "fn_syncCartWithServer", "to": "fn_ruutFetch", "type": "calls", "label": "Uses fetch wrapper" },
+    { "from": "fn_syncCartWithServer", "to": "api_ruut_add_to_cart", "type": "syncs_with", "label": "On add" },
+    { "from": "fn_syncCartWithServer", "to": "api_ruut_update_cart_qty", "type": "syncs_with", "label": "On qty update" },
+    { "from": "fn_syncCartWithServer", "to": "api_ruut_remove_cart_item", "type": "syncs_with", "label": "On remove" },
+    { "from": "fn_syncCartWithServer", "to": "api_ruut_apply_coupon", "type": "syncs_with", "label": "On coupon apply" },
+
+    { "from": "fn_ensureProductsFetched", "to": "fn_ruutFetch", "type": "calls", "label": "Fetches from REST API" },
+    { "from": "fn_ensureProductsFetched", "to": "api_rest_products", "type": "reads_from", "label": "GET /products" },
+
+    { "from": "fn_tryApplyCoupon", "to": "fn_renderCart", "type": "calls", "label": "Re-renders with new coupon" },
+    { "from": "fn_tryApplyCoupon", "to": "fn_syncCartWithServer", "type": "calls", "label": "Syncs coupon to server" },
+    { "from": "fn_tryApplyCoupon", "to": "fn_showToast", "type": "calls", "label": "Shows coupon applied toast" },
+
+    { "from": "fn_applyCouponCode", "to": "fn_tryApplyCoupon", "type": "calls", "label": "Validates then applies" },
+    { "from": "fn_applyCouponCode", "to": "dom_couponInput", "type": "reads_from", "label": "Reads coupon code input" },
+
+    { "from": "fn_removeCoupon", "to": "fn_renderCart", "type": "calls", "label": "Re-renders without coupon" },
+    { "from": "fn_removeCoupon", "to": "fn_syncCartWithServer", "type": "calls", "label": "Syncs removal to server" },
+    { "from": "fn_removeCoupon", "to": "fn_showToast", "type": "calls", "label": "Shows 'Coupon removed' toast" },
+
+    { "from": "dom_cartButton", "to": "fn_openCart", "type": "triggers", "label": "Click event listener" },
+
+    { "from": "api_ruut_add_to_cart", "to": "php_ruut_ajax_add_to_cart", "type": "calls", "label": "AJAX handler" },
+    { "from": "api_ruut_get_cart", "to": "php_ruut_ajax_get_cart", "type": "calls", "label": "AJAX handler" },
+
+    { "from": "php_ruut_ajax_add_to_cart", "to": "php_ruut_ensure_cart", "type": "calls", "label": "Loads WC cart" },
+    { "from": "php_ruut_ajax_add_to_cart", "to": "php_ruut_get_cart_response", "type": "calls", "label": "Returns updated cart" },
+    { "from": "php_ruut_ajax_get_cart", "to": "php_ruut_ensure_cart", "type": "calls", "label": "Loads WC cart" },
+    { "from": "php_ruut_ajax_get_cart", "to": "php_ruut_get_cart_response", "type": "calls", "label": "Returns cart state" },
+
+    { "from": "fn_createProductCard", "to": "fn_getProductUrl", "type": "calls", "label": "Builds product URL" },
+    { "from": "fn_createProductCard", "to": "fn_addToCart", "type": "triggers", "label": "onclick handler" },
+    { "from": "fn_createProductCard", "to": "fn_buyNow", "type": "triggers", "label": "onclick handler" },
+
+    { "from": "fn_getWooCommerceRedirectUrl", "to": "storage_ruut_cart", "type": "reads_from", "label": "Reads cart item IDs for URL" }
+  ]
+}

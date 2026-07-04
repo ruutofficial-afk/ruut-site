@@ -1,0 +1,144 @@
+# SYSTEM PROMPT: RE-ARCHITECTING THE RUUT E-COMMERCE CART & MINICART SYSTEM
+
+You are an expert Headless E-Commerce System Architect and Senior JavaScript Developer. Your task is to rewrite the complete client-side cart and minicart logic for the RUUT e-commerce website. 
+
+You must strictly implement all functionality as specified in the reference documentation files:
+- `CART_DOCUMENTATION.md`
+- `design.md`
+- `architecture.md`
+- `DEVELOPER_HANDOFF.md`
+
+Target Source Files to Modify:
+- `/assets/js/app.js`
+- `/cart.html`
+
+---
+
+## AGENTIC ITERATIVE EXECUTION PROTOCOL (LOOP SPECIFICATION)
+
+You must execute this task in a **Self-Correcting Verification Loop**. Do NOT write the entire implementation in a single unverified pass. Execute Phase 1, verify its outputs and edge cases, then proceed to Phase 2. If an assertion fails in any step, LOOP BACK, self-correct, and re-verify before continuing.
+
+
+---
+
+### LOOP 1: Core State & WooCommerce Server Synchronization Engine
+
+#### Task:
+1. Initialize a hybrid state model using an in-memory `cart` array (`{ id, name, price, originalPrice, quantity, image, volume, sku, key, is_gift }`) backed by `localStorage` keys `ruut_cart`, `ruut_coupon`, and `ruut_coupon_savings`.
+2. Implement `syncCartWithServer(action, payload)` targeting `/wp-admin/admin-ajax.php` via `ruutFetch`:
+   - Supported actions: `ruut_add_to_cart`, `ruut_update_cart_qty`, `ruut_remove_cart_item`, `ruut_apply_coupon`, `ruut_remove_coupon`, `ruut_get_cart`.
+3. Capture server responses (`response.data`) to update `serverSubtotal`, `serverTotal`, `serverDiscountTotal`, `serverVolumeDiscount`, `activeCoupon`, and `offer_thresholds`.
+4. Ensure offline/static preview fallbacks: if `syncCartWithServer` encounters a network failure or `file://` protocol, gracefully execute local `localStorage` modifications without throwing unhandled exceptions.
+
+#### Verification Criteria for Loop 1:
+- [ ] Does calling `addToCart(productId, 1)` update `localStorage.ruut_cart`?
+- [ ] Does `syncCartWithServer` POST valid `application/x-www-form-urlencoded` FormData to `/wp-admin/admin-ajax.php`?
+- [ ] Does network disconnection trigger offline local fallback safely?
+
+---
+
+### LOOP 2: Progressive Free Gift & Volume Tier Engine
+
+#### Task:
+1. Implement `updateGiftSimulation()`:
+   - Calculate total non-gift items (`regularItemsQty = cart.filter(item => !item.is_gift)`).
+   - Evaluate against `offerThresholds` (Tier 1 = 2 items compulsory gift; Tier 2 = 3 items compulsory + random pool gift).
+   - Automatically inject gift items into `cart` array with `price: 0`, `is_gift: true`, and `key: "gift-local-" + id`.
+   - Resolve gift names, images, and volumes dynamically from `window.allProducts`.
+   - If `regularItemsQty` drops below a threshold, automatically filter out un-earned gift items.
+2. Implement `getActiveVolumeDiscount()`:
+   - Calculate volume tier discount amounts (e.g. ₹100 for 2 items, ₹250 for 3 items).
+
+#### Verification Criteria for Loop 2:
+- [ ] Adding 2 regular items automatically adds the Tier 1 compulsory gift to `cart` at ₹0.00 with `is_gift: true`.
+- [ ] Decreasing regular item count back to 1 instantly removes the free gift item from `cart`.
+- [ ] Gift items do NOT increment `regularItemsQty` (prevents infinite recursive gift spawning).
+
+---
+
+### LOOP 3: Privilege Coupon, Loss Prevention & Mutual Exclusivity Engine
+
+#### Task:
+1. **Mutual Exclusivity Logic (Stacking Prevention)**:
+   - When a coupon code is active (`activeCoupon !== ''`):
+     - `updateGiftSimulation()` MUST remove all free gifts (`cart.filter(item => !item.is_gift)`).
+     - `getActiveVolumeDiscount()` MUST return `0`.
+     - Update progress banner text: `"Coupon {CODE} active. (Remove coupon to restore volume discount & free gifts)"`.
+   - When a coupon is removed via `removeCoupon(code)`:
+     - `activeCoupon` resets to `""`.
+     - `updateGiftSimulation()` and `getActiveVolumeDiscount()` MUST immediately run, re-injecting earned free gifts and restoring volume tier discounts!
+2. **Loss Prevention Confirmation Modal (`#ruut-confirm-overlay`)**:
+   - `tryApplyCoupon(code)` checks if `activeCoupon` is set and different.
+   - If active, display `#ruut-confirm-overlay` warning about benefit replacement.
+   - On "APPLY ANYWAY", execute `executeApplyCoupon(code)`, trigger server sync (`ruut_apply_coupon`), update UI, and fire `triggerConfetti()`.
+
+#### Verification Criteria for Loop 3:
+- [ ] Applying coupon `TEST-12` removes all free gift items and zeroes volume discounts.
+- [ ] Progress banner explicitly displays coupon active notice.
+- [ ] Clicking `×` to remove `TEST-12` instantly restores free gifts and volume tier discounts!
+- [ ] Attempting to apply `TEST-34` while `TEST-12` is active displays the Loss Prevention confirmation modal.
+
+---
+
+### LOOP 4: Minicart Drawer Rendering Engine (`renderCart`)
+
+#### Task:
+1. Implement `renderCart()` targeting minicart drawer DOM elements:
+   - Update header cart badge `#cartCount` with pop animation.
+   - Render `#ruut-minicart-progress` tier fill bar width (`%`) and milestone dots (`.cart-progress-dot`).
+   - Rebuild `#cartItemsList` HTML rendering thumbnails, volume labels, struck-through original prices, active prices, quantity controls, and remove buttons.
+   - Render `#cartUpsellSection` ("Complete The Ritual") proposing sub-category matching products.
+   - Update promo input state: toggle between input box (`#ruut_coupon_code`) and applied pill badge (`.coupon-applied-state`).
+   - Update subtotal `#cartSubtotal` and struck-through original subtotal `#cartSubtotalOriginal`.
+
+#### Verification Criteria for Loop 4:
+- [ ] Opening drawer via `openCart()` sets `#astra-mobile-cart-drawer` to `display: flex` and adds `.open`.
+- [ ] Minicart drawer does NOT open when user is on `cart.html`.
+- [ ] Empty cart state renders "Your cart is empty" along with suggested bestsellers.
+
+---
+
+### LOOP 5: Standalone Cart Page (`renderCartPage`) & Catalog Suggestions Engine
+
+#### Task:
+1. Implement `window.renderCartPage()` for [`cart.html`](file:///c:/Users/RAHUL/OneDrive/Desktop/ruut/cart.html):
+   - Left Column (70%): Render progress banner (`#ruut-cartpage-progress`) and item list (`#cartPageItemsList`). Free gifts feature a rose border, `"Unlocked Reward"` corner tag, struck-through regular price, and `"FREE"` label.
+   - Right Column (30% Sticky Order Summary):
+     - Subtotal `#billingSubtotal`.
+     - List of free gifts `#billingRewardProductsContainer`.
+     - Promo input `#cartpage_coupon_code` and applied pill state.
+     - Detailed Discount Breakdown `#billingDiscountsContainer`: Itemize Product Sale Savings, Privilege Discount (`TEST-12`), and Volume Discount.
+     - Final Total `#billingTotal`.
+     - Checkout link pointing to `/checkout/`.
+2. Implement `loadCartPageSuggestions()`:
+   - Pre-fetch catalog via `ensureProductsFetched()`.
+   - Filter out items already present in `cart`.
+   - Render 3 recommendation cards into `#cartPageSuggestionsGrid` inside `#cartPageSuggestionsSection`.
+   - Re-sync recommendations in real-time inside the `renderCart()` loop whenever cart items change.
+
+#### Verification Criteria for Loop 5:
+- [ ] `cart.html` correctly displays itemized discount breakdown in `#billingDiscountsContainer`.
+- [ ] Adding an item from "Suggested for You" updates `#cartPageItemsList` and removes that item from `#cartPageSuggestionsGrid` without reloading the page.
+
+---
+
+### LOOP 6: Edge Case Assertion, Self-Correction & Verification Loop
+
+#### Task:
+Run through all edge case assertions. If ANY assertion fails, identify the root cause in `app.js` or `cart.html`, fix the bug, and re-run Loop 1 through Loop 5.
+
+#### Automated Assertion Checklist:
+1. **Quantity Zero Assertion**: Decreasing regular item quantity to `0` removes item from cart and fires server sync `ruut_remove_cart_item`.
+2. **Gift Item Protection Assertion**: Clicking quantity or remove on a gift item is prohibited; gifts can only be modified via threshold evaluations.
+3. **Dual View Synchronization Assertion**: Adding an item from the minicart drawer or product page updates `cart.html` DOM elements immediately if open.
+4. **Minimum Spend Assertion**: If active coupon has a minimum spend requirement (e.g. ₹1500) and user removes items dropping subtotal below ₹1500, auto-remove coupon via `syncCartWithServer('ruut_remove_coupon')` and show error toast.
+5. **Cookie Redirect Assertion**: Visited `cart.html` while `wordpress_logged_in_` cookie is present redirects safely to `/shop`.
+
+---
+
+## TERMINATION CRITERIA
+
+You may complete the task ONLY when:
+1. All 6 loops have been executed in sequence.
+2. Every item on the **Automated Assertion Checklist** passes without errors.
+3. Code maintains strict compatibility with existing HTML elements, CSS custom properties, and WordPress `ruut-core` REST/AJAX endpoints.

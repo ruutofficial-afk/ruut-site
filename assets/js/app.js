@@ -629,10 +629,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Resolve missing or generic names and images from window.allProducts catalog if loaded
     if (window.allProducts && window.allProducts.length > 0) {
       cart.forEach(item => {
-        let prod = window.allProducts.find(p => p.id == item.id);
-        if (!prod && item.is_gift) prod = window.allProducts[0];
+        const prod = window.allProducts.find(p => p.id == item.id);
         if (prod) {
-          if (!item.name || item.name === 'Free Gift' || item.name.toLowerCase() === 'free gift') item.name = prod.title;
+          if (!item.name || item.name === 'Free Gift') item.name = prod.title;
           if (!item.image || item.image.includes('tac_hero.jpg')) item.image = prod.image;
           if (!item.volume) item.volume = prod.volume || '200ml';
           if (item.is_gift) {
@@ -644,6 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // STRICT EXCLUSION: Free gift items do NOT count toward regular item quantity count or cart badge
     const regularItemsQty = cart.reduce((acc, item) => acc + (item.is_gift ? 0 : item.quantity), 0);
     const hasActiveCouponCode = Boolean(activeCoupon && activeCoupon.trim().length > 0);
 
@@ -652,7 +652,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .filter(t => regularItemsQty >= t.quantity)
         .reduce((max, t) => (!max || t.quantity > max.quantity ? t : max), null);
 
-      let targetGiftIds = [];
+      let targetGifts = []; // array of { id, gift_type, gift_label }
       if (activeT) {
         let compId = parseInt(activeT.compulsory_gift_id || activeT.gift_id || 0);
         let randId = parseInt(activeT.random_gift_id || (activeT.random_gift_pool && activeT.random_gift_pool[0]) || 0);
@@ -664,48 +664,43 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             compId = parseInt(window.allProducts[0].id);
           }
-
-          const needsSecondGift = (activeT.quantity >= 3 || (activeT.random_gift_pool && activeT.random_gift_pool.length > 0) || activeT.random_gift_id > 0);
-          if (needsSecondGift) {
-            if (randId > 0) {
-              const foundRand = window.allProducts.find(p => p.id == randId);
-              if (!foundRand || randId === compId) {
-                const secondProd = window.allProducts.find(p => p.id != compId);
-                randId = secondProd ? parseInt(secondProd.id) : compId;
-              }
-            } else {
-              const secondProd = window.allProducts.find(p => p.id != compId);
-              randId = secondProd ? parseInt(secondProd.id) : compId;
-            }
+          if (randId > 0) {
+            const foundRand = window.allProducts.find(p => p.id == randId);
+            if (!foundRand) randId = compId;
           }
         }
 
-        if (compId > 0) targetGiftIds.push(compId);
-        if (randId > 0 && randId !== compId) targetGiftIds.push(randId);
+        if (compId > 0) {
+          targetGifts.push({ id: compId, gift_type: 'compulsory', gift_label: 'Complimentary Gift' });
+        }
+        if (randId > 0 && randId !== compId) {
+          targetGifts.push({ id: randId, gift_type: 'random', gift_label: 'Special Tester Gift' });
+        }
       }
 
-      targetGiftIds = [...new Set(targetGiftIds)];
-
-      const remainingTargetGiftIds = [...targetGiftIds];
-      const seenGiftIds = new Set();
+      // Filter existing gift items and match target gifts
+      const remainingTargetGifts = [...targetGifts];
+      const seenGiftKeys = new Set();
 
       cart = cart.filter(item => {
         if (item.is_gift) {
-          if (seenGiftIds.has(item.id)) return false;
-          let index = remainingTargetGiftIds.indexOf(item.id);
-          if (index === -1 && remainingTargetGiftIds.length > 0) {
-            index = 0;
-            if (window.allProducts && window.allProducts.some(p => p.id == item.id)) {
-              // Keep item.id as valid gift product
-            } else {
-              item.id = remainingTargetGiftIds[0];
-            }
+          const giftKey = `${item.id}-${item.gift_type || 'compulsory'}`;
+          if (seenGiftKeys.has(giftKey)) return false;
+
+          let matchIdx = remainingTargetGifts.findIndex(g => g.id == item.id);
+          if (matchIdx === -1 && remainingTargetGifts.length > 0) {
+            matchIdx = 0;
+            item.id = remainingTargetGifts[0].id;
           }
-          if (index > -1 && index < remainingTargetGiftIds.length) {
-            seenGiftIds.add(item.id);
+          if (matchIdx > -1 && matchIdx < remainingTargetGifts.length) {
+            const targetGift = remainingTargetGifts[matchIdx];
+            seenGiftKeys.add(`${item.id}-${targetGift.gift_type}`);
             item.quantity = 1;
             item.price = 0;
-            remainingTargetGiftIds.splice(index, 1);
+            item.gift_type = targetGift.gift_type;
+            item.gift_label = targetGift.gift_label;
+            item.key = `gift-${targetGift.gift_type}-${item.id}`;
+            remainingTargetGifts.splice(matchIdx, 1);
             return true;
           }
           return false;
@@ -713,10 +708,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
       });
 
-      remainingTargetGiftIds.forEach(giftId => {
+      // Inject any newly earned gift products resolved from WordPress catalog
+      remainingTargetGifts.forEach(targetGift => {
         let giftProduct = null;
         if (window.allProducts && window.allProducts.length > 0) {
-          giftProduct = window.allProducts.find(p => p.id == giftId);
+          giftProduct = window.allProducts.find(p => p.id == targetGift.id);
           if (!giftProduct) giftProduct = window.allProducts[0];
         }
         if (giftProduct) {
@@ -729,12 +725,15 @@ document.addEventListener('DOMContentLoaded', () => {
             volume: giftProduct.volume || "200ml",
             sku: giftProduct.sku || ("GIFT-" + giftProduct.id),
             id: giftProduct.id,
-            key: "gift-local-" + giftProduct.id,
-            is_gift: true
+            key: "gift-" + targetGift.gift_type + "-" + giftProduct.id,
+            is_gift: true,
+            gift_type: targetGift.gift_type,
+            gift_label: targetGift.gift_label
           });
         }
       });
     } else {
+      // Remove all free gift items if offer is disabled or a coupon code is active
       cart = cart.filter(item => !item.is_gift);
     }
   };
@@ -996,24 +995,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper: build unlocked reward description
     const getOfferUnlockText = (t) => {
       const rewards = [];
-      let compName = t.compulsory_gift_name;
-      let randName = t.random_gift_name;
-
-      if (window.allProducts && window.allProducts.length > 0) {
-        if (!compName || compName === 'Free Gift') {
-          const foundComp = window.allProducts.find(p => p.id == t.compulsory_gift_id) || window.allProducts[0];
-          compName = foundComp ? foundComp.title : '';
-        }
-        if (t.quantity >= 3 && (!randName || randName === 'Free Gift')) {
-          const foundRand = window.allProducts.find(p => p.id == t.random_gift_id && p.title !== compName) || window.allProducts.find(p => p.title !== compName) || window.allProducts[0];
-          randName = foundRand ? foundRand.title : '';
-        }
+      if (t.compulsory_gift_name) {
+        rewards.push(`a free <strong>${t.compulsory_gift_name}</strong>`);
       }
-
-      if (compName) rewards.push(`a free <strong>${compName}</strong>`);
-      if (randName && randName !== compName) rewards.push(`a free <strong>${randName}</strong>`);
-      if (t.discount > 0) rewards.push(`<strong>₹${t.discount.toFixed(0)} off</strong>`);
-
+      if (t.random_gift_name) {
+        rewards.push(`a free <strong>${t.random_gift_name}</strong>`);
+      }
+      if (t.discount > 0) {
+        rewards.push(`<strong>₹${t.discount.toFixed(0)} off</strong>`);
+      }
+      
       if (rewards.length === 0) return 'rewards';
       if (rewards.length === 1) return rewards[0];
       if (rewards.length === 2) return `${rewards[0]} and ${rewards[1]}`;
@@ -1022,18 +1013,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (offerEnabled && offerThresholds.length > 0) {
       const N = offerThresholds.length;
-      const maxQty = Math.max(...offerThresholds.map(t => t.quantity), 3);
       const dots = [];
-
       for (let i = 0; i < N; i++) {
         dots.push({
-          percent: Math.min(100, (offerThresholds[i].quantity / maxQty) * 100),
+          percent: ((i + 1) / N) * 100,
           quantity: offerThresholds[i].quantity,
           threshold: offerThresholds[i]
         });
       }
-
-      progressPercent = Math.min(100, (regularItemsQty / maxQty) * 100);
 
       // Find active threshold index
       let activeIndex = -1;
@@ -1044,15 +1031,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (activeIndex === -1) {
+        // Below first threshold
         const nextT = offerThresholds[0];
         needed = nextT.quantity - regularItemsQty;
+        const firstDotPercent = (1 / N) * 100;
+        progressPercent = (regularItemsQty / nextT.quantity) * firstDotPercent;
         nextOfferText = `Add <strong>${needed}</strong> more to unlock ${getOfferUnlockText(nextT)}.`;
       } else {
         if (activeIndex < N - 1) {
+          // Between activeIndex and activeIndex + 1
+          const prevT = offerThresholds[activeIndex];
           const nextT = offerThresholds[activeIndex + 1];
           needed = nextT.quantity - regularItemsQty;
+          
+          const prevDotPercent = ((activeIndex + 1) / N) * 100;
+          const nextDotPercent = ((activeIndex + 2) / N) * 100;
+          
+          const qtyDiff = nextT.quantity - prevT.quantity;
+          const qtyProgress = regularItemsQty - prevT.quantity;
+          
+          progressPercent = prevDotPercent + (qtyProgress / qtyDiff) * (nextDotPercent - prevDotPercent);
           nextOfferText = `Add <strong>${needed}</strong> more to unlock ${getOfferUnlockText(nextT)}.`;
         } else {
+          // Reached/exceeded highest threshold
+          progressPercent = 100;
           needed = 0;
           nextOfferText = `<strong>Congratulations! You have unlocked all benefits: ${getOfferUnlockText(offerThresholds[activeIndex])}.</strong>`;
         }
@@ -1072,12 +1074,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Append new dots
         dots.forEach((dot, idx) => {
-          const isReached = regularItemsQty >= dot.quantity;
-          const reachedClass = isReached ? 'ruut-dot-reached' : '';
-          const activeColor = isReached ? 'var(--ruut-accent)' : 'var(--ruut-white)';
+          const reachedClass = progressPercent >= dot.percent ? 'ruut-dot-reached' : '';
+          const activeColor = progressPercent >= dot.percent ? 'var(--ruut-accent)' : 'var(--ruut-white)';
           const dotHtml = `
             <div class="cart-progress-dot ${reachedClass}" style="left: ${dot.percent}%; background-color: ${activeColor};" title="Tier ${idx + 1}: ${dot.quantity} items">
-              <span style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 600; color: var(--ruut-text); white-space: nowrap;">${dot.quantity} Qty</span>
+              <span style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; font-weight: 600; color: var(--ruut-text); white-space: nowrap;">${dot.quantity} Qty</span>
             </div>
           `;
           wrapEl.insertAdjacentHTML('beforeend', dotHtml);
@@ -1261,7 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ` : `₹${(item.price * item.quantity).toFixed(2)}`;
       
       const qtyHtml = isGift ? `
-        <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:600;color:var(--ruut-white);letter-spacing:0.05em;text-transform:uppercase;background:var(--ruut-accent);padding:4px 12px;border-radius:4px;">🎁 Complimentary Gift</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:600;color:var(--ruut-white);letter-spacing:0.05em;text-transform:uppercase;background:var(--ruut-accent);padding:4px 12px;border-radius:4px;">🎁 ${item.gift_label || 'Complimentary Gift'}</span>
       ` : `
         <div class="qty-selector" style="display:inline-flex;align-items:center;border:1px solid var(--ruut-border);border-radius:6px;">
           <button type="button" class="qty-btn" onclick="updateQty(${index}, -1)" style="border:none;background:none;padding:4px 10px;cursor:pointer;font-size:1rem;line-height:1;">&minus;</button>
@@ -1306,7 +1307,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const originalVal = item.originalPrice || 250.00;
           return `
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; margin-top: 10px;">
-              <span style="color: var(--ruut-gray); font-style: italic;">🎁 ${item.name}</span>
+              <span style="color: var(--ruut-gray); font-style: italic;">🎁 ${item.name} (${item.gift_label || 'Free Gift'})</span>
               <div style="display: inline-flex; align-items: center; gap: 8px;">
                 <span style="text-decoration: line-through; color: #aaa; font-size: 0.85rem;">₹${originalVal.toFixed(2)}</span>
                 <span style="color: var(--ruut-accent); font-weight: 600; text-transform: uppercase;">FREE</span>
@@ -1780,6 +1781,76 @@ document.addEventListener('DOMContentLoaded', () => {
     return amount;
   };
 
+  // Confetti explosion helper on privilege unlock
+  window.triggerConfetti = () => {
+    let canvas = document.getElementById('ruut-confetti-canvas');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.id = 'ruut-confetti-canvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '99999';
+      document.body.appendChild(canvas);
+    }
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#895158', '#D4AF37', '#664436', '#cf6400', '#7d8427', '#EADBC8'];
+    const particles = [];
+    for (let i = 0; i < 75; i++) {
+      particles.push({
+        x: canvas.width / 2,
+        y: canvas.height / 3,
+        vx: (Math.random() - 0.5) * 12,
+        vy: (Math.random() - 0.8) * 14,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rSpeed: (Math.random() - 0.5) * 8,
+        alpha: 1
+      });
+    }
+
+    let animationFrame;
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.3; // gravity
+        p.rotation += p.rSpeed;
+        p.alpha -= 0.015;
+        if (p.alpha > 0) {
+          alive = true;
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        }
+      });
+      if (alive) {
+        animationFrame = requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+      }
+    };
+    render();
+    setTimeout(() => {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+    }, 2500);
+  };
+
   const applyCouponDirectly = (code) => {
     document.querySelectorAll('.ruut-modal-coupon-messages').forEach(el => {
       el.textContent = '';
@@ -1835,6 +1906,9 @@ document.addEventListener('DOMContentLoaded', () => {
             window.showToast(`Coupon applied successfully. You saved ₹${savings.toFixed(0)}.`, 'success');
           } else {
             window.showToast(`Applied privilege: ${code}`, 'success');
+          }
+          if (typeof window.triggerConfetti === 'function') {
+            window.triggerConfetti();
           }
           renderCart();
         }

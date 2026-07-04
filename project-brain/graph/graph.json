@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "project": "RUUT E-Commerce",
+    "domain": "Cart System",
+    "version": "1.0.0",
+    "generated": "2026-06-27",
+    "description": "Dependency graph for the RUUT cart/mini-cart system and WooCommerce backend sync"
+  },
+  "summary": {
+    "total_nodes": 42,
+    "total_edges": 58,
+    "node_types": ["function", "dom_element", "api_endpoint", "file", "storage_key", "css_property"],
+    "relationship_types": ["calls", "renders", "syncs_with", "reads_from", "writes_to", "contains", "depends_on", "triggers"]
+  },
+  "entry_points": [
+    { "id": "fn_addToCart", "label": "User clicks Add to Cart" },
+    { "id": "fn_buyNow", "label": "User clicks Buy Now" },
+    { "id": "fn_updateQty", "label": "User changes quantity" },
+    { "id": "fn_removeCartItem", "label": "User removes item" },
+    { "id": "fn_tryApplyCoupon", "label": "User applies coupon" },
+    { "id": "dom_cartButton", "label": "User clicks cart icon" }
+  ],
+  "critical_paths": [
+    {
+      "name": "Add to Cart Flow",
+      "nodes": ["fn_addToCart", "fn_renderCart", "fn_openCart", "fn_showToast", "fn_syncCartWithServer", "api_ruut_add_to_cart", "php_ruut_ajax_add_to_cart", "php_ruut_ensure_cart", "php_ruut_get_cart_response"]
+    },
+    {
+      "name": "Cart Render Flow",
+      "nodes": ["fn_renderCart", "fn_saveCartToStorage", "storage_ruut_cart", "storage_ruut_coupon", "dom_cartCount", "dom_cartItemsList", "dom_ruutMinicartFill", "dom_cartSubtotal", "dom_cartUpsellSection"]
+    },
+    {
+      "name": "Coupon Application Flow",
+      "nodes": ["fn_tryApplyCoupon", "fn_renderCart", "fn_syncCartWithServer", "fn_showToast", "api_ruut_apply_coupon"]
+    }
+  ]
+}

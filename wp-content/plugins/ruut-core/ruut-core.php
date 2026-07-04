@@ -313,13 +313,8 @@ function ruut_get_announcement() {
 }
 
 // ===================================================================================
-// PART 1: WOOCOMMERCE AJAX CART SYNCHRONIZATION (MODULAR API IN INC/RUUT-CART-API.PHP)
+// PART 1: WOOCOMMERCE AJAX CART SYNCHRONIZATION
 // ===================================================================================
-
-$ruut_cart_module = plugin_dir_path( __FILE__ ) . 'inc/ruut-cart-api.php';
-if ( file_exists( $ruut_cart_module ) ) {
-    require_once $ruut_cart_module;
-}
 
 // Helper to ensure WooCommerce cart is loaded during AJAX
 function ruut_ensure_cart() {

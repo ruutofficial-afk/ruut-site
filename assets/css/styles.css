@@ -2339,7 +2339,7 @@ footer {
 .cart-promo-banner {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.3);
-  padding: 1rem 1.5rem 1.8rem 1.5rem;
+  padding: 1rem 1.5rem;
   border-radius: 8px;
 }
 
@@ -2360,7 +2360,6 @@ footer {
   background-color: rgba(102, 68, 54, 0.15);
   border-radius: 3px;
   position: relative;
-  margin-bottom: 8px;
 }
 
 .cart-progress-bar {
