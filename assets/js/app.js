@@ -469,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json())
       .then(response => {
         if (response.success && response.data) {
-          if (response.data.items) {
+          if (response.data.items && Array.isArray(response.data.items) && response.data.items.length > 0) {
             cart = response.data.items.map(serverItem => ({
               name: serverItem.name,
               price: parseFloat(serverItem.price),
@@ -482,7 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
               key: serverItem.key,
               is_gift: serverItem.is_gift || false
             }));
+          } else if (action === 'ruut_remove_cart_item' && cart.filter(i => !i.is_gift).length === 0) {
+            cart = [];
           }
+
           if (response.data.totals) {
             serverSubtotal = parseFloat(response.data.subtotal || response.data.totals.subtotal || 0);
             serverTotal = parseFloat(response.data.total || response.data.totals.total || 0);
@@ -493,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (coupons && coupons.length > 0) {
               activeCoupon = coupons[0];
               activeCouponSavings = serverDiscountTotal;
-            } else {
+            } else if (action === 'ruut_remove_coupon') {
               activeCoupon = '';
               activeCouponSavings = 0;
               try {
@@ -1061,6 +1064,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (hasActiveCouponCode) {
+        progressPercent = 0;
         nextOfferText = `<span>Coupon <strong>${activeCoupon.toUpperCase()}</strong> active. (Remove coupon to restore volume discount & free gifts)</span>`;
       }
 
@@ -1072,6 +1076,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove existing dots
         wrapEl.querySelectorAll('.cart-progress-dot').forEach(el => el.remove());
         
+        if (hasActiveCouponCode) {
+          return; // Don't render milestone dots when coupon code is active
+        }
+
         // Append new dots
         dots.forEach((dot, idx) => {
           const reachedClass = progressPercent >= dot.percent ? 'ruut-dot-reached' : '';
