@@ -2904,12 +2904,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const productPage = document.getElementById('productPage');
   if (productPage) {
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('product') || urlParams.get('id');
+    const productId = urlParams.get('product') || urlParams.get('id') || urlParams.get('product_id');
+    const productSlug = urlParams.get('slug') || urlParams.get('name');
 
-    if (productId) {
-      window.ensureProductsFetched().then(products => {
-        const product = products.find(p => p.id == productId);
-        if (product) {
+    window.ensureProductsFetched().then(products => {
+      if (!products || products.length === 0) return;
+
+      let product = null;
+      if (productId) {
+        product = products.find(p => p.id == productId);
+      }
+      if (!product && productSlug) {
+        product = products.find(p => p.slug && p.slug.toLowerCase() === productSlug.toLowerCase());
+      }
+      if (!product) {
+        product = products[0]; // Fallback to first product in WordPress catalog if no query param match
+      }
+
+      if (product) {
           const productImage = document.getElementById('productImage');
           const productTitle = document.getElementById('productTitle');
           const productPrice = document.getElementById('productPrice');
