@@ -1264,23 +1264,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper: build unlocked reward description
     const getOfferUnlockText = (t) => {
-      const rewards = [];
-      if (t.discount > 0) {
-        rewards.push(`<strong>₹${t.discount.toFixed(0)} off</strong>`);
+      if (t.discount > 0 && t.quantity >= 3) {
+        return '<strong>₹' + t.discount.toFixed(0) + ' OFF + 2 Free Gifts</strong>';
+      } else if (t.discount > 0 && t.quantity === 2) {
+        return '<strong>₹' + t.discount.toFixed(0) + ' OFF + Free Gift</strong>';
+      } else if (t.discount > 0) {
+        return '<strong>₹' + t.discount.toFixed(0) + ' OFF</strong>';
       }
-      const compName = t.compulsory_gift_name || (t.compulsory_gift_id && window.allProducts ? (window.allProducts.find(p => p.id == t.compulsory_gift_id) || {}).title : '') || 'Complimentary Gift';
-      if (compName) {
-        rewards.push(`a free <strong>${compName}</strong>`);
-      }
-      const randName = t.random_gift_name || (t.random_gift_id && window.allProducts ? (window.allProducts.find(p => p.id == t.random_gift_id) || {}).title : '');
-      if (randName) {
-        rewards.push(`a free <strong>${randName}</strong>`);
-      }
-      
-      if (rewards.length === 0) return 'rewards';
-      if (rewards.length === 1) return rewards[0];
-      if (rewards.length === 2) return `${rewards[0]} and ${rewards[1]}`;
-      return `${rewards.slice(0, -1).join(', ')}, and ${rewards[rewards.length - 1]}`;
+      return '<strong>Free Gift</strong>';
     };
 
     if (offerEnabled && offerThresholds.length > 0) {
@@ -1303,15 +1294,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (activeIndex === -1) {
-        // Below first threshold
+        // Below first threshold (0 or 1 item)
         const nextT = offerThresholds[0];
         needed = nextT.quantity - regularItemsQty;
         const firstDotPercent = (1 / N) * 100;
         progressPercent = (regularItemsQty / nextT.quantity) * firstDotPercent;
-        nextOfferText = `Add <strong>${needed}</strong> more to unlock ${getOfferUnlockText(nextT)}.`;
+        const itemWord = needed === 1 ? 'item' : 'items';
+        nextOfferText = `Add <strong>${needed} ${itemWord}</strong> to unlock ${getOfferUnlockText(nextT)}.`;
       } else {
         if (activeIndex < N - 1) {
-          // Between activeIndex and activeIndex + 1
+          // Between activeIndex and activeIndex + 1 (e.g. 2 items)
           const prevT = offerThresholds[activeIndex];
           const nextT = offerThresholds[activeIndex + 1];
           needed = nextT.quantity - regularItemsQty;
@@ -1323,12 +1315,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const qtyProgress = regularItemsQty - prevT.quantity;
           
           progressPercent = prevDotPercent + (qtyProgress / qtyDiff) * (nextDotPercent - prevDotPercent);
-          nextOfferText = `Add <strong>${needed}</strong> more to unlock ${getOfferUnlockText(nextT)}.`;
+          const itemWord = needed === 1 ? 'item' : 'items';
+          nextOfferText = `🎉 ${getOfferUnlockText(prevT)} unlocked! Add <strong>${needed} ${itemWord}</strong> to get ${getOfferUnlockText(nextT)}.`;
         } else {
-          // Reached/exceeded highest threshold
+          // Reached/exceeded highest threshold (3+ items)
           progressPercent = 100;
           needed = 0;
-          nextOfferText = `<strong>Congratulations! You have unlocked all benefits: ${getOfferUnlockText(offerThresholds[activeIndex])}.</strong>`;
+          nextOfferText = `🎉 <strong>Congratulations! You have unlocked ${getOfferUnlockText(offerThresholds[activeIndex])}!</strong>`;
         }
       }
 
@@ -1355,17 +1348,19 @@ document.addEventListener('DOMContentLoaded', () => {
           const activeColor = progressPercent >= dot.percent ? 'var(--ruut-accent)' : 'var(--ruut-white)';
 
           let badgeText = `${dot.quantity} Qty`;
-          if (dot.threshold.discount > 0 && dot.quantity >= 3) {
-            badgeText = `${dot.quantity} Qty (₹${dot.threshold.discount.toFixed(0)} OFF + GIFTS)`;
-          } else if (dot.threshold.discount > 0) {
-            badgeText = `${dot.quantity} Qty (₹${dot.threshold.discount.toFixed(0)} OFF)`;
-          } else if (dot.quantity >= 2) {
-            badgeText = `${dot.quantity} Qty (FREE GIFT)`;
+          if (dot.quantity >= 3) {
+            badgeText = `${dot.quantity} Qty (₹250 OFF + 2 GIFTS)`;
+          } else if (dot.quantity === 2) {
+            badgeText = `${dot.quantity} Qty (₹100 OFF + GIFT)`;
           }
+
+          let alignClass = '';
+          if (idx === 0) alignClass = 'dot-label-start';
+          else if (idx === dots.length - 1) alignClass = 'dot-label-end';
 
           const dotHtml = `
             <div class="cart-progress-dot ${reachedClass}" style="left: ${dot.percent}%; background-color: ${activeColor};" title="Tier ${idx + 1}: ${dot.quantity} items (${badgeText})">
-              <span class="dot-label">${badgeText}</span>
+              <span class="dot-label ${alignClass}">${badgeText}</span>
             </div>
           `;
           wrapEl.insertAdjacentHTML('beforeend', dotHtml);

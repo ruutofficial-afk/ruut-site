@@ -2398,16 +2398,28 @@ footer {
   top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--ruut-text);
   white-space: nowrap;
   line-height: 1;
   pointer-events: none;
-  background: rgba(255, 255, 255, 0.88);
-  padding: 2px 6px;
+  background: #ffffff;
+  padding: 3px 6px;
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(137, 81, 88, 0.2);
+}
+
+.cart-progress-dot .dot-label.dot-label-end {
+  left: auto !important;
+  right: 0 !important;
+  transform: translateX(15%) !important;
+}
+
+.cart-progress-dot .dot-label.dot-label-start {
+  left: 0 !important;
+  transform: translateX(-15%) !important;
 }
 
 /* Cart Scrollable Area */
