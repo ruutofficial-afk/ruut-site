@@ -15,11 +15,16 @@ window.ruutFetch = (url, options = {}) => {
                       window.location.hostname === '127.0.0.1' ||
                       window.location.hostname === '';
 
-  const liveOrigin = (window.location.origin && window.location.origin !== 'null') ? window.location.origin : 'https://yourruut.com';
-  const wpBaseUrl = window.RUUT_WP_URL || liveOrigin;
+  const remoteWpUrl = window.RUUT_WP_URL || 'https://yourruut.com';
+  const liveOrigin = (window.location.origin && window.location.origin !== 'null' && !isLocalHost) ? window.location.origin : remoteWpUrl;
+  const wpBaseUrl = liveOrigin;
 
-  if (isRelative && isLocalHost) {
-    targetUrl = wpBaseUrl + url;
+  if (isRelative) {
+    if (isLocalHost) {
+      targetUrl = wpBaseUrl + url;
+    } else {
+      targetUrl = url;
+    }
   }
 
   return fetch(targetUrl, { ...options, signal: controller.signal })
@@ -34,8 +39,8 @@ window.ruutFetch = (url, options = {}) => {
       clearTimeout(id);
       console.warn(`ruutFetch failed for ${targetUrl}:`, err);
       // Fall back if relative request failed
-      if (isRelative && targetUrl !== wpBaseUrl + url) {
-        return fetch(wpBaseUrl + url, { ...options });
+      if (isRelative && targetUrl !== remoteWpUrl + url) {
+        return fetch(remoteWpUrl + url, { ...options });
       }
       throw err;
     });
