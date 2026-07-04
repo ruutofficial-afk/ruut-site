@@ -2551,9 +2551,19 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render Dynamic Collection Page Grid
       if (collectionGrid) {
         const urlParams = new URLSearchParams(window.location.search);
-        const collectionSlug = urlParams.get('collection') || 'the-atlas-collection';
+        const collectionSlug = urlParams.get('collection') || urlParams.get('category') || urlParams.get('cat') || urlParams.get('slug') || '';
 
-        const collectionProducts = products.filter(p => p.categories && p.categories.some(c => c.slug === collectionSlug));
+        let collectionProducts = [];
+        if (collectionSlug) {
+          const normSlug = collectionSlug.toLowerCase().trim();
+          collectionProducts = products.filter(p => 
+            p.categories && p.categories.some(c => (c.slug && c.slug.toLowerCase() === normSlug) || (c.name && c.name.toLowerCase() === normSlug))
+          );
+        }
+
+        if (collectionProducts.length === 0) {
+          collectionProducts = products; // Fallback to showing all products if filter is empty or unmatched
+        }
         
         const resultsCountEl = document.getElementById('collectionResultsCount');
         if (resultsCountEl) {
