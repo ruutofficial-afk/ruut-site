@@ -25,7 +25,7 @@ jobs:
           rm -rf .git .github project-brain scratch *.py reconstructed_ruut_core* *.md
 
       # Deploy frontend files + ruut-core plugin to Hostinger via FTP using lftp
-      # Target path: domains/yourruut.com/public_html/
+      # Uses FTP_SERVER_DIR secret if defined, defaulting to public_html/
       - name: Deploy via FTP
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
@@ -36,18 +36,24 @@ jobs:
             set net:timeout 15;
             open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' '${{ secrets.FTP_HOST }}';
             
-            # 1. Upload frontend files to yourruut.com public_html
+            # Determine target base dir
+            TARGET_DIR='${{ secrets.FTP_SERVER_DIR }}'
+            if [ -z \"\$TARGET_DIR\" ]; then
+              TARGET_DIR='public_html/'
+            fi
+
+            # 1. Upload frontend files
             mirror --reverse --verbose \
               --exclude-glob 'wp-admin/*' \
               --exclude-glob 'wp-includes/*' \
               --exclude-glob 'wp-content/*' \
               --exclude-glob 'wp-config.php' \
               --exclude-glob '*.mp4' \
-              ./ 'domains/yourruut.com/public_html/';
+              ./ \"\$TARGET_DIR\";
 
             # 2. Upload ruut-core plugin (inc/ruut-cart-api.php, ruut-core.php, assets)
             mirror --reverse --verbose \
-              ./wp-content/plugins/ruut-core/ 'domains/yourruut.com/public_html/wp-content/plugins/ruut-core/';
+              ./wp-content/plugins/ruut-core/ \"\${TARGET_DIR}wp-content/plugins/ruut-core/\";
 
             quit;
           "
