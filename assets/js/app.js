@@ -547,6 +547,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const isCartPage = document.body.id === 'cartPage' || window.location.pathname.endsWith('cart.html') || window.location.pathname.endsWith('/cart');
     if (isCartPage) return;
 
+    if (typeof renderCart === 'function') {
+      renderCart();
+    }
+
     const drawer = document.getElementById('astra-mobile-cart-drawer');
     const overlay = document.getElementById('astra-cart-drawer-overlay');
     if (drawer) {
@@ -775,6 +779,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Update cart badge (present on all pages in the header)
+    const cartCountEl = document.getElementById('cartCount');
     if (cartCountEl) {
       cartCountEl.textContent = totalQuantity;
       cartCountEl.classList.remove('pop');
@@ -795,12 +800,19 @@ document.addEventListener('DOMContentLoaded', () => {
       window.renderCartPage();
     }
 
+    const cartItemsListEl = document.getElementById('cartItemsList');
+    const minicartProgressEl = document.getElementById('ruut-minicart-progress');
+    const cartpageProgressEl = document.getElementById('ruut-cartpage-progress');
+    const cartSubtotalOriginalEl = document.getElementById('cartSubtotalOriginal');
+    const cartSubtotalEl = document.getElementById('cartSubtotal');
+    const cartUpsellSectionEl = document.getElementById('cartUpsellSection');
+
     // If drawer list isn't present, stop here
-    if (!cartItemsList) return;
+    if (!cartItemsListEl) return;
 
     if (cart.length === 0) {
-      if (ruutMinicartProgress) ruutMinicartProgress.style.display = 'none';
-      if (ruutCartpageProgress) ruutCartpageProgress.style.display = 'none';
+      if (minicartProgressEl) minicartProgressEl.style.display = 'none';
+      if (cartpageProgressEl) cartpageProgressEl.style.display = 'none';
 
       let bestsellersHtml = '';
       if (window.allProducts) {
@@ -830,7 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
 
-      cartItemsList.innerHTML = `
+      cartItemsListEl.innerHTML = `
         <div class="cart-empty-state" style="text-align: center; padding: 40px 20px 20px 20px;">
           <p style="color: var(--ruut-text); margin-bottom: 20px; font-size: 0.95rem;">Your cart is empty.</p>
           <a href="/shop" class="btn-solid" style="display: inline-block; padding: 10px 25px; border-radius: 20px; font-size: 0.8rem; text-decoration: none; text-align: center; margin-bottom: 10px;">Shop Now</a>
@@ -838,17 +850,17 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      if (cartSubtotalOriginal) cartSubtotalOriginal.style.display = 'none';
-      if (cartSubtotal) cartSubtotal.innerHTML = '₹0.00';
-      if (cartUpsellSection) cartUpsellSection.style.display = 'none';
+      if (cartSubtotalOriginalEl) cartSubtotalOriginalEl.style.display = 'none';
+      if (cartSubtotalEl) cartSubtotalEl.innerHTML = '₹0.00';
+      if (cartUpsellSectionEl) cartUpsellSectionEl.style.display = 'none';
       return;
     }
 
-    if (ruutMinicartProgress) ruutMinicartProgress.style.display = offerEnabled ? 'block' : 'none';
-    if (ruutCartpageProgress) ruutCartpageProgress.style.display = (offerEnabled && cart.length > 0) ? 'block' : 'none';
+    if (minicartProgressEl) minicartProgressEl.style.display = offerEnabled ? 'block' : 'none';
+    if (cartpageProgressEl) cartpageProgressEl.style.display = (offerEnabled && cart.length > 0) ? 'block' : 'none';
 
     // Clear list
-    cartItemsList.innerHTML = '';
+    cartItemsListEl.innerHTML = '';
 
     cart.forEach((item, index) => {
       const isGift = item.is_gift || false;
@@ -898,7 +910,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ${removeHtml}
         </div>
       `;
-      cartItemsList.insertAdjacentHTML('beforeend', itemHtml);
+      cartItemsListEl.insertAdjacentHTML('beforeend', itemHtml);
     });
 
     // Apply coupon calculation — use server-reported savings when available,
@@ -969,17 +981,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let finalDiscountedTotal = Math.max(0, discountedSubtotal - discount - activeDiscount);
 
     // Update Subtotal Summary text
-    if (cartSubtotalOriginal) {
+    if (cartSubtotalOriginalEl) {
       if (discount > 0 || activeDiscount > 0 || discountedSubtotal < originalSubtotal) {
-        cartSubtotalOriginal.style.display = 'inline';
-        cartSubtotalOriginal.innerHTML = `₹${originalSubtotal.toFixed(2)}`;
+        cartSubtotalOriginalEl.style.display = 'inline';
+        cartSubtotalOriginalEl.innerHTML = `₹${originalSubtotal.toFixed(2)}`;
       } else {
-        cartSubtotalOriginal.style.display = 'none';
+        cartSubtotalOriginalEl.style.display = 'none';
       }
     }
 
-    if (cartSubtotal) {
-      cartSubtotal.innerHTML = `₹${finalDiscountedTotal.toFixed(2)}`;
+    if (cartSubtotalEl) {
+      cartSubtotalEl.innerHTML = `₹${finalDiscountedTotal.toFixed(2)}`;
     }
 
     // Dynamically insert/update Privilege & Volume Discount breakdown rows in minicart drawer summary
