@@ -570,36 +570,68 @@ document.addEventListener('DOMContentLoaded', () => {
   // Open & Close Drawer System (Ultra-robust with dynamic DOM lookup and event delegation)
   window.openCart = () => {
     // NEVER open mini cart drawer on Cart Page
-    const isCartPage = document.body.id === 'cartPage' || window.location.pathname.endsWith('cart.html') || window.location.pathname.endsWith('/cart');
+    const isCartPage = document.body.id === 'cartPage' || 
+                       window.location.pathname.endsWith('cart.html') || 
+                       window.location.pathname === '/cart' || 
+                       window.location.pathname === '/cart/';
     if (isCartPage) return;
 
     if (typeof renderCart === 'function') {
       renderCart();
     }
 
-    const drawer = document.getElementById('astra-mobile-cart-drawer');
-    const overlay = document.getElementById('astra-cart-drawer-overlay');
+    const drawer = document.getElementById('astra-mobile-cart-drawer') || 
+                   document.querySelector('.cart-drawer') || 
+                   document.getElementById('cart-drawer');
+                   
+    const overlay = document.getElementById('astra-cart-drawer-overlay') || 
+                    document.querySelector('.cart-drawer-overlay') || 
+                    document.getElementById('cart-drawer-overlay');
+
     if (drawer) {
       drawer.style.display = 'flex';
+      drawer.style.visibility = 'visible';
       drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
     }
     if (overlay) {
       overlay.style.display = 'block';
+      overlay.style.opacity = '1';
+      overlay.style.visibility = 'visible';
       overlay.classList.add('open');
     }
     document.body.style.overflow = 'hidden';
   };
 
   window.closeCart = () => {
-    const drawer = document.getElementById('astra-mobile-cart-drawer');
-    const overlay = document.getElementById('astra-cart-drawer-overlay');
-    if (drawer) drawer.classList.remove('open');
-    if (overlay) overlay.classList.remove('open');
+    const drawer = document.getElementById('astra-mobile-cart-drawer') || 
+                   document.querySelector('.cart-drawer');
+                   
+    const overlay = document.getElementById('astra-cart-drawer-overlay') || 
+                    document.querySelector('.cart-drawer-overlay');
+
+    if (drawer) {
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+    }
+    if (overlay) {
+      overlay.classList.remove('open');
+      overlay.style.opacity = '0';
+      overlay.style.visibility = 'hidden';
+      setTimeout(() => {
+        if (!overlay.classList.contains('open')) {
+          overlay.style.display = 'none';
+        }
+      }, 400);
+    }
     document.body.style.overflow = '';
   };
 
   const openCartHandler = (e) => {
-    const isCartPage = document.body.id === 'cartPage' || window.location.pathname.endsWith('cart.html') || window.location.pathname.endsWith('/cart');
+    const isCartPage = document.body.id === 'cartPage' || 
+                       window.location.pathname.endsWith('cart.html') || 
+                       window.location.pathname === '/cart' || 
+                       window.location.pathname === '/cart/';
     if (isCartPage) {
       return;
     }
@@ -609,17 +641,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openCart();
   };
 
-  // Attach to cart icon/toggle triggers
-  const cartElements = document.querySelectorAll('#cartButton, .cart-icon, a[href="#cart"], .open-cart-btn');
+  // Attach to cart icon/toggle triggers (supporting all custom, Astra, WooCommerce cart icons)
+  const cartSelectors = '#cartButton, .cart-icon, .ast-site-header-cart, .ast-header-cart-icon, .header-cart, .cart-link, .cart-toggle, a[href="#cart"], a[href*="cart.html"], .open-cart-btn, [data-open-cart]';
+  const cartElements = document.querySelectorAll(cartSelectors);
   cartElements.forEach(el => {
     el.addEventListener('click', openCartHandler, true);
   });
 
   // Global event delegation backup for cart icon opening
   document.addEventListener('click', (e) => {
-    const target = e.target.closest('#cartButton, .cart-icon, a[href="#cart"], .open-cart-btn');
+    const target = e.target.closest(cartSelectors);
     if (target) {
-      const isCartPage = document.body.id === 'cartPage' || window.location.pathname.endsWith('cart.html') || window.location.pathname.endsWith('/cart');
+      const isCartPage = document.body.id === 'cartPage' || 
+                         window.location.pathname.endsWith('cart.html') || 
+                         window.location.pathname === '/cart' || 
+                         window.location.pathname === '/cart/';
       if (isCartPage) {
         return;
       }
