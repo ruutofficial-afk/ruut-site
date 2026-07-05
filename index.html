@@ -74,6 +74,18 @@
     }
   </script>
   <script src="/assets/js/app.js?v=127.0" defer></script>
+
+  <!-- Three.js for the WebGL 3D hero (loaded via CDN importmap) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="/assets/js/hero3d.js?v=1.0"></script>
+  <script src="/assets/js/scroll-fx.js?v=1.0" defer></script>
 </head>
 
 <body>
@@ -151,6 +163,16 @@
 
   <!-- HERO SECTION -->
   <section class="hero" id="home">
+    <!-- WebGL 3D layer (progressive enhancement; image slides below are the fallback) -->
+    <canvas id="hero3dCanvas" class="hero-3d-canvas" aria-hidden="true"></canvas>
+    <div class="hero-3d-overlay" id="hero3dOverlay">
+      <span class="hero-3d-eyebrow">The Atlas Collection</span>
+      <h1 class="hero-3d-title">Bottled from the world&rsquo;s most beautiful places</h1>
+      <p class="hero-3d-sub">Water-based natural air mists that carry you to Pangong Tso, Landour and the streets of Kannauj.</p>
+      <a href="/the-atlas-collection" class="hero-3d-cta">Explore the collection</a>
+      <span class="hero-3d-scroll" aria-hidden="true">Scroll</span>
+    </div>
+
     <div class="hero-slides" id="heroSlides">
       <!-- Slide 1 (Collection) -->
       <a href="/the-atlas-collection" class="hero-slide active"
@@ -204,11 +226,11 @@
   <section class="ingredients-banner" id="collection">
     <div class="container">
       <div class="ingredients-grid">
-        <div class="ingredients-text">
-          <h2>We use only natural ingredients for our products, which are good for you and the environment too.
-            ewvwevgrdtjbfynjtu</h2>
+        <div class="ingredients-text" data-reveal>
+          <h2>We use only natural ingredients for our products &mdash; kind to you, and kind to the
+            environment too.</h2>
         </div>
-        <div class="badge-grid">
+        <div class="badge-grid" data-reveal data-reveal-delay="120">
           <div class="badge-item">
             <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/b9a1f3e4-64a2-4d93-95f1-79e6f9ad171d.webp"
               alt="100% Clean Formulas">
@@ -430,7 +452,7 @@
   <!-- BESTSELLERS -->
   <section class="bestsellers" id="bestsellers">
     <div class="container">
-      <h2 class="section-title">Bestsellers</h2>
+      <h2 class="section-title" data-reveal>Bestsellers</h2>
       <div class="bestsellers-grid-three" id="bestsellersGrid">
         <!-- Dynamically rendered by app.js?v=7.4 -->
       </div>
@@ -441,15 +463,15 @@
   <section class="quote-callout">
     <div class="container">
       <div class="quote-container">
-        <div class="quote-text-side">
+        <div class="quote-text-side" data-reveal>
           <h2 class="quote-headline">You deserve a little gift that says &ldquo;love&rdquo;</h2>
-          <p class="quote-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p class="quote-description">Every RUUT mist is a memory in a bottle &mdash; the crisp air of a
+            mountain morning, the calm of a still blue lake, the warmth of a fragrant old street. Turn any
+            room into a place you love to be.</p>
           <a href="#bestsellers" class="btn-solid">choose your products</a>
         </div>
-        <div class="quote-img-side">
-          <div class="quote-img-wrap">
+        <div class="quote-img-side" data-reveal data-reveal-delay="120">
+          <div class="quote-img-wrap" data-parallax="0.08">
             <img loading="lazy" decoding="async" src="/assets/images/diffuser_image.webp" alt="RUUT Premium Diffuser arrangement">
           </div>
         </div>
@@ -502,7 +524,7 @@
   <!-- TESTIMONIALS -->
   <section class="testimonials">
     <div class="container testimonials-container">
-      <h2 class="section-title">Customer Reviews</h2>
+      <h2 class="section-title" data-reveal>Customer Reviews</h2>
       <div class="testimonials-grid">
         <div class="testimonials-track" id="testimonialsTrack">
           <!-- Dynamic customer reviews will be loaded here -->
