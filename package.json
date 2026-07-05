@@ -1,0 +1,9 @@
+{
+  "name": "ruut-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes serve -l ${PORT:-3000} .",
+    "start": "npx --yes serve -l ${PORT:-3000} ."
+  }
+}
