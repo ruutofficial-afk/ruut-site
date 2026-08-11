@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Order – ṚUUT</title>
+  <meta name="description" content="Track your RUUT order and view transit checkpoints from our delivery partners in real time.">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon-192x192.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=65.0">
+  <link rel="stylesheet" href="/assets/css/components/header.css?v=2.0">
+  <link rel="stylesheet" href="/assets/css/components/search.css?v=2.0">
+  <link rel="stylesheet" href="/assets/css/pages/track.css">
+
+  <script src="/assets/js/app.js?v=168.0" defer></script>
+  <script src="/assets/js/pages/track.js?v=2.0" defer></script>
+</head>
+
+<body class="page-track">
+
+  <!-- TOP ANNOUNCEMENT STRIPE -->
+  <div class="announcement-bar">
+    <div class="announcement-marquee">
+      <div class="announcement-track">
+        <span>✨ USE CODE <strong>TEST-12</strong> TO UNLOCK ₹200 OFF ON YOUR RITUAL ✨</span>
+        <span>🌿 FREE SHIPPING ON ALL ORDERS ABOVE ₹1500 🌿</span>
+        <span>✨ EXPLORE THE ATLAS COLLECTION: WATER-BASED NATURAL ENVIRONMENT MISTS ✨</span>
+        <span>🌿 EXTRA 5% OFF WITH CODE <strong>TEST-34</strong> 🌿</span>
+        <span>✨ USE CODE <strong>TEST-12</strong> TO UNLOCK ₹200 OFF ON YOUR RITUAL ✨</span>
+        <span>🌿 FREE SHIPPING ON ALL ORDERS ABOVE ₹1500 🌿</span>
+        <span>✨ EXPLORE THE ATLAS COLLECTION: WATER-BASED NATURAL ENVIRONMENT MISTS ✨</span>
+        <span>🌿 EXTRA 5% OFF WITH CODE <strong>TEST-34</strong> 🌿</span>
+      </div>
+    </div>
+  </div>
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <button class="close-btn" id="closeDrawer" aria-label="Close menu">&times;</button>
+    <ul class="mobile-nav-links">
+      <li><a href="https://yourruut.com/">Home</a></li>
+      <li class="mobile-nav-item-has-children">
+        <div class="mobile-nav-link-wrapper">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <button class="mobile-dropdown-toggle" aria-label="Toggle Air Mist Submenu" aria-expanded="false">
+            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-sub-menu" id="mobile-submenu-airmist">
+          <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="mobile-nav-link-wrapper">
+          <a href="/category.html?category=diffuser">Diffuser</a>
+          <button class="mobile-dropdown-toggle" aria-label="Toggle Diffuser Submenu" aria-expanded="false" style="display:none;">
+            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-sub-menu" id="mobile-submenu-diffuser" style="display:none;"></ul>
+      </li>
+      <li><a href="/index.html#gifts">Gifts</a></li>
+      <li><a href="/about-us.html">About Us</a></li>
+      <li><a href="/my-account/">My Account</a></li>
+    </ul>
+  </div>
+
+  <!-- HEADER -->
+  <header id="mainHeader" class="scrolled">
+    <div class="nav-container">
+      <!-- Left Navigation (Desktop) -->
+      <ul class="nav-links left">
+        <li><a href="https://yourruut.com/">Home</a></li>
+        <li class="nav-item-has-children">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <ul class="sub-menu" id="nav-submenu-airmist">
+            <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/category.html?category=diffuser">Diffuser</a>
+          <ul class="sub-menu" id="nav-submenu-diffuser" style="display:none;"></ul>
+        </li>
+        <li class="nav-item-gifts">
+          <a href="/index.html#gifts">
+            <span class="gifts-normal">Gifts</span>
+            <span class="gifts-hover">coming soon</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Hamburger Menu (Mobile) -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Center Logo -->
+      <a href="https://yourruut.com/" class="logo-container" aria-label="RUUT Home">
+        <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-CF6400.png"
+          alt="yourruut.com logo">
+      </a>
+
+      <!-- Right Navigation (Desktop) + Actions -->
+      <div class="header-actions">
+        <ul class="nav-links right">
+          <li><a href="/about-us.html">About Us</a></li>
+          <li><a href="/my-account/">My Account</a></li>
+        </ul>
+
+        <div class="header-search-container">
+          <input type="text" class="header-search-input" id="headerSearchInputField" placeholder="Search products..." autocomplete="off">
+          <button id="searchButton" class="search-toggle-btn" aria-label="Search Products">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <div class="header-search-suggestions" id="headerSearchSuggestions"></div>
+        </div>
+
+        <a href="javascript:void(0)" class="cart-icon" id="cartButton" aria-label="View Cart">
+          <img class="cart-icon-img" src="/assets/images/cart.png" alt="Cart" width="24" height="24">
+          <span class="cart-badge" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN BODY CONTENT -->
+  <main class="track-main" style="padding: 140px 20px 80px 20px; background-color: var(--ruut-bg, #E6DED1); min-height: calc(100vh - 400px); box-sizing: border-box;">
+      <div class="track-unified-card" style="max-width: 1050px; margin: 0 auto; background: #F1ECE6; border: 1px solid rgba(74, 51, 36, 0.15); border-radius: 5px; padding: 45px 35px; box-shadow: 0 15px 35px rgba(74, 51, 36, 0.08); box-sizing: border-box;">
+          
+          <div class="track-card-header" style="text-align: center; margin-bottom: 40px; border-bottom: 1px solid rgba(74, 51, 36, 0.12); padding-bottom: 25px;">
+              <h1 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: normal; color: var(--ruut-coffee, #4A3324); margin: 0 0 10px 0; letter-spacing: 2px;">ORDER TRACKING & ACCOUNT</h1>
+              <p style="font-family: var(--font-sans), 'Karla', sans-serif; font-size: 0.9rem; color: var(--ruut-text, #664436); opacity: 0.85; margin: 0; letter-spacing: 0.5px;">Track your shipment directly by order number or sign in on the right to view all your recent purchases in one place.</p>
+          </div>
+
+          <div class="track-columns-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+              
+              <!-- LEFT COLUMN: TRACKING & USER ORDERS -->
+              <div class="track-left-col" style="text-align: left;">
+                  <h2 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: normal; color: var(--ruut-coffee, #4A3324); margin: 0 0 15px 0; letter-spacing: 1px;">DIRECT SHIPMENT TRACKING</h2>
+                  
+                  <!-- Search Form -->
+                  <div id="trackSearchForm">
+                      <div class="track-input-group" style="margin-bottom: 20px;">
+                          <label for="orderIdInput" style="display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ruut-coffee, #4A3324); margin-bottom: 8px; font-weight: 600;">ORDER NUMBER OR AWB NUMBER</label>
+                          <input type="text" id="orderIdInput" placeholder="e.g. 2405 or AWB Number" style="width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid var(--ruut-coffee, #4A3324); background: transparent; font-family: var(--font-sans), 'Karla', sans-serif; font-size: 0.95rem; color: var(--ruut-coffee, #4A3324); border-radius: 0; box-shadow: none; outline: none; transition: border-color 0.3s; box-sizing: border-box;">
+                      </div>
+                      <button onclick="executeTracking()" class="button" style="width: 100%; padding: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; border-radius: 5px; transition: all 0.3s; cursor: pointer; border: 1px solid var(--ruut-coffee, #4A3324); background: var(--ruut-coffee, #4A3324); color: white; display: block; box-sizing: border-box;">FIND SHIPMENT</button>
+                      <div id="trackErrorMessage" style="display: none; background: rgba(217, 83, 79, 0.08); border: 1px solid rgba(217, 83, 79, 0.3); border-radius: 5px; padding: 12px 15px; color: #d9534f; font-size: 0.85rem; margin-top: 18px; font-family: var(--font-sans), 'Karla', sans-serif; text-align: center; line-height: 1.4;"></div>
+                  </div>
+
+                  <!-- Loading Spinner -->
+                  <div id="trackLoader" style="display: none; padding: 40px 0; text-align: center;">
+                      <div class="spinner" style="width: 30px; height: 30px; border: 3px solid rgba(74, 51, 36, 0.1); border-top-color: var(--ruut-coffee, #4A3324); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                  </div>
+
+                  <!-- User Orders Container (Populated when user signs in or enters email) -->
+                  <div id="userOrdersContainer" style="display: none; margin-top: 25px;">
+                      <h3 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--ruut-coffee, #4A3324); margin: 0 0 15px 0; border-bottom: 1px solid rgba(74, 51, 36, 0.15); padding-bottom: 8px;">YOUR RECENT ORDERS</h3>
+                      <div id="userOrdersList" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                  </div>
+
+                  <!-- Tracking Results Container -->
+                  <div id="trackResults" style="display: none; margin-top: 25px;">
+                      <!-- Details Card -->
+                      <div class="track-details-header" style="background: rgba(74, 51, 36, 0.05); padding: 18px; border-radius: 5px; margin-bottom: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-family: var(--font-sans), 'Karla', sans-serif; font-size: 0.85rem; box-sizing: border-box;">
+                          <div>
+                              <span style="opacity: 0.7; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                              <strong id="trackOrderRealStatus" style="display: block; font-size: 0.95rem; color: var(--ruut-accent, #895158); text-transform: uppercase; margin-top: 4px;">-</strong>
+                          </div>
+                          <div>
+                              <span style="opacity: 0.7; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Carrier</span>
+                              <strong id="trackOrderCarrier" style="display: block; font-size: 0.95rem; margin-top: 4px; color: var(--ruut-coffee, #4A3324);">-</strong>
+                          </div>
+                          <div>
+                              <span style="opacity: 0.7; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Tracking Number</span>
+                              <strong id="trackOrderNumber" style="display: block; font-size: 0.9rem; margin-top: 4px; color: var(--ruut-coffee, #4A3324);">-</strong>
+                          </div>
+                          <div>
+                              <span style="opacity: 0.7; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px;">Customer</span>
+                              <strong id="trackOrderCustomer" style="display: block; font-size: 0.9rem; margin-top: 4px; color: var(--ruut-coffee, #4A3324);">-</strong>
+                          </div>
+                      </div>
+
+                      <!-- Visual Timeline -->
+                      <h3 style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: normal; color: var(--ruut-coffee, #4A3324); margin: 0 0 20px 0; border-bottom: 1px solid rgba(74, 51, 36, 0.15); padding-bottom: 8px; letter-spacing: 1px;">SHIPMENT JOURNEY</h3>
+                      
+                      <div class="timeline-container" id="trackTimeline" style="position: relative; padding-left: 30px; font-family: var(--font-sans), 'Karla', sans-serif;">
+                          <!-- Dynamic checkpoints -->
+                      </div>
+
+                      <!-- Action buttons -->
+                      <div style="margin-top: 30px; display: flex; gap: 12px;">
+                          <button onclick="resetTracking()" class="button" style="flex: 1; padding: 12px; font-size: 0.7rem; letter-spacing: 1.5px; border-radius: 5px; border: 1px solid var(--ruut-coffee, #4A3324); background: transparent; color: var(--ruut-coffee, #4A3324); cursor: pointer; transition: all 0.3s; text-transform: uppercase; font-weight: 600;">TRACK ANOTHER</button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- RIGHT COLUMN: CAN'T REMEMBER ORDER NUMBER -->
+              <div class="track-right-col" style="text-align: center; background: rgba(74, 51, 36, 0.04); padding: 35px 25px; border-radius: 5px; border: 1px dashed rgba(74, 51, 36, 0.2); height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box;">
+                  <h2 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: normal; color: var(--ruut-coffee, #4A3324); margin: 0 0 12px 0; letter-spacing: 1px;">DON'T REMEMBER YOUR ORDER NUMBER?</h2>
+                  <p style="font-family: var(--font-sans), 'Karla', sans-serif; font-size: 0.85rem; color: var(--ruut-text, #664436); opacity: 0.85; margin: 0 0 25px 0; line-height: 1.5;">If you don't remember your order number then login to view your orders.</p>
+
+                  <a href="/my-account/?redirect_to=/my-account/orders/" class="button" style="width: 100%; max-width: 280px; padding: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; border-radius: 5px; cursor: pointer; border: 1px solid var(--ruut-coffee, #4A3324); background: var(--ruut-coffee, #4A3324); color: white; text-decoration: none; display: inline-block; box-sizing: border-box; transition: all 0.3s;">
+                      LOGIN
+                  </a>
+              </div>
+          </div>
+      </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div class="footer-col">
+          <h3>Useful Links</h3>
+          <ul class="footer-links">
+            <li><a href="/about-us.html">About Us</a></li>
+            <li><a href="/index.html#contact">Contact Us</a></li>
+            <li><a href="/my-account/">My account</a></li>
+            <li><a href="/index.html#faqSection">FAQs</a></li>
+          </ul>
+        </div>
+        <!-- Col 2 -->
+        <div class="footer-col">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="/category.html?category=airmist">Collection</a></li>
+            <li><a href="/index.html#gifts">Gifts</a></li>
+          </ul>
+        </div>
+        <!-- Col 3 -->
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <p>+91 98985 71044</p>
+          <p><a href="mailto:connect@yourruut.com">connect@yourruut.com</a></p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </a>
+            <a href="https://wa.me/919898571044" target="_blank" aria-label="WhatsApp">
+              <svg class="social-icon" viewBox="0 0 448 512">
+                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-bottom-brand">ṚUUT</span>
+        <span class="copyright">Copyright &copy; 2026 yourruut.com</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER OVERLAY -->
+  <div class="cart-drawer-overlay" id="astra-cart-drawer-overlay"></div>
+
+  <!-- CART DRAWER -->
+  <div id="astra-mobile-cart-drawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">Shopping Cart</div>
+      <button type="button" class="cart-drawer-close" id="closeCartDrawer" aria-label="Close Cart Drawer">&times;</button>
+    </div>
+
+    <div class="cart-drawer-content">
+      <div class="cart-scrollable-area">
+        <!-- Mini Cart Progress Bar -->
+        <div class="cart-promo-banner" id="ruut-minicart-progress">
+          <div class="cart-promo-text" id="ruutMinicartText">
+            Add <span class="bold">1</span> more to unlock free gifts.
+          </div>
+          <div class="cart-progress-bar-wrap">
+            <div class="cart-progress-bar" id="ruutMinicartFill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Cart Items List -->
+        <div class="cart-items-list" id="cartItemsList"></div>
+
+        <!-- Promo Code Section -->
+        <div class="cart-promo-code-section">
+          <div class="cart-promo-input-wrap">
+            <input type="text" class="cart-promo-input" id="ruut_coupon_code" placeholder="Gift or Promo Code">
+            <button type="button" class="btn-promo-apply" onclick="applyCouponCode()">APPLY</button>
+          </div>
+          <a href="#" class="cart-coupons-link" id="exploreCouponsBtn">EXPLORE ALL ACTIVE COUPONS</a>
+          <div class="ruut-coupon-messages" id="couponMessages"></div>
+        </div>
+      </div>
+
+      <!-- Pricing Summary -->
+      <div class="cart-summary-section">
+        <div class="cart-summary-row">
+          <span class="cart-summary-label">Total</span>
+          <div class="cart-summary-value-wrap">
+            <span class="cart-summary-original-price" id="cartSubtotalOriginal"></span>
+            <span class="cart-summary-price" id="cartSubtotal"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="cart-drawer-actions">
+        <a href="/cart.html" class="btn-cart-drawer view-cart-btn">View Cart</a>
+        <a href="#" class="btn-cart-drawer checkout-btn">Checkout</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

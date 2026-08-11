@@ -34,14 +34,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="/assets/images/hero_desktop.webp">
   <link rel="stylesheet" href="/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=33.0">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=65.0">
+  <link rel="stylesheet" href="/assets/css/components/header.css?v=3.0">
+  <link rel="stylesheet" href="/assets/css/components/search.css?v=2.0">
 
   <!-- Structured JSON-LD Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "RUUT",
+      "name": "ṚUUT",
       "url": "https://yourruut.com",
       "logo": "https://yourruut.com/assets/images/ruut-logo-CF6400.png",
       "sameAs": [
@@ -67,13 +69,7 @@
     }
   </script>
 
-  <script>
-    // Redirect logged-in users to shop
-    if (document.cookie.split(';').some(item => item.trim().startsWith('wordpress_logged_in_'))) {
-      window.location.replace('shop');
-    }
-  </script>
-  <script src="/assets/js/app.js?v=127.0" defer></script>
+  <script src="/assets/js/app.js?v=168.0" defer></script>
 </head>
 
 <body>
@@ -98,12 +94,25 @@
   <div class="mobile-nav-drawer" id="mobileDrawer">
     <button class="close-btn" id="closeDrawer" aria-label="Close menu">&times;</button>
     <ul class="mobile-nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="/collection.html">Collection</a></li>
-      <li><a href="#bestsellers">Bestsellers</a></li>
-      <li><a href="/about-us">About Us</a></li>
-      <li><a href="#gifts">Gifts</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://yourruut.com/">Home</a></li>
+      <li class="mobile-nav-item-has-children">
+        <div class="mobile-nav-link-wrapper">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <button class="mobile-dropdown-toggle" aria-label="Toggle Air Mist Submenu" aria-expanded="false">
+            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-sub-menu" id="mobile-submenu-airmist">
+          <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+        </ul>
+      </li>
+      <li><a href="/category.html?category=diffuser">Diffuser</a></li>
+      <li><a href="/index.html#gifts">Gifts</a></li>
+      <li><a href="/about-us.html">About Us</a></li>
+      <li><a href="/my-account/">My Account</a></li>
     </ul>
   </div>
 
@@ -112,8 +121,20 @@
     <div class="nav-container">
       <!-- Left Navigation (Desktop) -->
       <ul class="nav-links left">
-        <li><a href="#home">Home</a></li>
-        <li><a href="/collection.html">Collection</a></li>
+        <li><a href="https://yourruut.com/">Home</a></li>
+        <li class="nav-item-has-children">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <ul class="sub-menu" id="nav-submenu-airmist">
+            <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+          </ul>
+        </li>
+        <li><a href="/category.html?category=diffuser">Diffuser</a></li>
+        <li class="nav-item-gifts">
+          <a href="/index.html#gifts">
+            <span class="gifts-normal">Gifts</span>
+            <span class="gifts-hover">coming soon</span>
+          </a>
+        </li>
       </ul>
 
       <!-- Hamburger Menu (Mobile) -->
@@ -126,24 +147,34 @@
       </button>
 
       <!-- Center Logo -->
-      <a href="#home" class="logo-container" aria-label="RUUT Home">
-        <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-CF6400.png" alt="yourruut.com logo">
+      <a href="https://yourruut.com/" class="logo-container" aria-label="RUUT Home">
+        <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-CF6400.png"
+          alt="yourruut.com logo">
       </a>
 
       <!-- Right Navigation (Desktop) + Actions -->
       <div class="header-actions">
         <ul class="nav-links right">
-          <li><a href="#gifts">Gifts</a></li>
-          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/about-us.html">About Us</a></li>
           <li><a href="/my-account/">My Account</a></li>
         </ul>
 
-        <a href="#cart" class="cart-icon" id="cartButton" aria-label="View Cart">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M19 6H16C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6H5C3.9 6 3 6.9 3 8V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V8C21 6.9 20.1 6H19ZM12 4C13.1 4 14 4.9 14 6H10C10 4.9 10.9 4 12 4ZM19 19H5V8H8V10C8 10.55 8.45 11 9 11C9.55 11 10 10.55 10 10V8H14V10C14 10.55 14.45 11 15 11C15.55 11 16 10.55 16 10V8H19V19Z" />
-          </svg>
-          <span class="cart-badge" id="cartCount">0</span>
+        <div class="header-search-container">
+          <input type="text" class="header-search-input" id="headerSearchInputField" placeholder="Search products..."
+            autocomplete="off">
+          <button id="searchButton" class="search-toggle-btn" aria-label="Search Products">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <div class="header-search-suggestions" id="headerSearchSuggestions"></div>
+        </div>
+
+        <a href="javascript:void(0)" class="cart-icon" id="cartButton" aria-label="View Cart">
+          <img class="cart-icon-img" src="/assets/images/cart.png" alt="Cart" width="24" height="24">
+          <span class="cart-badge pop" id="cartCount">0</span>
         </a>
       </div>
     </div>
@@ -153,7 +184,7 @@
   <section class="hero" id="home">
     <div class="hero-slides" id="heroSlides">
       <!-- Slide 1 (Collection) -->
-      <a href="/the-atlas-collection" class="hero-slide active"
+      <a href="" class="hero-slide active"
         style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/assets/images/hero_desktop.webp');">
         <div class="hero-slide-content">
           <span class="hero-subtitle">The Collection</span>
@@ -165,11 +196,11 @@
         style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/assets/images/landing_hero.webp');">
         <div class="hero-slide-content">
           <span class="hero-subtitle">Best Seller</span>
-          <h2 class="hero-title">Diffusior</h2>
+          <h2 class="hero-title">Diffuser</h2>
         </div>
       </a>
       <!-- Slide 3 (Product 2) -->
-      <a href="/product" class="hero-slide" id="heroProductSlide2"
+      <a href="/product " class="hero-slide" id="heroProductSlide2"
         style="background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/assets/images/hero_landing_desktop_slide3_1.webp');">
         <div class="hero-slide-content">
           <span class="hero-subtitle">Premium Mist</span>
@@ -210,17 +241,18 @@
         </div>
         <div class="badge-grid">
           <div class="badge-item">
-            <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/b9a1f3e4-64a2-4d93-95f1-79e6f9ad171d.webp"
-              alt="100% Clean Formulas">
+            <img loading="lazy" decoding="async" class="badge-icon-img"
+              src="/assets/images/b9a1f3e4-64a2-4d93-95f1-79e6f9ad171d.webp" alt="100% Clean Formulas">
             <span class="badge-label">100% Clean Formulas</span>
           </div>
           <div class="badge-item">
-            <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/8a17ff43-eeed-4020-9f57-4e83d6153674.webp" alt="Cruelty Free">
+            <img loading="lazy" decoding="async" class="badge-icon-img"
+              src="/assets/images/8a17ff43-eeed-4020-9f57-4e83d6153674.webp" alt="Cruelty Free">
             <span class="badge-label">Cruelty Free</span>
           </div>
           <div class="badge-item">
-            <img loading="lazy" decoding="async" class="badge-icon-img" src="/assets/images/f91de18e-8ae4-468a-a1ff-a6dd3943c0bb.webp"
-              alt="Sustainable Vessels">
+            <img loading="lazy" decoding="async" class="badge-icon-img"
+              src="/assets/images/f91de18e-8ae4-468a-a1ff-a6dd3943c0bb.webp" alt="Sustainable Vessels">
             <span class="badge-label">Sustainable Vessels</span>
           </div>
         </div>
@@ -247,9 +279,11 @@
         transition: opacity 0.3s ease;
         z-index: 2;
       }
+
       .reel-card:hover .reel-play-overlay {
         opacity: 1;
       }
+
       .reel-play-btn-circle {
         background: rgba(255, 255, 255, 0.95);
         border-radius: 50%;
@@ -259,13 +293,16 @@
         align-items: center;
         justify-content: center;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        color: #cf6400; /* fallback ruut-accent */
+        color: #cf6400;
+        /* fallback ruut-accent */
         transform: scale(0.9);
         transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
+
       .reel-card:hover .reel-play-btn-circle {
         transform: scale(1);
       }
+
       .reel-play-btn-circle svg {
         margin-left: 4px;
       }
@@ -287,10 +324,12 @@
         align-items: center;
         justify-content: center;
       }
+
       .reels-modal.open {
         display: flex;
         opacity: 1;
       }
+
       .reels-modal-close {
         position: absolute;
         top: 30px;
@@ -304,10 +343,12 @@
         line-height: 1;
         transition: transform 0.25s ease, color 0.25s ease;
       }
+
       .reels-modal-close:hover {
         transform: rotate(90deg);
         color: #cf6400;
       }
+
       .reels-modal-slider-wrapper {
         position: relative;
         width: 100%;
@@ -318,6 +359,7 @@
         justify-content: center;
         overflow: hidden;
       }
+
       .reels-modal-track {
         position: relative;
         width: 100%;
@@ -327,6 +369,7 @@
         justify-content: center;
         perspective: 1000px;
       }
+
       .reels-modal-card {
         position: absolute;
         width: 270px;
@@ -336,15 +379,17 @@
         background: #2A1D12;
         transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, z-index 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
         cursor: pointer;
-        border: 2px solid rgba(255,255,255,0.08);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        border: 2px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         display: flex;
         flex-direction: column;
       }
+
       .reels-modal-card.active {
         border: 3px solid #cf6400;
         box-shadow: 0 0 35px rgba(207, 100, 0, 0.35);
       }
+
       .modal-reel-video {
         width: 100%;
         height: 100%;
@@ -352,6 +397,7 @@
         flex: 1;
         display: block;
       }
+
       .reels-modal-nav-btn {
         position: absolute;
         top: 50%;
@@ -366,18 +412,21 @@
         justify-content: center;
         cursor: pointer;
         color: #333;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
         z-index: 100000;
         transition: background-color 0.25s, transform 0.25s, color 0.25s;
       }
+
       .reels-modal-nav-btn:hover {
         background: #cf6400;
         color: #fff;
         transform: translateY(-50%) scale(1.1);
       }
+
       .reels-modal-nav-btn.prev-btn {
         left: 40px;
       }
+
       .reels-modal-nav-btn.next-btn {
         right: 40px;
       }
@@ -387,22 +436,28 @@
         .reels-modal-slider-wrapper {
           height: 450px;
         }
+
         .reels-modal-card {
           width: 200px;
           height: 355px;
         }
+
         .reels-modal-nav-btn.prev-btn {
           left: 15px;
         }
+
         .reels-modal-nav-btn.next-btn {
           right: 15px;
         }
+
         .reels-modal-nav-btn {
           width: 40px;
           height: 40px;
         }
       }
     </style>
+
+    <h2 class="section-title" style="text-align: center; margin-bottom: 1.5rem;">Watch & Buy</h2>
 
     <div class="reels-carousel-wrapper">
       <div class="reels-track" id="reelsTrack">
@@ -414,7 +469,9 @@
     <div class="reels-modal" id="reelsModal">
       <button class="reels-modal-close" id="reelsModalClose">&times;</button>
       <button class="reels-modal-nav-btn prev-btn" id="reelsModalPrev" aria-label="Previous Reel">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
       </button>
       <div class="reels-modal-slider-wrapper">
         <div class="reels-track reels-modal-track" id="reelsModalTrack">
@@ -422,7 +479,9 @@
         </div>
       </div>
       <button class="reels-modal-nav-btn next-btn" id="reelsModalNext" aria-label="Next Reel">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
       </button>
     </div>
   </section>
@@ -446,11 +505,12 @@
           <p class="quote-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
             laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <a href="#bestsellers" class="btn-solid">choose your products</a>
+          <a href="https://yourruut.com/shop/diffuser/?product=3126" class="btn-solid">choose your products</a>
         </div>
         <div class="quote-img-side">
           <div class="quote-img-wrap">
-            <img loading="lazy" decoding="async" src="/assets/images/diffuser_image.webp" alt="RUUT Premium Diffuser arrangement">
+            <img loading="lazy" decoding="async" src="/assets/images/diffuser_image.webp"
+              alt="RUUT Premium Diffuser arrangement">
           </div>
         </div>
       </div>
@@ -521,39 +581,39 @@
       <h2 class="featured-title">Featured On</h2>
       <div class="logos-marquee">
         <div class="logos-track">
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png"
-              alt="Featured Partner 1"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png"
-              alt="Featured Partner 2"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png"
-              alt="Featured Partner 3"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png"
-              alt="Featured Partner 4"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png"
-              alt="Featured Partner 5"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png"
-              alt="Featured Partner 6"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png"
-              alt="Featured Partner 7"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png"
-              alt="Featured Partner 8"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png" alt="Featured Partner 1"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png" alt="Featured Partner 2"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png" alt="Featured Partner 3"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png" alt="Featured Partner 4"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png" alt="Featured Partner 5"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png" alt="Featured Partner 6"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png" alt="Featured Partner 7"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png" alt="Featured Partner 8"></div>
           <!-- Duplicated for seamless loop -->
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png"
-              alt="Featured Partner 1"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png"
-              alt="Featured Partner 2"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png"
-              alt="Featured Partner 3"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png"
-              alt="Featured Partner 4"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png"
-              alt="Featured Partner 5"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png"
-              alt="Featured Partner 6"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png"
-              alt="Featured Partner 7"></div>
-          <div class="logo-item"><img loading="lazy" decoding="async" src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png"
-              alt="Featured Partner 8"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-01-free-img.png" alt="Featured Partner 1"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-02-free-img.png" alt="Featured Partner 2"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-03-free-img.png" alt="Featured Partner 3"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-06-free-img.png" alt="Featured Partner 4"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-07-free-img.png" alt="Featured Partner 5"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-04-free-img.png" alt="Featured Partner 6"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-08-free-img.png" alt="Featured Partner 7"></div>
+          <div class="logo-item"><img loading="lazy" decoding="async"
+              src="https://yourruut.com/wp-content/uploads/2021/04/logo-05-free-img.png" alt="Featured Partner 8"></div>
         </div>
       </div>
     </div>
@@ -569,6 +629,8 @@
     </div>
   </section>
 
+  <hr class="shop-divider">
+
   <!-- HAVE QUESTIONS BANNER -->
   <section class="questions-banner" id="contact">
     <div class="container">
@@ -579,11 +641,13 @@
         </div>
         <div class="q-column">
           <h2 class="q-title" style="font-size: 1.4rem;">Track Your Order</h2>
-          <a href="#" class="q-link">Track your Order</a>
+          <a href="/track.html" class="q-link">Track your Order</a>
         </div>
       </div>
     </div>
   </section>
+
+  <hr class="shop-divider">
 
   <!-- FOOTER -->
   <footer>
@@ -614,7 +678,8 @@
           <p><a href="mailto:connect@yourruut.com">connect@yourruut.com</a></p>
           <div class="footer-socials">
             <!-- Instagram -->
-            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank" aria-label="Instagram">
               <svg class="social-icon" viewBox="0 0 24 24">
                 <path
                   d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
@@ -719,27 +784,7 @@
       <div class="ruut-modal-subheader">SELECT A REWARD TO ENHANCE YOUR RITUAL</div>
 
       <div class="ruut-modal-body" id="ruutCouponsList">
-        <div class="ruut-modal-coupon-item" data-coupon-code="TEST-34">
-          <div class="ruut-modal-coupon-main">
-            <div class="ruut-modal-coupon-info">
-              <div class="ruut-modal-coupon-code">TEST-34</div>
-              <div class="ruut-modal-coupon-desc">this gives you 5% add. discount.</div>
-            </div>
-            <button type="button" class="ruut-modal-apply-btn" onclick="tryApplyCoupon('TEST-34')">APPLY</button>
-          </div>
-          <div class="ruut-modal-coupon-messages" id="coupon-msg-TEST-34" style="display: none;"></div>
-        </div>
-
-        <div class="ruut-modal-coupon-item" data-coupon-code="TEST-12">
-          <div class="ruut-modal-coupon-main">
-            <div class="ruut-modal-coupon-info">
-              <div class="ruut-modal-coupon-code">TEST-12</div>
-              <div class="ruut-modal-coupon-desc">this would give you ₹200 off.</div>
-            </div>
-            <button type="button" class="ruut-modal-apply-btn" onclick="tryApplyCoupon('TEST-12')">APPLY</button>
-          </div>
-          <div class="ruut-modal-coupon-messages" id="coupon-msg-TEST-12" style="display: none;"></div>
-        </div>
+        <p style="text-align: center; padding: 20px; color: var(--ruut-gray);">Fetching active coupons...</p>
       </div>
     </div>
   </div>
@@ -794,7 +839,7 @@
     </div>
   </div>
 
-  
+
   <script>
     // FAQ Loader for homepage
     document.addEventListener('DOMContentLoaded', () => {
@@ -904,8 +949,8 @@
         globalReels = reels;
         reelsSection.style.display = 'block';
 
-        // Duplicate reels multiple times to guarantee an endless infinite loop on desktop
-        const allReels = [...reels, ...reels, ...reels, ...reels];
+        // Duplicate reels 3x for seamless infinite loop (start in middle set)
+        const allReels = [...reels, ...reels, ...reels];
 
         reelsTrack.innerHTML = allReels.map((reel, idx) => {
           let productHtml = '';
@@ -941,9 +986,9 @@
             <div class="reel-card" data-original-index="${originalIndex}">
               <div class="reel-media">
                 ${reel.video_url
-                  ? `<video class="reel-video" src="${reel.video_url}" autoplay muted loop playsinline preload="metadata" poster="${reel.thumbnail || ''}"></video>`
-                  : `<img loading="lazy" decoding="async" class="reel-thumbnail" src="${reel.thumbnail || ''}" alt="${reel.title}" />`
-                }
+              ? `<video class="reel-video" src="${reel.video_url}" autoplay muted loop playsinline preload="metadata" poster="${reel.thumbnail || ''}"></video>`
+              : `<img loading="lazy" decoding="async" class="reel-thumbnail" src="${reel.thumbnail || ''}" alt="${reel.title}" />`
+            }
                 <div class="reel-play-overlay">
                   <div class="reel-play-btn-circle">
                     <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -960,30 +1005,45 @@
           card.addEventListener('click', (e) => {
             // If they clicked the product link card, let the link navigate
             if (e.target.closest('.reel-product-card')) return;
-            
+
             const origIndex = parseInt(card.getAttribute('data-original-index'));
             openModalAt(origIndex);
           });
         });
 
-        // Endless infinite scroll
-        let scrollSpeed = 0.4;
+        // Endless infinite scroll — 3 copies, start in the middle set
+        const COPIES = 3;
+        let scrollSpeed = 0.5;
         let scrollAccumulator = 0;
+        let singleSetWidth = 0;
+
+        // Wait one frame for layout, then measure and position
+        requestAnimationFrame(() => {
+          singleSetWidth = reelsTrack.scrollWidth / COPIES;
+          // Start at second copy so we have buffer on both sides
+          reelsTrack.scrollLeft = singleSetWidth;
+        });
 
         function autoScroll() {
           if (!isPaused) {
             scrollAccumulator += scrollSpeed;
             if (scrollAccumulator >= 1) {
-              reelsTrack.scrollLeft += Math.floor(scrollAccumulator);
-              scrollAccumulator -= Math.floor(scrollAccumulator);
-            }
-            // Jump back to middle silently for infinite loop
-            if (reelsTrack.scrollLeft >= reelsTrack.scrollWidth / 2) {
-              reelsTrack.scrollLeft -= reelsTrack.scrollWidth / 2;
-            } else if (reelsTrack.scrollLeft <= 0) {
-              reelsTrack.scrollLeft += reelsTrack.scrollWidth / 2;
+              const step = Math.floor(scrollAccumulator);
+              reelsTrack.scrollLeft += step;
+              scrollAccumulator -= step;
             }
           }
+
+          // Seamless wrap-around: jump by exactly one set width
+          if (singleSetWidth > 0) {
+            const maxScroll = reelsTrack.scrollWidth - reelsTrack.clientWidth;
+            if (reelsTrack.scrollLeft >= singleSetWidth * 2 || reelsTrack.scrollLeft >= maxScroll - 2) {
+              reelsTrack.scrollLeft -= singleSetWidth;
+            } else if (reelsTrack.scrollLeft <= 2) {
+              reelsTrack.scrollLeft += singleSetWidth;
+            }
+          }
+
           animationId = requestAnimationFrame(autoScroll);
         }
 
@@ -1009,12 +1069,19 @@
         }, { passive: true });
       };
 
-      // 3D Cover Flow Modal Slider logic
+      // 3D Cover Flow Modal Slider logic — circular offset for infinite loop
       const updateGallery = () => {
         const cards = reelsModalTrack.querySelectorAll('.reels-modal-card');
+        const n = cards.length;
+        if (n === 0) return;
+
         cards.forEach((card, i) => {
           const video = card.querySelector('.modal-reel-video');
-          const offset = i - activeIndex;
+
+          // Calculate shortest circular distance between i and activeIndex
+          let offset = i - activeIndex;
+          if (offset > n / 2) offset -= n;
+          if (offset < -n / 2) offset += n;
 
           if (offset === 0) {
             // CENTER REEL (active, unmuted, playing)
@@ -1027,7 +1094,7 @@
             if (video) {
               video.muted = false;
               video.currentTime = 0;
-              video.play().catch(() => {});
+              video.play().catch(() => { });
             }
           } else {
             // SIDE REELS (scaled down, dim, muted)
@@ -1071,9 +1138,9 @@
           return `
             <div class="reels-modal-card" data-idx="${idx}">
               ${reel.video_url
-                ? `<video class="modal-reel-video" src="${reel.video_url}" loop playsinline preload="auto" poster="${reel.thumbnail || ''}"></video>`
-                : `<img class="modal-reel-video" src="${reel.thumbnail || ''}" alt="${reel.title}" />`
-              }
+              ? `<video class="modal-reel-video" src="${reel.video_url}" loop playsinline preload="auto" poster="${reel.thumbnail || ''}"></video>`
+              : `<img class="modal-reel-video" src="${reel.thumbnail || ''}" alt="${reel.title}" />`
+            }
               ${buyOverlayHtml}
             </div>
           `;

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="categoryPageTitle">Category | RUUT</title>
+  <meta name="description" id="categoryMetaDescription"
+    content="Discover RUUT Premium Categories. Premium indoor environment air mists and diffusers crafted from essential oils.">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon-192x192.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/hero_desktop.webp">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=65.0">
+  <link rel="stylesheet" href="/assets/css/components/header.css?v=2.0">
+  <link rel="stylesheet" href="/assets/css/components/search.css?v=2.0">
+  <link rel="stylesheet" href="/assets/css/pages/category.css">
+
+  <script src="/assets/js/app.js?v=168.0" defer></script>
+</head>
+
+<body id="categoryPage">
+  <div class="announcement-bar">
+    <div class="announcement-marquee">
+      <div class="announcement-track">
+        <span>✨ USE CODE <strong>TEST-12</strong> TO UNLOCK ₹200 OFF ON YOUR RITUAL ✨</span>
+        <span>🌿 FREE SHIPPING ON ALL ORDERS ABOVE ₹1500 🌿</span>
+        <span>✨ EXPLORE THE ATLAS COLLECTION: WATER-BASED NATURAL ENVIRONMENT MISTS ✨</span>
+        <span>🌿 EXTRA 5% OFF WITH CODE <strong>TEST-34</strong> 🌿</span>
+        <span>✨ USE CODE <strong>TEST-12</strong> TO UNLOCK ₹200 OFF ON YOUR RITUAL ✨</span>
+        <span>🌿 FREE SHIPPING ON ALL ORDERS ABOVE ₹1500 🌿</span>
+        <span>✨ EXPLORE THE ATLAS COLLECTION: WATER-BASED NATURAL ENVIRONMENT MISTS ✨</span>
+        <span>🌿 EXTRA 5% OFF WITH CODE <strong>TEST-34</strong> 🌿</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <button class="close-btn" id="closeDrawer" aria-label="Close menu">&times;</button>
+    <ul class="mobile-nav-links">
+      <li><a href="https://yourruut.com/">Home</a></li>
+      <li class="mobile-nav-item-has-children">
+        <div class="mobile-nav-link-wrapper">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <button class="mobile-dropdown-toggle" aria-label="Toggle Air Mist Submenu" aria-expanded="false">
+            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-sub-menu" id="mobile-submenu-airmist">
+          <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+        </ul>
+      </li>
+      <li><a href="/category.html?category=diffuser">Diffuser</a></li>
+      <li><a href="/index.html#gifts">Gifts</a></li>
+      <li><a href="/about-us.html">About Us</a></li>
+      <li><a href="/my-account/">My Account</a></li>
+    </ul>
+  </div>
+
+  <!-- HEADER -->
+  <header id="mainHeader" class="">
+    <div class="nav-container">
+      <!-- Left Navigation (Desktop) -->
+      <ul class="nav-links left">
+        <li><a href="https://yourruut.com/">Home</a></li>
+        <li class="nav-item-has-children">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <ul class="sub-menu" id="nav-submenu-airmist">
+            <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+          </ul>
+        </li>
+        <li><a href="/category.html?category=diffuser">Diffuser</a></li>
+        <li class="nav-item-gifts">
+          <a href="/index.html#gifts">
+            <span class="gifts-normal">Gifts</span>
+            <span class="gifts-hover">coming soon</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Hamburger Menu (Mobile) -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Center Logo -->
+      <a href="https://yourruut.com/" class="logo-container" aria-label="RUUT Home">
+        <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-CF6400.png"
+          alt="yourruut.com logo">
+      </a>
+
+      <!-- Right Navigation (Desktop) + Actions -->
+      <div class="header-actions">
+        <ul class="nav-links right">
+          <li><a href="/about-us.html">About Us</a></li>
+          <li><a href="/my-account/">My Account</a></li>
+        </ul>
+
+        <div class="header-search-container">
+          <input type="text" class="header-search-input" id="headerSearchInputField" placeholder="Search products..."
+            autocomplete="off">
+          <button id="searchButton" class="search-toggle-btn" aria-label="Search Products">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <div class="header-search-suggestions" id="headerSearchSuggestions"></div>
+        </div>
+
+        <a href="javascript:void(0)" class="cart-icon" id="cartButton" aria-label="View Cart">
+          <img class="cart-icon-img" src="/assets/images/cart.png" alt="Cart" width="24" height="24">
+          <span class="cart-badge pop" id="cartCount">1</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top: 32px; min-height: 80vh;">
+
+    <!-- ① HERO BANNER -->
+    <section class="shop-hero" id="categoryHero"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(&quot;https://yourruut.com/wp-content/uploads/2026/03/IMG_0517.jpg&quot;);">
+      <div class="shop-hero-content" style="text-align: center; max-width: 800px; padding: 0 20px;">
+        <h1 class="shop-hero-title" id="categoryPageTitleDisplay"
+          style="font-family: var(--font-serif); font-size: 3rem; margin-bottom: 10px;">Air Mists</h1>
+        <p class="shop-hero-subtitle" id="categoryPageSubtitleDisplay"
+          style="font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.95); margin: 0;">Explore RUUT premium
+          Air Mists.</p>
+      </div>
+    </section>
+
+    <!-- BREADCRUMBS -->
+    <div class="container" style="margin-top: 10px;">
+      <nav class="breadcrumbs-showcase" id="categoryBreadcrumbs"
+        style="padding: 0.4rem 0; font-size: 0.85rem; font-family: var(--font-sans); color: var(--ruut-gray); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px;">
+        <a href="/shop.html" style="text-decoration: none; color: inherit; transition: color 0.2s;">Shop</a>
+        <span style="color: #ccc;">/</span>
+        <span id="categoryBreadcrumbCurrent" style="color: #111; font-weight: 600;">Air Mists</span>
+      </nav>
+    </div>
+
+    <!-- ② SHOP BY SUB-CATEGORY (Circular Spheres) -->
+    <section class="shop-categories-section" style="padding: 1rem 0 0.8rem 0;">
+      <div class="container">
+        <h2 class="shop-categories-title" id="categorySubcategoriesTitle" style="margin-bottom: 1.2rem;">Sub Categories</h2>
+        <div class="shop-categories-row" id="categoryPageSubcategoriesRow">
+          <a href="/collection.html?collection=the-atlas-collection" class="shop-category-sphere">
+            <img src="https://yourruut.com/wp-content/uploads/2026/02/Untitled-design-scaled.jpg" alt="The Atlas Collection" class="shop-category-sphere-img">
+            <span class="shop-category-sphere-label">The Atlas Collection</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ NEW ARRIVALS (Just Dropped in this category) -->
+    <section class="shop-section" style="padding: 1rem 0;">
+      <div class="container">
+        <div class="shop-section-header"
+          style="margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 8px;">
+          <h2 class="shop-section-title"
+            style="font-family: var(--font-serif); font-size: 1.8rem; margin: 0 0 5px 0; color: var(--ruut-text);">Just
+            Dropped</h2>
+
+        </div>
+        <div class="shop-all-products-grid" id="categoryNewArrivalsGrid">
+          <div class="product-card" data-id="2490">
+            <div class="product-img-wrap">
+              <a href="/shop/airmist/the-atlas-collection/?product=2490" style="text-decoration: none; color: inherit;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/kan-1.webp" alt="The Street of Kannauj">
+
+              </a>
+              <div class="add-to-cart-overlay">
+                <div class="card-qty-selector">
+                  <button type="button" class="card-qty-btn minus" onclick="changeCardQty(this, -1)">-</button>
+                  <span class="card-qty-val">1</span>
+                  <button type="button" class="card-qty-btn plus" onclick="changeCardQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addCardProductToCart(this, 2490)">Add To Cart</button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta-row">
+                <span class="product-category-tag">The Atlas Collection</span>
+                <span class="product-rating">
+                  <span class="star-icon">★</span> 4.5
+                </span>
+              </div>
+              <h3 class="product-title" style="margin-bottom: 0.2rem;">
+                <a href="/shop/airmist/the-atlas-collection/?product=2490"
+                  style="color: inherit; text-decoration: none;">The Street of Kannauj</a>
+              </h3>
+              <div class="product-price-row">
+                <span class="product-price" style="color: var(--ruut-accent); font-weight: 600; font-size: 0.9rem;">₹
+                  650.00</span>
+                <button class="btn-buy-now" onclick="buyNow(2490)">Buy Now</button>
+                <div class="mobile-add-to-cart-wrapper">
+                  <button class="btn-add-cart-mobile" onclick="addCardProductToCart(this, 2490, 650.00)">+ ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="2489">
+            <div class="product-img-wrap">
+              <a href="/shop/airmist/the-atlas-collection/?product=2489" style="text-decoration: none; color: inherit;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/pang-1.webp" alt="Pangong Tso Paradise">
+
+              </a>
+              <div class="add-to-cart-overlay">
+                <div class="card-qty-selector">
+                  <button type="button" class="card-qty-btn minus" onclick="changeCardQty(this, -1)">-</button>
+                  <span class="card-qty-val">1</span>
+                  <button type="button" class="card-qty-btn plus" onclick="changeCardQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addCardProductToCart(this, 2489)">Add To Cart</button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta-row">
+                <span class="product-category-tag">The Atlas Collection</span>
+                <span class="product-rating">
+                  <span class="star-icon">★</span> 4.5
+                </span>
+              </div>
+              <h3 class="product-title" style="margin-bottom: 0.2rem;">
+                <a href="/shop/airmist/the-atlas-collection/?product=2489"
+                  style="color: inherit; text-decoration: none;">Pangong Tso Paradise</a>
+              </h3>
+              <div class="product-price-row">
+                <span class="product-price" style="color: var(--ruut-accent); font-weight: 600; font-size: 0.9rem;">₹
+                  650.00</span>
+                <button class="btn-buy-now" onclick="buyNow(2489)">Buy Now</button>
+                <div class="mobile-add-to-cart-wrapper">
+                  <button class="btn-add-cart-mobile" onclick="addCardProductToCart(this, 2489, 650.00)">+ ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="2130">
+            <div class="product-img-wrap">
+              <a href="/shop/airmist/the-atlas-collection/?product=2130" style="text-decoration: none; color: inherit;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/RUUT-BLD-1-.webp" alt="The Landour Morning">
+                <span class="sale-badge">20% OFF</span>
+              </a>
+              <div class="add-to-cart-overlay">
+                <div class="card-qty-selector">
+                  <button type="button" class="card-qty-btn minus" onclick="changeCardQty(this, -1)">-</button>
+                  <span class="card-qty-val">1</span>
+                  <button type="button" class="card-qty-btn plus" onclick="changeCardQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addCardProductToCart(this, 2130)">Add To Cart</button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta-row">
+                <span class="product-category-tag">The Atlas Collection</span>
+                <span class="product-rating">
+                  <span class="star-icon">★</span> 4.5
+                </span>
+              </div>
+              <h3 class="product-title" style="margin-bottom: 0.2rem;">
+                <a href="/shop/airmist/the-atlas-collection/?product=2130"
+                  style="color: inherit; text-decoration: none;">The Landour Morning</a>
+              </h3>
+              <div class="product-price-row">
+                <span class="product-price"
+                  style="color: var(--ruut-accent); font-weight: 600; font-size: 0.9rem;"><span
+                    style="text-decoration: line-through; color: #999; margin-right: 8px; font-size: 0.85em;">₹
+                    650.00</span>₹ 520.00</span>
+                <button class="btn-buy-now" onclick="buyNow(2130)">Buy Now</button>
+                <div class="mobile-add-to-cart-wrapper">
+                  <button class="btn-add-cart-mobile" onclick="addCardProductToCart(this, 2130, 520.00)">+ ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑥ ALL PRODUCTS IN CATEGORY -->
+    <section class="shop-section" id="categoryAllProducts" style="padding: 1rem 0 1.5rem 0;">
+      <div class="container">
+        <div class="shop-section-header" style="margin-bottom: 15px;">
+          <h2 class="shop-section-title"
+            style="font-family: var(--font-serif); font-size: 1.8rem; margin: 0; color: var(--ruut-text);">All Products
+          </h2>
+        </div>
+        <div class="shop-sort-bar">
+          <span class="shop-sort-count" id="categoryAllProductsCount">Loading products...</span>
+          <select class="shop-sort-select" id="categorySortSelect">
+            <option value="popularity">Sort by: Popularity</option>
+            <option value="newest">Sort by: Newest</option>
+            <option value="price-low">Sort by: Price — Low to High</option>
+          </select>
+        </div>
+        <div class="shop-all-products-grid" id="categoryAllProductsGrid">
+          <div class="product-card" data-id="2489">
+            <div class="product-img-wrap">
+              <a href="/shop/airmist/the-atlas-collection/?product=2489" style="text-decoration: none; color: inherit;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/pang-1.webp" alt="Pangong Tso Paradise">
+
+              </a>
+              <div class="add-to-cart-overlay">
+                <div class="card-qty-selector">
+                  <button type="button" class="card-qty-btn minus" onclick="changeCardQty(this, -1)">-</button>
+                  <span class="card-qty-val">1</span>
+                  <button type="button" class="card-qty-btn plus" onclick="changeCardQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addCardProductToCart(this, 2489)">Add To Cart</button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta-row">
+                <span class="product-category-tag">The Atlas Collection</span>
+                <span class="product-rating">
+                  <span class="star-icon">★</span> 4.5
+                </span>
+              </div>
+              <h3 class="product-title" style="margin-bottom: 0.2rem;">
+                <a href="/shop/airmist/the-atlas-collection/?product=2489"
+                  style="color: inherit; text-decoration: none;">Pangong Tso Paradise</a>
+              </h3>
+              <div class="product-price-row">
+                <span class="product-price" style="color: var(--ruut-accent); font-weight: 600; font-size: 0.9rem;">₹
+                  650.00</span>
+                <button class="btn-buy-now" onclick="buyNow(2489)">Buy Now</button>
+                <div class="mobile-add-to-cart-wrapper">
+                  <button class="btn-add-cart-mobile" onclick="addCardProductToCart(this, 2489, 650.00)">+ ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="2130">
+            <div class="product-img-wrap">
+              <a href="/shop/airmist/the-atlas-collection/?product=2130" style="text-decoration: none; color: inherit;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/RUUT-BLD-1-.webp" alt="The Landour Morning">
+                <span class="sale-badge">20% OFF</span>
+              </a>
+              <div class="add-to-cart-overlay">
+                <div class="card-qty-selector">
+                  <button type="button" class="card-qty-btn minus" onclick="changeCardQty(this, -1)">-</button>
+                  <span class="card-qty-val">1</span>
+                  <button type="button" class="card-qty-btn plus" onclick="changeCardQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addCardProductToCart(this, 2130)">Add To Cart</button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta-row">
+                <span class="product-category-tag">The Atlas Collection</span>
+                <span class="product-rating">
+                  <span class="star-icon">★</span> 4.5
+                </span>
+              </div>
+              <h3 class="product-title" style="margin-bottom: 0.2rem;">
+                <a href="/shop/airmist/the-atlas-collection/?product=2130"
+                  style="color: inherit; text-decoration: none;">The Landour Morning</a>
+              </h3>
+              <div class="product-price-row">
+                <span class="product-price"
+                  style="color: var(--ruut-accent); font-weight: 600; font-size: 0.9rem;"><span
+                    style="text-decoration: line-through; color: #999; margin-right: 8px; font-size: 0.85em;">₹
+                    650.00</span>₹ 520.00</span>
+                <button class="btn-buy-now" onclick="buyNow(2130)">Buy Now</button>
+                <div class="mobile-add-to-cart-wrapper">
+                  <button class="btn-add-cart-mobile" onclick="addCardProductToCart(this, 2130, 520.00)">+ ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="2490">
+            <div class="product-img-wrap">
+              <a href="/shop/airmist/the-atlas-collection/?product=2490" style="text-decoration: none; color: inherit;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/kan-1.webp" alt="The Street of Kannauj">
+
+              </a>
+              <div class="add-to-cart-overlay">
+                <div class="card-qty-selector">
+                  <button type="button" class="card-qty-btn minus" onclick="changeCardQty(this, -1)">-</button>
+                  <span class="card-qty-val">1</span>
+                  <button type="button" class="card-qty-btn plus" onclick="changeCardQty(this, 1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addCardProductToCart(this, 2490)">Add To Cart</button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta-row">
+                <span class="product-category-tag">The Atlas Collection</span>
+                <span class="product-rating">
+                  <span class="star-icon">★</span> 4.5
+                </span>
+              </div>
+              <h3 class="product-title" style="margin-bottom: 0.2rem;">
+                <a href="/shop/airmist/the-atlas-collection/?product=2490"
+                  style="color: inherit; text-decoration: none;">The Street of Kannauj</a>
+              </h3>
+              <div class="product-price-row">
+                <span class="product-price" style="color: var(--ruut-accent); font-weight: 600; font-size: 0.9rem;">₹
+                  650.00</span>
+                <button class="btn-buy-now" onclick="buyNow(2490)">Buy Now</button>
+                <div class="mobile-add-to-cart-wrapper">
+                  <button class="btn-add-cart-mobile" onclick="addCardProductToCart(this, 2490, 650.00)">+ ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <hr class="shop-divider">
+
+  <!-- HAVE QUESTIONS BANNER -->
+  <section class="questions-banner" id="contact">
+    <div class="container">
+      <div class="questions-grid">
+        <div class="q-column"
+          style="opacity: 1; transform: translateY(0px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);">
+          <h2 class="q-title">Have questions?</h2>
+          <a href="mailto:connect@yourruut.com" class="q-link">get in touch</a>
+        </div>
+        <div class="q-column">
+          <h2 class="q-title" style="font-size: 1.4rem;">Track Your Order</h2>
+          <a href="/track.html" class="q-link">Track your Order</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="shop-divider">
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div class="footer-col">
+          <h3>Useful Links</h3>
+          <ul class="footer-links">
+            <li><a href="/about-us">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="/my-account/">My account</a></li>
+            <li><a href="#faqSection">FAQs</a></li>
+          </ul>
+        </div>
+        <!-- Col 2 -->
+        <div class="footer-col">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="/category.html?category=airmist">Collection</a></li>
+            <li><a href="#gifts">Gifts</a></li>
+          </ul>
+        </div>
+        <!-- Col 3 -->
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <p>+91 98985 71044</p>
+          <p><a href="mailto:connect@yourruut.com">connect@yourruut.com</a></p>
+          <div class="footer-socials">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw=="
+              target="_blank" aria-label="Instagram">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z">
+                </path>
+              </svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/919898571044" target="_blank" aria-label="WhatsApp">
+              <svg class="social-icon" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-bottom-brand">ṚUUT</span>
+        <span class="copyright">Copyright © 2026 yourruut.com</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MINI CART DRAWER OVERLAY -->
+  <div class="cart-drawer-overlay" id="astra-cart-drawer-overlay" aria-hidden="true"></div>
+
+  <!-- MINI CART DRAWER -->
+  <div id="astra-mobile-cart-drawer" class="cart-drawer" role="dialog" aria-label="Shopping Cart" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">Shopping Cart</div>
+      <button type="button" class="cart-drawer-close" id="closeCartDrawer" aria-label="Close Cart Drawer">×</button>
+    </div>
+
+    <div class="cart-drawer-content">
+      <div class="cart-scrollable-area">
+        <div class="cart-promo-banner" id="ruut-minicart-progress" style="display: block;">
+          <div class="cart-promo-text" id="ruutMinicartText"><strong>₹100 OFF</strong> unlocked! Add <strong>1
+              item</strong> to get <strong>₹100 OFF + Free Gift</strong>.</div>
+          <div class="cart-progress-bar-wrap" style="margin-bottom: 25px;">
+            <div class="cart-progress-bar" id="ruutMinicartFill" style="width: 33.3333%;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="cart-progress-dot ruut-dot-reached"
+              style="left: 33.33333333333333%; background-color: var(--ruut-accent);" title="Tier 1: 1 items (1 Qty)">
+              <span class="dot-label dot-label-start">1 Qty</span>
+            </div>
+
+            <div class="cart-progress-dot " style="left: 66.66666666666666%; background-color: var(--ruut-white);"
+              title="Tier 2: 2 items (2 Qty (₹100 OFF + GIFT))">
+              <span class="dot-label ">2 Qty (₹100 OFF + GIFT)</span>
+            </div>
+
+            <div class="cart-progress-dot " style="left: 100%; background-color: var(--ruut-white);"
+              title="Tier 3: 3 items (3 Qty (₹250 OFF + 2 GIFTS))">
+              <span class="dot-label dot-label-end">3 Qty (₹250 OFF + 2 GIFTS)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-items-list" id="cartItemsList">
+          <div class="cart-item ">
+            <div class="cart-item-img-wrap">
+              <img src="https://yourruut.com/wp-content/uploads/2026/02/kan-1.webp" alt="The Street of Kannauj">
+
+            </div>
+            <div class="cart-item-details">
+              <div class="cart-item-title-row">
+                <h4 class="cart-item-name">The Street of Kannauj</h4>
+                <div class="cart-item-price-wrap">
+
+                  <span class="cart-item-price">₹650.00</span>
+                </div>
+              </div>
+              <span class="cart-item-volume">200ml</span>
+              <div class="cart-item-qty-row">
+
+                <div class="qty-selector">
+                  <button type="button" class="qty-btn" onclick="updateQty(0, -1)">−</button>
+                  <span class="qty-val">1</span>
+                  <button type="button" class="qty-btn" onclick="updateQty(0, 1)">+</button>
+                </div>
+
+              </div>
+            </div>
+
+            <a role="button" href="#" class="cart-drawer-close" aria-label="Remove The Street of Kannauj from cart"
+              onclick="removeCartItem(0); return false;"
+              style="font-size: 1.5rem; align-self: flex-start; margin-left: auto;">×</a>
+
+          </div>
+        </div>
+        <div class="cart-upsell-section" id="cartUpsellSection" style="display: block;">
+          <div class="cart-upsell-title">Complete The Ritual</div>
+          <div class="cart-upsell-list" style="display: flex; flex-direction: column; gap: 10px;">
+
+            <div class="cart-upsell-card"
+              style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.3); padding: 10px; border-radius: 8px; margin-top: 10px;">
+              <div class="cart-upsell-img-wrap"
+                style="width: 50px; height: 50px; flex-shrink: 0; border-radius: 6px; overflow: hidden;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/pang-1.webp" alt="Pangong Tso Paradise"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="cart-upsell-info" style="flex: 1;">
+                <h4 class="cart-upsell-name"
+                  style="margin: 0; font-size: 0.85rem; font-family: var(--font-serif); font-weight: normal; color: var(--ruut-text);">
+                  Pangong Tso Paradise</h4>
+                <span class="cart-upsell-price"
+                  style="font-size: 0.8rem; font-weight: 600; color: var(--ruut-accent);">₹650.00</span>
+              </div>
+              <button type="button" class="btn-upsell-add" onclick="addToCart(2489)"
+                style="font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; background: var(--ruut-accent); color: var(--ruut-white); border: none; font-weight: 500; cursor: pointer;">ADD
+                +</button>
+            </div>
+
+            <div class="cart-upsell-card"
+              style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.3); padding: 10px; border-radius: 8px; margin-top: 10px;">
+              <div class="cart-upsell-img-wrap"
+                style="width: 50px; height: 50px; flex-shrink: 0; border-radius: 6px; overflow: hidden;">
+                <img src="https://yourruut.com/wp-content/uploads/2026/02/RUUT-BLD-1-.webp" alt="The Landour Morning"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="cart-upsell-info" style="flex: 1;">
+                <h4 class="cart-upsell-name"
+                  style="margin: 0; font-size: 0.85rem; font-family: var(--font-serif); font-weight: normal; color: var(--ruut-text);">
+                  The Landour Morning</h4>
+                <span class="cart-upsell-price"
+                  style="font-size: 0.8rem; font-weight: 600; color: var(--ruut-accent);">₹520.00</span>
+              </div>
+              <button type="button" class="btn-upsell-add" onclick="addToCart(2130)"
+                style="font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; background: var(--ruut-accent); color: var(--ruut-white); border: none; font-weight: 500; cursor: pointer;">ADD
+                +</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="cart-promo-code-section">
+          <div class="cart-promo-input-wrap" style="display: flex;">
+            <input type="text" class="cart-promo-input" id="ruut_coupon_code" placeholder="Gift or Promo Code"
+              autocomplete="off">
+            <button type="button" class="btn-promo-apply" onclick="applyCouponCode()">APPLY</button>
+          </div>
+          <a href="#" class="cart-coupons-link" id="exploreCouponsBtn">EXPLORE ALL ACTIVE COUPONS</a>
+          <div class="ruut-coupon-messages" id="couponMessages" role="alert"></div>
+        </div>
+      </div>
+
+      <div class="cart-summary-section">
+        <div class="cart-summary-row cart-summary-volume-row"
+          style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--ruut-accent); font-weight: 600; margin-bottom: 8px; align-items: center;">
+          <span>Tier Discount (1 Items)</span>
+          <span>-₹100.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span class="cart-summary-label">Total</span>
+          <div class="cart-summary-value-wrap">
+            <span class="cart-summary-original-price" id="cartSubtotalOriginal" style="display: inline;">₹650.00</span>
+            <span class="cart-summary-price" id="cartSubtotal">₹550.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-drawer-actions">
+        <a href="/cart" class="btn-cart-drawer view-cart-btn">View Cart</a>
+        <a href="/checkout/" class="btn-cart-drawer checkout-btn">Checkout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVILEGES / COUPONS MODAL OVERLAY -->
+  <div id="ruut-coupons-modal-overlay" class="ruut-coupons-modal-overlay" style="display: none;">
+    <div class="ruut-coupons-modal">
+      <button type="button" class="ruut-modal-close" id="closeCouponsModal">×</button>
+      <div class="ruut-modal-header">Privileges</div>
+      <div class="ruut-modal-subheader">SELECT A REWARD TO ENHANCE YOUR RITUAL</div>
+
+      <div class="ruut-modal-body" id="ruutCouponsList">
+        <p style="text-align: center; padding: 20px; color: var(--ruut-gray);">Fetching active coupons...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOSS PREVENTION CONFIRM OVERLAY -->
+  <div id="ruut-confirm-overlay" class="ruut-confirm-overlay" style="display: none;">
+    <div class="ruut-confirm-modal">
+      <div class="ruut-confirm-title">Confirm Change</div>
+      <div class="ruut-confirm-desc">Applying this privilege will replace your current active privilege, resulting in a
+        lower total benefit. Are you sure you wish to proceed?</div>
+      <div class="ruut-confirm-actions">
+        <button type="button" class="ruut-confirm-cancel" id="confirmCancelBtn">CANCEL</button>
+        <button type="button" class="ruut-confirm-anyway" id="confirmAnywayBtn">APPLY ANYWAY</button>
+      </div>
+    </div>
+  </div>
+  <script defer=""
+    src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+    integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ=="
+    data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;498ba23e14c342a5b8f3777c5a7cc1f4&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}"
+    crossorigin="anonymous"></script>
+
+
+
+  <div id="searchOverlay" class="search-overlay"
+    style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(58, 46, 40, 0.4); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: flex-start; padding-top: 100px; transition: opacity 0.25s; opacity: 0; pointer-events: none;">
+    <div class="search-container-box"
+      style="background: #FAF8F6; width: 90%; max-width: 700px; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid #E6E0D8; padding: 25px; position: relative; margin: 0 auto; transform: translateY(-20px); transition: transform 0.25s ease;">
+      <button id="closeSearchBtn"
+        style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; color: #776B5D; cursor: pointer; line-height: 1; padding: 4px;">×</button>
+      <h3
+        style="font-family: var(--font-serif); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; color: #3A2E28; letter-spacing: 0.02em;">
+        Search Products</h3>
+      <div
+        style="position: relative; display: flex; align-items: center; border-bottom: 2px solid #776B5D; padding-bottom: 8px;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#776B5D" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInputField" placeholder="Type name, category, scent notes..."
+          style="background: none; border: none; outline: none; width: 100%; font-family: var(--font-sans); font-size: 1.1rem; color: #3A2E28;"
+          autocomplete="off">
+      </div>
+      <div id="searchSuggestions" style="margin-top: 20px; max-height: 350px; overflow-y: auto; padding-right: 5px;">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -34,7 +34,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="/assets/images/hero_desktop.webp">
   <link rel="stylesheet" href="/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=33.0">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=65.0">
+  <link rel="stylesheet" href="/assets/css/components/header.css?v=2.0">
+  <link rel="stylesheet" href="/assets/css/components/search.css?v=2.0">
+  <link rel="stylesheet" href="/assets/css/pages/cart-page.css?v=7.0">
+  <script src="/assets/js/app.js?v=168.0" defer></script>
 
   <!-- Structured JSON-LD Data -->
   <script type="application/ld+json">
@@ -66,14 +70,6 @@
       }
     }
   </script>
-
-  <script>
-    // Redirect logged-in users to shop
-    if (document.cookie.split(';').some(item => item.trim().startsWith('wordpress_logged_in_'))) {
-      window.location.replace('shop');
-    }
-  </script>
-  <script src="/assets/js/app.js?v=127.0" defer></script>
 </head>
 
 <body id="cartPage">
@@ -97,9 +93,33 @@
   <div class="mobile-nav-drawer" id="mobileDrawer">
     <button class="close-btn" id="closeDrawer" aria-label="Close menu">&times;</button>
     <ul class="mobile-nav-links">
-      <li><a href="/index.html">Home</a></li>
-      <li><a href="/collection.html">Collection</a></li>
-      <li><a href="/about-us">About Us</a></li>
+      <li><a href="https://yourruut.com/">Home</a></li>
+      <li class="mobile-nav-item-has-children">
+        <div class="mobile-nav-link-wrapper">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <button class="mobile-dropdown-toggle" aria-label="Toggle Air Mist Submenu" aria-expanded="false">
+            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-sub-menu" id="mobile-submenu-airmist">
+          <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="mobile-nav-link-wrapper">
+          <a href="/category.html?category=diffuser">Diffuser</a>
+          <button class="mobile-dropdown-toggle" aria-label="Toggle Diffuser Submenu" aria-expanded="false" style="display:none;">
+            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-sub-menu" id="mobile-submenu-diffuser" style="display:none;"></ul>
+      </li>
+      <li><a href="/index.html#gifts">Gifts</a></li>
+      <li><a href="/about-us.html">About Us</a></li>
       <li><a href="/my-account/">My Account</a></li>
     </ul>
   </div>
@@ -109,8 +129,23 @@
     <div class="nav-container">
       <!-- Left Navigation (Desktop) -->
       <ul class="nav-links left">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/collection.html">Collection</a></li>
+        <li><a href="https://yourruut.com/">Home</a></li>
+        <li class="nav-item-has-children">
+          <a href="/category.html?category=airmist">Air Mist</a>
+          <ul class="sub-menu" id="nav-submenu-airmist">
+            <li><a href="/collection.html?collection=the-atlas-collection">The Atlas Collection</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/category.html?category=diffuser">Diffuser</a>
+          <ul class="sub-menu" id="nav-submenu-diffuser" style="display:none;"></ul>
+        </li>
+        <li class="nav-item-gifts">
+          <a href="/index.html#gifts">
+            <span class="gifts-normal">Gifts</span>
+            <span class="gifts-hover">coming soon</span>
+          </a>
+        </li>
       </ul>
 
       <!-- Hamburger Menu (Mobile) -->
@@ -123,7 +158,7 @@
       </button>
 
       <!-- Center Logo -->
-      <a href="/index.html" class="logo-container" aria-label="RUUT Home">
+      <a href="https://yourruut.com/" class="logo-container" aria-label="RUUT Home">
         <img loading="lazy" decoding="async" class="logo-img" src="/assets/images/ruut-logo-CF6400.png"
           alt="yourruut.com logo">
       </a>
@@ -131,25 +166,33 @@
       <!-- Right Navigation (Desktop) + Actions -->
       <div class="header-actions">
         <ul class="nav-links right">
-          <li><a href="#gifts">Gifts</a></li>
-          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/about-us.html">About Us</a></li>
           <li><a href="/my-account/">My Account</a></li>
         </ul>
 
-        <a href="#cart" class="cart-icon" id="cartButton" aria-label="View Cart">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M19 6H16C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6H5C3.9 6 3 6.9 3 8V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V8C21 6.9 20.1 6H19ZM12 4C13.1 4 14 4.9 14 6H10C10 4.9 10.9 4 12 4ZM19 19H5V8H8V10C8 10.55 8.45 11 9 11C9.55 11 10 10.55 10 10V8H14V10C14 10.55 14.45 11 15 11C15.55 11 16 10.55 16 10V8H19V19Z" />
-          </svg>
-          <span class="cart-badge" id="cartCount">0</span>
+        <div class="header-search-container">
+          <input type="text" class="header-search-input" id="headerSearchInputField" placeholder="Search products..." autocomplete="off">
+          <button id="searchButton" class="search-toggle-btn" aria-label="Search Products">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <div class="header-search-suggestions" id="headerSearchSuggestions"></div>
+        </div>
+
+        <a href="javascript:void(0)" class="cart-icon" id="cartButton" aria-label="View Cart">
+          <img class="cart-icon-img" src="/assets/images/cart.png" alt="Cart" width="24" height="24">
+          <span class="cart-badge pop" id="cartCount">0</span>
         </a>
       </div>
     </div>
   </header>
 
   <!-- CART PAGE MAIN CONTENT -->
-  <main style="padding-top: 140px; padding-bottom: 80px; min-height: 80vh;" class="container">
-    <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 40px; text-align: center;">Your
+  <main style="padding-top: 170px; padding-bottom: 80px; min-height: 80vh;" class="container cart-main-wrapper">
+    <h1 class="cart-page-title" style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 40px; text-align: center;">Your
       Shopping Cart</h1>
 
     <div class="cart-layout-container">
@@ -168,19 +211,11 @@
           <!-- Dynamically rendered by app.js -->
           <p>Loading cart...</p>
         </div>
-
-        <!-- Suggested for You Section (Directly below Cart Items) -->
-        <section id="cartPageSuggestionsSection" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); display: none;">
-          <h2 style="font-family: var(--font-serif); margin-bottom: 30px; text-align: left;">Suggested for You</h2>
-          <div id="cartPageSuggestionsGrid" class="bestsellers-grid-three">
-            <!-- Dynamically rendered by app.js -->
-          </div>
-        </section>
       </div>
 
       <!-- Sticky Order Summary (Right Side 30%) -->
       <div class="cart-right-col">
-        <div class="cart-summary-card" style="background: rgba(255,255,255,0.5); padding: 30px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+        <div class="cart-summary-card" style="padding: 30px;">
           <h3 style="margin-top: 0; margin-bottom: 20px; font-family: var(--font-serif); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px;">
             Order Summary</h3>
 
@@ -236,7 +271,86 @@
         </div>
       </div>
     </div>
+
+    <!-- Suggested for You Section (Full width below Cart Items & Order Summary) -->
+    <section id="cartPageSuggestionsSection" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); display: none;">
+      <h2 style="font-family: var(--font-serif); margin-bottom: 30px; text-align: left;">Suggested for You</h2>
+      <div id="cartPageSuggestionsGrid" class="shop-all-products-grid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </section>
   </main>
+
+  <hr class="shop-divider">
+
+  <!-- HAVE QUESTIONS BANNER -->
+  <section class="questions-banner" id="contact">
+    <div class="container">
+      <div class="questions-grid">
+        <div class="q-column">
+          <h2 class="q-title">Have questions?</h2>
+          <a href="mailto:connect@yourruut.com" class="q-link">get in touch</a>
+        </div>
+        <div class="q-column">
+          <h2 class="q-title" style="font-size: 1.4rem;">Track Your Order</h2>
+          <a href="/track.html" class="q-link">Track your Order</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="shop-divider">
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div class="footer-col">
+          <h3>Useful Links</h3>
+          <ul class="footer-links">
+            <li><a href="/about-us.html">About Us</a></li>
+            <li><a href="/index.html#contact">Contact Us</a></li>
+            <li><a href="/my-account/">My account</a></li>
+            <li><a href="/collection.html">Collection</a></li>
+          </ul>
+        </div>
+        <!-- Col 2 -->
+        <div class="footer-col">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="/collection.html">Collection</a></li>
+            <li><a href="/index.html#gifts">Gifts</a></li>
+          </ul>
+        </div>
+        <!-- Col 3 -->
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <p>+91 98985 71044</p>
+          <p><a href="mailto:connect@yourruut.com">connect@yourruut.com</a></p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/your.ruut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank" aria-label="Instagram">
+              <svg class="social-icon" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </a>
+            <a href="https://wa.me/919898571044" target="_blank" aria-label="WhatsApp">
+              <svg class="social-icon" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-bottom-brand">ṚUUT</span>
+        <span class="copyright">Copyright &copy; 2026 yourruut.com</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- CART DRAWER OVERLAY -->
   <div class="cart-drawer-overlay" id="astra-cart-drawer-overlay"></div>
@@ -320,27 +434,7 @@
       <div class="ruut-modal-subheader">SELECT A REWARD TO ENHANCE YOUR RITUAL</div>
 
       <div class="ruut-modal-body" id="ruutCouponsList">
-        <div class="ruut-modal-coupon-item" data-coupon-code="TEST-34">
-          <div class="ruut-modal-coupon-main">
-            <div class="ruut-modal-coupon-info">
-              <div class="ruut-modal-coupon-code">TEST-34</div>
-              <div class="ruut-modal-coupon-desc">this gives you 5% add. discount.</div>
-            </div>
-            <button type="button" class="ruut-modal-apply-btn" onclick="tryApplyCoupon('TEST-34')">APPLY</button>
-          </div>
-          <div class="ruut-modal-coupon-messages" id="coupon-msg-TEST-34" style="display: none;"></div>
-        </div>
-
-        <div class="ruut-modal-coupon-item" data-coupon-code="TEST-12">
-          <div class="ruut-modal-coupon-main">
-            <div class="ruut-modal-coupon-info">
-              <div class="ruut-modal-coupon-code">TEST-12</div>
-              <div class="ruut-modal-coupon-desc">this would give you ₹200 off.</div>
-            </div>
-            <button type="button" class="ruut-modal-apply-btn" onclick="tryApplyCoupon('TEST-12')">APPLY</button>
-          </div>
-          <div class="ruut-modal-coupon-messages" id="coupon-msg-TEST-12" style="display: none;"></div>
-        </div>
+        <p style="text-align: center; padding: 20px; color: var(--ruut-gray);">Fetching active coupons...</p>
       </div>
     </div>
   </div>
