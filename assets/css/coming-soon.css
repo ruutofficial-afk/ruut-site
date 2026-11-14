@@ -1,24 +1,20 @@
 /* ==========================================================================
-   RUUT — LAUNCHING SOON (COMING SOON) AESTHETIC DIRECTIVE
-   Warm Parchment (#F3E8D0) • Deep Roasted Espresso (#3B241C) • Rose Mauve (#895158)
+   RUUT — MINIMAL CINEMATIC COMING SOON
+   Inspired by Ethereal Full-Bleed Reference Design with Nocturnal Smoke Video
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Karla', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  --ruut-bg: #F3E8D0;
-  --ruut-espresso: #3B241C;
-  --ruut-sepia: #664436;
-  --ruut-mauve: #895158;
-  --ruut-mauve-hover: #6D3E44;
-  --ruut-surface: #FFFFFF;
-  --ruut-border: rgba(59, 36, 28, 0.14);
-  --ruut-border-light: rgba(59, 36, 28, 0.08);
-  --ruut-shadow-warm: 0 16px 40px rgba(59, 36, 28, 0.08);
-  --ruut-shadow-sm: 0 4px 14px rgba(59, 36, 28, 0.05);
+  --color-white: #FFFFFF;
+  --color-parchment: #F3E8D0;
+  --color-espresso: #14110F;
+  --color-muted: rgba(255, 255, 255, 0.72);
+  --color-border: rgba(255, 255, 255, 0.32);
+  --color-glass-bg: rgba(255, 255, 255, 0.10);
 }
 
 * {
@@ -27,387 +23,344 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: var(--font-sans);
-  background-color: var(--ruut-bg);
-  color: var(--ruut-espresso);
-  min-height: 100vh;
+  background-color: var(--color-espresso);
+  color: var(--color-white);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-x: hidden;
+  align-items: center;
   position: relative;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient Radial Mist Background */
-.bg-ambient {
+/* --------------------------------------------------------------------------
+   Ambient Video Engine & Nocturnal Vignette
+   -------------------------------------------------------------------------- */
+.bg-video-container {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
   pointer-events: none;
-  background: 
-    radial-gradient(circle at 15% 15%, rgba(137, 81, 88, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 85%, rgba(102, 68, 54, 0.10) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(243, 232, 208, 0.6) 0%, transparent 70%);
-  animation: floatBG 24s ease-in-out infinite alternate;
 }
 
-@keyframes floatBG {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.04) translate(1%, 1%); }
+.bg-cinematic-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
 }
 
-/* Container */
-.coming-soon-container {
+.bg-cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(20, 17, 15, 0.40) 0%, rgba(12, 10, 8, 0.78) 85%);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Main Fullscreen Centered Stage
+   -------------------------------------------------------------------------- */
+.stage-container {
   position: relative;
   z-index: 2;
-  max-width: 1080px;
   width: 100%;
-  margin: 0 auto;
-  padding: 48px 24px 32px 24px;
-  flex: 1;
+  max-width: 900px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-}
-
-/* Header */
-.coming-soon-header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 32px;
-}
-
-.logo-wrap {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo-wrap img {
-  height: 52px;
-  width: auto;
-  opacity: 0.95;
-  transition: opacity 0.3s ease;
-}
-
-.logo-wrap img:hover {
-  opacity: 1;
-}
-
-/* Hero Launch Card */
-.launch-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid var(--ruut-border);
-  border-radius: 20px;
-  padding: 56px 48px;
-  width: 100%;
-  max-width: 820px;
+  padding: 40px 24px 32px 24px;
   text-align: center;
-  box-shadow: var(--ruut-shadow-warm);
-  animation: slideUpFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes slideUpFade {
-  0% { opacity: 0; transform: translateY(24px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Status Pill */
-.launch-status-pill {
-  display: inline-flex;
+/* Top Brand Kicker */
+.brand-kicker-wrap {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(137, 81, 88, 0.08);
-  border: 1px solid rgba(137, 81, 88, 0.22);
-  padding: 6px 18px;
-  border-radius: 9999px;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--ruut-mauve);
+  gap: 16px;
+  margin-top: 10px;
+  animation: fadeInDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.brand-crest-logo {
+  height: 38px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+.brand-kicker-text {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  font-weight: 300;
+  text-align: left;
+  line-height: 1.35;
+  max-width: 240px;
+}
+
+/* Center Content */
+.center-content {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Big Display Coming Soon (Styled Exactly like the Ethereal Reference) */
+.display-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.95;
   margin-bottom: 24px;
 }
 
-.status-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--ruut-mauve);
-  box-shadow: 0 0 0 rgba(137, 81, 88, 0.4);
-  animation: pulseDot 2s infinite;
-}
-
-@keyframes pulseDot {
-  0% {
-    box-shadow: 0 0 0 0 rgba(137, 81, 88, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(137, 81, 88, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(137, 81, 88, 0);
-  }
-}
-
-/* Typography */
-.main-title {
+.title-line-coming {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
-  font-weight: 400;
-  line-height: 1.18;
-  color: var(--ruut-espresso);
-  letter-spacing: -0.015em;
-  margin-bottom: 20px;
-}
-
-.main-title em {
-  font-style: italic;
-  color: var(--ruut-mauve);
-}
-
-.launch-alert-banner {
-  background: rgba(137, 81, 88, 0.06);
-  border-left: 3px solid var(--ruut-mauve);
-  border-radius: 0 8px 8px 0;
-  padding: 12px 20px;
-  margin: 0 auto 28px auto;
-  max-width: 640px;
-  text-align: left;
-}
-
-.launch-alert-banner p {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--ruut-sepia);
-}
-
-.launch-alert-banner strong {
-  color: var(--ruut-espresso);
-  font-weight: 600;
-}
-
-.description {
-  font-size: 0.96rem;
-  line-height: 1.7;
-  color: var(--ruut-sepia);
-  max-width: 660px;
-  margin: 0 auto 24px auto;
-}
-
-.brand-philosophy-quote {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.08rem;
-  line-height: 1.6;
-  color: var(--ruut-mauve);
-  max-width: 640px;
-  margin: 0 auto 36px auto;
-}
-
-/* 3-Pillar Formulation Highlights */
-.launch-pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin: 32px 0 36px 0;
-  text-align: left;
-}
-
-.pillar-item {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--ruut-border-light);
-  border-radius: 12px;
-  padding: 18px 16px;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.pillar-item:hover {
-  transform: translateY(-2px);
-  border-color: rgba(137, 81, 88, 0.28);
-}
-
-.pillar-kicker {
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-weight: 300;
+  font-size: clamp(3.6rem, 9.5vw, 6.8rem);
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.92);
   text-transform: uppercase;
-  color: var(--ruut-mauve);
-  font-weight: 600;
-  display: block;
-  margin-bottom: 6px;
+  text-indent: 0.22em; /* Compensate for right letter spacing */
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-.pillar-title {
+.title-line-soon {
   font-family: var(--font-serif);
-  font-size: 0.98rem;
-  color: var(--ruut-espresso);
-  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: clamp(3.6rem, 9.5vw, 6.8rem);
+  letter-spacing: 0.16em;
+  color: var(--color-white);
+  text-transform: uppercase;
+  text-indent: 0.16em;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
 }
 
-.pillar-desc {
-  font-size: 0.8rem;
-  line-height: 1.45;
-  color: var(--ruut-sepia);
+.waitlist-subtitle {
+  font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  font-weight: 300;
+  margin-bottom: 32px;
+  max-width: 500px;
 }
 
-/* Subscription Form */
-.form-container {
-  max-width: 520px;
+/* --------------------------------------------------------------------------
+   Minimal Seamless Waitlist Form Bar (Reference Image Replica)
+   -------------------------------------------------------------------------- */
+.waitlist-form-wrap {
+  width: 100%;
+  max-width: 460px;
   margin: 0 auto;
-  position: relative;
 }
 
-.form-group-custom {
+.waitlist-form {
   display: flex;
-  background: #FFFFFF;
-  border: 1px solid var(--ruut-border);
-  border-radius: 50px;
-  padding: 5px;
-  box-shadow: var(--ruut-shadow-sm);
+  width: 100%;
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group-custom:focus-within {
-  border-color: var(--ruut-mauve);
-  box-shadow: 0 0 0 3px rgba(137, 81, 88, 0.12);
+.waitlist-form:focus-within {
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.15);
 }
 
-.email-input {
+.waitlist-input {
   flex: 1;
   background: transparent;
   border: none;
   outline: none;
-  padding: 12px 20px;
+  padding: 14px 20px;
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  color: var(--ruut-espresso);
+  color: var(--color-white);
+  letter-spacing: 0.03em;
 }
 
-.email-input::placeholder {
-  color: var(--ruut-sepia);
-  opacity: 0.65;
+.waitlist-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 300;
 }
 
-.submit-btn {
-  background: var(--ruut-mauve);
-  color: #FFFFFF;
+.waitlist-btn {
+  background: var(--color-white);
+  color: var(--color-espresso);
   border: none;
   outline: none;
+  padding: 14px 26px;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 12px 28px;
-  border-radius: 50px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
-.submit-btn:hover {
-  background: var(--ruut-mauve-hover);
+.waitlist-btn:hover {
+  background: var(--color-parchment);
   transform: translateY(-1px);
 }
 
-.form-micro-guarantee {
-  font-size: 0.75rem;
-  color: var(--ruut-sepia);
-  margin-top: 10px;
-  opacity: 0.85;
+.waitlist-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
-/* Privilege Box on Subscribe */
-.privilege-reveal-box {
-  background: rgba(137, 81, 88, 0.05);
-  border: 1px dashed var(--ruut-mauve);
-  border-radius: 14px;
-  padding: 24px 20px;
-  margin-top: 20px;
+/* Success Card after Join */
+.waitlist-success-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  padding: 24px;
   text-align: center;
-  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes scaleIn {
-  0% { opacity: 0; transform: scale(0.96); }
-  100% { opacity: 1; transform: scale(1); }
+.success-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-parchment);
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-.privilege-title {
+.success-title {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: var(--ruut-mauve);
-  margin-bottom: 6px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 8px;
 }
 
-.privilege-code {
-  font-size: 1.35rem;
+.success-desc {
+  font-size: 0.84rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.privilege-pill {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-espresso);
+  padding: 6px 18px;
+  border-radius: 4px;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: var(--ruut-espresso);
-  margin: 10px 0;
-  display: inline-block;
-  background: #FFFFFF;
-  padding: 6px 22px;
-  border-radius: 6px;
-  border: 1px solid var(--ruut-border);
+  font-size: 0.95rem;
 }
 
-.privilege-desc {
-  font-size: 0.82rem;
-  color: var(--ruut-sepia);
-  line-height: 1.5;
-}
-
-/* Footer Section */
-.coming-soon-footer {
-  width: 100%;
-  position: relative;
-  z-index: 2;
+/* --------------------------------------------------------------------------
+   Connect With Us & Social Links (Matching Reference Image)
+   -------------------------------------------------------------------------- */
+.connect-block {
+  margin-top: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  margin-top: 36px;
+  gap: 12px;
 }
 
-.social-links {
+.connect-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 300;
+}
+
+.connect-icons {
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
-.social-icon-link {
-  color: var(--ruut-espresso);
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+.connect-icon-link {
+  color: var(--color-white);
+  opacity: 0.65;
   display: flex;
   align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
   text-decoration: none;
 }
 
-.social-icon-link:hover {
+.connect-icon-link:hover {
   opacity: 1;
-  color: var(--ruut-mauve);
+  color: var(--color-parchment);
   transform: translateY(-2px);
 }
 
-.social-icon-link svg {
-  width: 20px;
-  height: 20px;
+.connect-icon-link svg {
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
-.copyright-text {
-  font-size: 0.74rem;
-  color: var(--ruut-sepia);
-  letter-spacing: 0.08em;
+/* --------------------------------------------------------------------------
+   Bottom Signature Brandmark (Like 'ildesign' in Reference)
+   -------------------------------------------------------------------------- */
+.stage-footer {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.stage-footer:hover {
+  opacity: 0.95;
+}
+
+.footer-brandmark {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.footer-copy {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* Toast Message */
@@ -416,13 +369,13 @@ body {
   bottom: -60px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--ruut-espresso);
-  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-espresso);
   font-size: 0.84rem;
   font-weight: 500;
   padding: 12px 28px;
   border-radius: 9999px;
-  box-shadow: 0 10px 25px rgba(59, 36, 28, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   z-index: 9999;
   transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
   opacity: 0;
@@ -434,35 +387,59 @@ body {
   opacity: 1;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .launch-pillars-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+/* Keyframes */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .stage-container {
+    padding: 28px 20px 24px 20px;
   }
-  .launch-card {
-    padding: 36px 20px;
-  }
-  .main-title {
-    font-size: 2rem;
-  }
-  .form-group-custom {
+  
+  .brand-kicker-wrap {
     flex-direction: column;
-    background: transparent;
-    border: none;
-    padding: 0;
-    box-shadow: none;
-    gap: 10px;
+    gap: 8px;
+    align-items: center;
   }
-  .email-input {
-    background: #FFFFFF;
-    border: 1px solid var(--ruut-border);
-    border-radius: 50px;
-    width: 100%;
+  
+  .brand-kicker-text {
     text-align: center;
-    box-shadow: var(--ruut-shadow-sm);
+    font-size: 0.78rem;
   }
-  .submit-btn {
+
+  .title-line-coming,
+  .title-line-soon {
+    font-size: clamp(2.8rem, 13vw, 4rem);
+    letter-spacing: 0.16em;
+  }
+
+  .waitlist-form {
+    flex-direction: column;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .waitlist-input {
+    text-align: center;
+    padding: 14px 16px;
+  }
+
+  .waitlist-btn {
     width: 100%;
     padding: 14px 20px;
   }

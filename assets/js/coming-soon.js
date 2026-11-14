@@ -1,15 +1,12 @@
 /* ==========================================================================
-   RUUT — LAUNCHING SOON SCRIPTS
-   Early Access Circle • No Countdown Timer • VIP Privilege Unlock
+   RUUT — MINIMAL CINEMATIC COMING SOON SCRIPTS
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. VIP Private Launch Circle Subscription
-  const subscribeForm = document.getElementById('comingSoonForm');
+  const waitlistForm = document.getElementById('comingSoonForm');
   const emailInput = document.getElementById('comingSoonEmail');
-  const formWrap = document.getElementById('subscribeFormWrap');
+  const formWrap = document.getElementById('waitlistWrap');
 
-  // Helper: Show Toast notification
   const showToast = (msg) => {
     let toast = document.getElementById('comingSoonToast');
     if (!toast) {
@@ -25,63 +22,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   };
 
-  function revealPrivilegeCode(alreadySubscribed = false) {
+  const renderSuccess = (alreadySubscribed = false) => {
     if (!formWrap) return;
-    
-    // Smooth transition
-    formWrap.style.display = 'none';
-    
-    // Check if box already inserted
-    if (document.getElementById('privilegeBox')) return;
-    
-    const revealHtml = `
-      <div class="privilege-reveal-box" id="privilegeBox">
-        <h3 class="privilege-title">${alreadySubscribed ? 'Welcome Back to the Private Circle' : 'Thank You for Joining Us'}</h3>
-        <p class="privilege-desc">Your private early-access invitation has been reserved. Keep your launch privilege code safe:</p>
-        <span class="privilege-code" id="privilegeCodeText">RUUT-LAUNCH-15</span>
-        <p class="privilege-desc" style="margin-top:6px; font-weight:600; color:var(--ruut-mauve);">
-          Enjoy 15% inaugural privileges on our premier batch release.
-        </p>
+    if (document.getElementById('waitlistSuccessCard')) return;
+
+    formWrap.innerHTML = `
+      <div class="waitlist-success-card" id="waitlistSuccessCard">
+        <span class="success-badge">Waitlist Confirmed</span>
+        <h3 class="success-title">${alreadySubscribed ? 'Welcome back to the circle' : 'You are on the private waitlist'}</h3>
+        <p class="success-desc">An early-access invitation will be dispatched to your inbox the moment our doors open.</p>
+        <div style="margin-top: 10px;">
+          <span class="privilege-pill">RUUT-LAUNCH-15</span>
+        </div>
       </div>
     `;
-    formWrap.insertAdjacentHTML('afterend', revealHtml);
+  };
+
+  if (localStorage.getItem('ruut_waitlist_joined') === 'true') {
+    renderSuccess(true);
   }
 
-  // Check if already subscribed in this browser session
-  const isSubscribed = localStorage.getItem('ruut_newsletter_subscribed') === 'true';
-  if (isSubscribed) {
-    revealPrivilegeCode(true);
-  }
-
-  if (subscribeForm && emailInput) {
-    subscribeForm.addEventListener('submit', (e) => {
+  if (waitlistForm && emailInput) {
+    waitlistForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      
-      const emailValue = emailInput.value.trim();
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      
-      if (!emailValue || !emailRegex.test(emailValue)) {
+
+      const email = emailInput.value.trim();
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !regex.test(email)) {
         showToast('Please enter a valid email address.');
         return;
       }
-      
-      const submitBtn = subscribeForm.querySelector('.submit-btn');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Reserving...';
+
+      const btn = waitlistForm.querySelector('.waitlist-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'JOINING...';
       }
-      
-      // Store subscription & reveal
+
       setTimeout(() => {
         try {
-          localStorage.setItem('ruut_newsletter_subscribed', 'true');
-          localStorage.setItem('ruut_subscriber_email', emailValue);
+          localStorage.setItem('ruut_waitlist_joined', 'true');
+          localStorage.setItem('ruut_waitlist_email', email);
         } catch (err) {
           console.warn('Storage unavailable', err);
         }
-        showToast('Private circle invitation confirmed! Unlocking privilege code...');
-        revealPrivilegeCode(false);
-      }, 900);
+        showToast('You have joined the private waitlist!');
+        renderSuccess(false);
+      }, 700);
     });
   }
 });
