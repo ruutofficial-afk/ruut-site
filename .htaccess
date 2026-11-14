@@ -1,12 +1,26 @@
-# Prioritize the coming-soon launch landing page over other files
+# Prioritize the homepage over other files
 DirectoryIndex coming-soon.html index.html index.php
+
+# Custom Error Pages (404, 500, 502, 503, 403)
+ErrorDocument 404 /404.html
+ErrorDocument 500 /404.html?code=500
+ErrorDocument 502 /404.html?code=500
+ErrorDocument 503 /404.html?code=503
+ErrorDocument 403 /404.html?code=403
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Redirect external requests for coming-soon.html to root /
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/coming-soon\.html(?:[?#]|\s) [NC]
-RewriteRule ^coming-soon\.html$ / [R=301,L]
+# Redirect external requests for index.html or /index to root /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/index(?:\.html)?(?:[?#]|\s) [NC]
+RewriteRule ^index(?:\.html)?$ / [R=301,L]
+
+# Rewrite /cart/ and /cart to the static cart.html directly to bypass WordPress redirects
+RewriteRule ^cart/?$ /cart.html [L,NC]
+
+# Rewrite /my-account/ and /account to the static account.html directly to bypass WordPress
+RewriteRule ^my-account/?$ /account.html [L,NC]
+RewriteRule ^account/?$ /account.html [L,NC]
 
 # Redirect external requests for other .html files to their extensionless URL
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/+(.+?)\.html(?:[?#]|\s) [NC]
@@ -24,10 +38,6 @@ RewriteRule ^shop/.*$ /product.html [QSA,L]
 # Force WooCommerce AJAX requests to be handled by index.php instead of index.html
 RewriteCond %{QUERY_STRING} wc-ajax= [NC]
 RewriteRule ^$ /index.php [L]
-
-# Redirect WordPress cart/account pages to static frontend
-RewriteRule ^cart/?$ /cart.html [R=302,L,NC]
-RewriteRule ^my-account/?$ /about-us.html [R=302,L,NC]
 </IfModule>
 
 # BEGIN WordPress
